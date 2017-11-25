@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/SceneController.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/kademlia/node/Node.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/rating/GetDeviceInfo.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/rating/DeviceRating.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/Scene.fxml</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/kademlia/file/FileReceiver.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/allocator/Scheduler.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/allocator/Xmlreader.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/Main.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/kademlia/file/FileSender.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/resources/Style.css</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/timeshare/RunningConfiguration.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/kademlia/message/WorkloadManager.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/JavaFXApplication4/src/kademlia/message/WorkloadMessage.java</file>
+        </group>
+    </open-files>
+</project-private>

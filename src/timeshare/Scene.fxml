@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timeshare.SceneController">
+    <top>
+      <VBox id="titleVbox" prefHeight="120.0" prefWidth="645.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane id="titlePane" opacity="0.84" prefHeight="31.0" prefWidth="707.0">
+               <children>
+                  <Label id="titleLbl" layoutX="14.0" layoutY="-7.0" prefHeight="43.0" prefWidth="100.0" text="TimeShare" textFill="WHITE" />
+                  <Button id="buttonExit" fx:id="buttonExit" layoutX="799.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="18.0" prefWidth="18.0" styleClass="buttonbar">
+                     <font>
+                        <Font size="6.0" />
+                     </font>
+                  </Button>
+                  <Button id="buttonMinimize" fx:id="buttonMinimize" layoutX="773.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleMinimize" prefHeight="18.0" prefWidth="18.0" styleClass="buttonbar">
+                     <font>
+                        <Font size="6.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <HBox prefHeight="91.0" prefWidth="715.0">
+               <children>
+                  <Pane prefHeight="90.0" prefWidth="842.0">
+                     <children>
+                        <Label layoutX="203.0" layoutY="-14.0" prefHeight="118.0" prefWidth="426.0" styleClass="timeShareTitle" text="Time Share" />
+                     </children>
+                  </Pane>
+               </children></HBox>
+         </children>
+      </VBox>
+   </top>
+   <effect>
+      <DropShadow height="89.2" radius="37.3675" spread="0.27" width="62.27" />
+   </effect>
+   <bottom>
+      <Pane id="footerPane" prefHeight="31.0" prefWidth="831.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="726.0" layoutY="4.0" prefHeight="27.0" prefWidth="91.0">
+               <children>
+                  <Label layoutY="5.0" prefHeight="17.0" prefWidth="31.0" text="DHT:" />
+                  <Label fx:id="lblNodeCount" layoutX="31.0" layoutY="5.0" prefHeight="17.0" prefWidth="20.0" text="100" />
+                  <Label layoutX="52.0" layoutY="5.0" prefHeight="17.0" prefWidth="42.0" text="Nodes" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </bottom>
+   <right>
+      <Pane prefHeight="445.0" prefWidth="477.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnSource" layoutX="24.0" layoutY="85.0" mnemonicParsing="false" onAction="#uploadSource" prefHeight="25.0" prefWidth="130.0" text="Upload Source" />
+            <Button fx:id="sendFile" layoutX="190.0" layoutY="268.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="106.0" prefWidth="106.0" text="PROCESS" />
+            <Button fx:id="btnRules" layoutX="163.0" layoutY="85.0" mnemonicParsing="false" onAction="#uploadXML" prefHeight="25.0" prefWidth="156.0" text="Rules" />
+            <Button fx:id="btnCSV" layoutX="326.0" layoutY="85.0" mnemonicParsing="false" onAction="#uploadCSV" prefHeight="25.0" prefWidth="128.0" text="Upload CSV" />
+            <Label fx:id="lblUploadSource" layoutX="69.0" layoutY="144.0" prefHeight="17.0" prefWidth="231.0" text="Please Select the Source File" />
+            <ProgressIndicator fx:id="indicatorSource" layoutX="324.0" layoutY="140.0" progress="1.0" styleClass="prgs-indicator" visible="false" />
+            <Label fx:id="lblUploadXml" layoutX="69.0" layoutY="181.0" prefHeight="17.0" prefWidth="233.0" text="Please Select the Rules XML File" />
+            <ProgressIndicator fx:id="indicatorXml" layoutX="324.0" layoutY="179.0" progress="1.0" styleClass="prgs-indicator" visible="false" />
+            <Label fx:id="lblCsv" layoutX="71.0" layoutY="217.0" prefHeight="17.0" prefWidth="172.0" text="PLease Select the CSV File" />
+            <ProgressIndicator fx:id="indicatorCsv" layoutX="325.0" layoutY="217.0" progress="1.0" styleClass="percentage" visible="false" />
+            <ProgressBar fx:id="prgsUpdate" layoutX="96.0" layoutY="422.0" prefHeight="18.0" prefWidth="268.0" visible="false" />
+            <Label fx:id="lblUpdate" layoutX="197.0" layoutY="395.0" text="Running Tasks...!" textFill="#1a0dba" visible="false">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDone" layoutX="216.0" layoutY="404.0" styleClass="os-info" text="Done" visible="false" />
+         </children></Pane>
+   </right>
+   <center>
+      <Pane id="leftPane" prefHeight="440.0" prefWidth="354.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator layoutX="351.0" layoutY="2.0" orientation="VERTICAL" prefHeight="461.0" prefWidth="7.0" />
+            <Label fx:id="lblTM" layoutX="20.0" layoutY="244.0" prefHeight="17.0" prefWidth="82.0" text="Total Memory" />
+            <ProgressBar fx:id="prgsTotMem" layoutX="102.0" layoutY="247.0" prefHeight="11.0" prefWidth="200.0" progress="0.0" />
+            <ProgressIndicator fx:id="indicatorTotMem" layoutX="313.0" layoutY="235.0" progress="0.0" />
+            <Label fx:id="lblTM1" layoutX="21.0" layoutY="288.0" prefHeight="17.0" prefWidth="82.0" text="Used Memory" />
+            <ProgressBar fx:id="prgsUsdMem" layoutX="103.0" layoutY="291.0" prefHeight="11.0" prefWidth="200.0" progress="0.0" />
+            <ProgressIndicator fx:id="indicatorUsdMem" layoutX="315.0" layoutY="326.0" progress="0.0" />
+            <Label fx:id="lblTM2" layoutX="22.0" layoutY="329.0" prefHeight="17.0" prefWidth="82.0" text="Free Memory" />
+            <ProgressBar fx:id="prgsFreeMem" layoutX="104.0" layoutY="332.0" prefHeight="11.0" prefWidth="200.0" progress="0.0" />
+            <ProgressIndicator fx:id="indicatorFreeMem" layoutX="315.0" layoutY="283.0" progress="0.0" />
+            <Label fx:id="lblOs" layoutX="24.0" layoutY="91.0" styleClass="os-info" text="Os" />
+            <Label fx:id="lblVersion" layoutX="157.0" layoutY="91.0" styleClass="os-info" text="Ver" />
+            <Label fx:id="lblArch" layoutX="24.0" layoutY="123.0" styleClass="os-info" text="Arch" />
+            <Label fx:id="lblProcess" layoutX="25.0" layoutY="155.0" styleClass="os-info" text="Avail" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
