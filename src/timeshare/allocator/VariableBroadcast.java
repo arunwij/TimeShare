@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timeshare.allocator;
+package com.timeshare.allocator;
 
 /**
  *
@@ -11,51 +11,49 @@ package timeshare.allocator;
  */
 public class VariableBroadcast {
 
-
     public synchronized static String[] vString(String org, int peers) {
-        String[]values= new String[peers];
+        String[] values = new String[peers];
         for (int i = 0; i < peers; i++) {
-            values[i]= org;
+            values[i] = org;
         }
-        
-        return values;
-    }
-    
-    public synchronized static int[] vInt(int org, int peers) {
-        int[]values= new int[peers];
-        for (int i = 0; i < peers; i++) {
-            values[i]= org;
-        }
-        
-        return values;
-    }
-    
-    public synchronized static double[] vDouble(double org, int peers) {
-        double[]values= new double[peers];
-        for (int i = 0; i < peers; i++) {
-            values[i]= org;
-        }
-        
-        return values;
-    }
-    
-    public synchronized static float[] vFloat(float org, int peers) {
-        float[]values= new float[peers];
-        for (int i = 0; i < peers; i++) {
-            values[i]= org;
-        }
-        
-        return values;
-    }
-    
-    public synchronized static Object[] vObject(Object org, int peers) {
-        Object[]values= new Object[peers];
-        for (int i = 0; i < peers; i++) {
-            values[i]= org;
-        }
-        
+
         return values;
     }
 
-    
+    public synchronized static int[] vInt(int org, int peers) {
+        int[] values = new int[peers];
+        for (int i = 0; i < peers; i++) {
+            values[i] = org;
+        }
+
+        return values;
+    }
+
+    public synchronized static double[] vDouble(double org, int peers) {
+        double[] values = new double[peers];
+        for (int i = 0; i < peers; i++) {
+            values[i] = org;
+        }
+
+        return values;
+    }
+
+    public synchronized static float[] vFloat(float org, int peers) {
+        float[] values = new float[peers];
+        for (int i = 0; i < peers; i++) {
+            values[i] = org;
+        }
+
+        return values;
+    }
+
+    public synchronized static Object[] vObject(Object org, int peers) {
+        Object[] values = new Object[peers];
+        for (int i = 0; i < peers; i++) {
+            values[i] = org;
+        }
+
+        return values;
+    }
+
 }

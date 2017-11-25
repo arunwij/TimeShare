@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timeshare.allocator;
+package com.timeshare.allocator;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ import java.util.PriorityQueue;
 
 /**
  *
- * @author Sanjula madumal
+ * @author Sanjula
  */
 public class XmlLoader {
 
