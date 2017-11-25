@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.timeshare.allocator;
+package timeshare.allocator;
 
-import com.timeshare.scheduler.ProcessInPeer;
+import timeshare.scheduler.ProcessInPeer;
 import java.io.IOException;
 import java.util.Map;
 import kademlia.JKademliaNode;

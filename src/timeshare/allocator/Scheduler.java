@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.timeshare.allocator;
+package timeshare.allocator;
 
-import com.timeshare.RunningConfiguration;
+import timeshare.RunningConfiguration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;

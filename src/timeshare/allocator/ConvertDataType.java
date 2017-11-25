@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.timeshare.allocator;
+package timeshare.allocator;
 
 import java.awt.Component;
 import java.util.HashMap;
