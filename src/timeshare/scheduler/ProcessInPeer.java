@@ -27,6 +27,7 @@ public class ProcessInPeer {
     static P2PJavaCompiler compiler;
     private boolean error = true;
     private String error_msg;
+    private String retrun_type;
 
     public synchronized void compileFile(String file) {
         InputStream is;
@@ -52,10 +53,11 @@ public class ProcessInPeer {
 
     public synchronized <Any> Any run(String className, String methodName, Any data_a[], int datacount) {
         
-        final Method m1, m2;
+        final Method m1;
         Object[] params = new Object[datacount];
         Object result = null;
         final Object results;
+        //Class<?>[]partype= getPrameters( className,  methodName) ;
         try {
             //
             m1 = compiler.compileMethod(methodName, className);
@@ -65,7 +67,9 @@ public class ProcessInPeer {
             int lenth = 10;
             float[] addarr = new float[lenth];
             //result = m1.invoke(null, condatatype(nums, m1.getReturnType()));
-            Class<?>[] parameterTypes = m1.getParameterTypes();
+           // Class<?>[] parameterTypes = m1.getParameterTypes();
+            //m1.getReturnType();
+            //retrun_type= m1.getReturnType().toString();
             for (int cc = 0; cc < datacount; cc++) {
               /*  for (Map.Entry m : data_a[cc].entrySet()) {
              */       
@@ -122,6 +126,10 @@ public class ProcessInPeer {
     
     public String errorMessage(){
         return error_msg;
+    }
+    
+    public String getReturnType(){
+        return retrun_type;
     }
 
     public synchronized <Any> Any conObj(Object object, Class type) {

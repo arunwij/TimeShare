@@ -45,9 +45,13 @@ public  class JCudaVectorAdd
 	}''
     public static int[][] test( int[][] a,int[][] b )
     { 
+		int c[][] = new int[a.length][a[0].length]
+		for(int i=0;i<a.length; i++)
+			for(int j=0;i<a[0].length; j++)
+				c[i][j]=c=a[i][j]+b[i][j];
        // for(int b=0; b<=6;b=b+1){
         /*long startTime = System.nanoTime(); 
-
+		
         JCudaVectorAdd unZip = new JCudaVectorAdd();
         
         unZip.unZipIt(INPUT_ZIP_FILE,OUTPUT_FOLDER);

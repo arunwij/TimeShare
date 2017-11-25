@@ -24,7 +24,7 @@ public class WorkloadMessage implements Message {
     private String methodName;
     private String className;
     private String type;
-    private String data;
+    public String data;
     private Node origin;
   
     public WorkloadMessage( String className,String methodName, String type, String data){
@@ -59,20 +59,20 @@ public class WorkloadMessage implements Message {
         return this.origin;
     }
     
-    public Object getData(){
+    public <Any>Any getData(){
         switch(this.type){
             case Serializer.INT1D:
-                return Serializer.getInt1d(this.data);
+                return (Any) Serializer.getInt1d(this.data);
             case Serializer.INT2D:
-                return Serializer.getInt2d(this.data);
+                return (Any)Serializer.getInt2d(this.data);
             case Serializer.INT3D:
-                return Serializer.getInt3d(this.data);
+                return (Any)Serializer.getInt3d(this.data);
             case Serializer.STR1D:
-                return Serializer.getStr1d(this.data);
+                return (Any)Serializer.getStr1d(this.data);
             case Serializer.STR2D:
-                return Serializer.getStr2d(this.data); 
+                return (Any)Serializer.getStr2d(this.data); 
             case Serializer.STR3D:
-                return Serializer.getStr3d(this.data); 
+                return (Any)Serializer.getStr3d(this.data); 
             default:
                 System.out.println("No suitable data type for "+type);
                 return null;

@@ -1,8 +1,11 @@
 package kademlia.message;
 
+import com.google.gson.Gson;
 import timeshare.scheduler.ProcessInPeer;
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kademlia.KadServer;
 import kademlia.file.Serializer;
 
@@ -26,26 +29,35 @@ public class WorkloadReceiver implements Receiver{
     
     @Override
     public void receive(Message incoming, int comm) throws IOException{
-        //System.out.println("Received message: " + incoming.toString());
-        WorkloadMessage msg = (WorkloadMessage) incoming; 
-        System.out.println("message data: "+msg.getStringData());
-        //Integer objarray[][][] = msg.getData();
-       
-        System.out.println("------------run-----"+msg.getClassName());
-        pip.compileFile("data/received/"+msg.getClassName()+".java");
-        int out[][] = pip.run(msg.getClassName(), msg.getMethodName(), (int [][][]) msg.getData(), 2);
-        System.out.println("------------taks executed-----");
-        
-        for(int[] i: out){
-            for(int j: i){
-                System.out.println(j);
+        try {
+            //System.out.println("Received message: " + incoming.toString());
+            WorkloadMessage msg = (WorkloadMessage) incoming;
+            System.out.println("message data: "+msg.getStringData());
+            //Integer objarray[][][] = msg.getData();
+            
+            System.out.println("------------run-----"+msg.getClassName());
+            pip.compileFile("data/received/"+msg.getClassName()+".java");
+            
+            //System.out.println(msg.data);
+            
+            
+            int[][] out = pip.run(msg.getClassName(), msg.getMethodName(),  msg.getData(), 2);
+            System.out.println("------------taks executed-----");
+            for (int i = 0; i < out.length; i++) {
+                for (int j = 0; j < out[0].length; j++) {
+                    System.out.println(out[i][j]);
+                    
+                }
+                
             }
+            
+            ResultMessage resultMsg = new ResultMessage(pip.getReturnType(),Serializer.toJson(out));
+            System.out.println("Sending results to originator");
+            this.server.reply(msg.getOrigin(), resultMsg, comm);
+            System.out.println("done...");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WorkloadReceiver.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        ResultMessage resultMsg = new ResultMessage(msg.getType(),Serializer.toJson(out));
-        System.out.println("Sending results to originator");
-        this.server.reply(msg.getOrigin(), resultMsg, comm);
-        System.out.println("done...");
         
     }
 
