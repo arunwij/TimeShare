@@ -29,15 +29,15 @@ public class WorkloadReceiver implements Receiver{
         //System.out.println("Received message: " + incoming.toString());
         WorkloadMessage msg = (WorkloadMessage) incoming; 
         System.out.println("message data: "+msg.getStringData());
-        String objarray[][][] =  (String[][][]) msg.getData();
+        //Integer objarray[][][] = msg.getData();
        
         System.out.println("------------run-----"+msg.getClassName());
         pip.compileFile("data/received/"+msg.getClassName()+".java");
-        String out[][] = (String[][])pip.run(msg.getClassName(), msg.getMethodName(), objarray, 2);
-        System.out.println("------------run-----");
+        int out[][] = pip.run(msg.getClassName(), msg.getMethodName(), (int [][][]) msg.getData(), 2);
+        System.out.println("------------taks executed-----");
         
-        for(String[] i: out){
-            for(String j: i){
+        for(int[] i: out){
+            for(int j: i){
                 System.out.println(j);
             }
         }

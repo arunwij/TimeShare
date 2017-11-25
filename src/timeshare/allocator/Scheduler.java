@@ -143,7 +143,7 @@ public class Scheduler {
                     intparams[a]=(int[][])params[a];
                 }**/
                 
-                WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.STR3D,Serializer.toJson(params));
+                WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.INT3D,Serializer.toJson(params));
                 WorkloadManager wmgr = new WorkloadManager();                
                 RunningConfiguration.KAD_SERVER.sendMessage(c.getNode(), wmsg, wmgr);
             }

@@ -25,6 +25,8 @@ import java.util.logging.Logger;
 public class ProcessInPeer {
 
     static P2PJavaCompiler compiler;
+    private boolean error = true;
+    private String error_msg;
 
     public synchronized void compileFile(String file) {
         InputStream is;
@@ -48,7 +50,7 @@ public class ProcessInPeer {
         }
     }
 
-    public synchronized <Any> Any run(String className, String methodName, Object data_a[][][], int datacount) {
+    public synchronized <Any> Any run(String className, String methodName, Any data_a[], int datacount) {
         
         final Method m1, m2;
         Object[] params = new Object[datacount];
@@ -72,35 +74,54 @@ public class ProcessInPeer {
                /* }*/
 
             }
+            System.out.println(methodName);
             if (datacount == 1) {
                 result = m1.invoke(null, params[0]);
+                error =false;
             } else if (datacount == 2) {
                 result = m1.invoke(null, params[0], params[1]);
+                error =false;
             } else if (datacount == 3) {
                 result = m1.invoke(null, params[0], params[1], params[2]);
+                error =false;
             } else if (datacount == 4) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3]);
+                error =false;
             } else if (datacount == 5) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4]);
+                error =false;
             } else if (datacount == 6) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5]);
+                error =false;
             } else if (datacount == 7) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6]);
+                error =false;
             } else if (datacount == 8) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7]);
+                error =false;
             } else if (datacount == 9) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8]);
+                error =false;
             } else if (datacount == 10) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8], params[9]);
-
+                error =false;
             }
 
             // float[] farr = conObj(result, m1.getReturnType());
             return (Any) result;
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException ex) {
-            System.out.println(ex);;
+            System.out.println(ex);
+            error_msg= ex.toString();
         }
         return null;
+    }
+    
+    public  boolean isError(){
+        return error;
+    }
+    
+    public String errorMessage(){
+        return error_msg;
     }
 
     public synchronized <Any> Any conObj(Object object, Class type) {
