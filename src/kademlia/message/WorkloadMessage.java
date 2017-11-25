@@ -1,7 +1,7 @@
 package kademlia.message;
 
-import timeshare.RunningConfiguration;
-import timeshare.allocator.XmlLoader;
+import com.timeshare.RunningConfiguration;
+import com.timeshare.allocator.XmlLoader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

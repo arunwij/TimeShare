@@ -1,7 +1,7 @@
 package kademlia.message;
 
-import timeshare.RunningConfiguration;
-import timeshare.scheduler.ProcessInPeer;
+import com.timeshare.RunningConfiguration;
+import com.timeshare.scheduler.ProcessInPeer;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
