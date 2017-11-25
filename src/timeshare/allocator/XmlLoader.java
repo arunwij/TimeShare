@@ -31,7 +31,7 @@ import java.util.PriorityQueue;
 
 /**
  *
- * @author Sanjula
+ * @author Sanjula madumal
  */
 public class XmlLoader {
 
