@@ -16,8 +16,9 @@ import org.jocl.cl_device_id;
 
 /**
  *
- * @author Artista
+ * @author Artista 
  */
+//git test
 public class ClDevice {
     
     long platformId;
