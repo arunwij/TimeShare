@@ -52,13 +52,13 @@ public  class JCudaVectorAdd
 		
 		
 	}
-    public static int[][] test( int[][] a,int[][] b )
+    public static double[][] test( double[][] a,int[][] b ,int d)
     { 
-       int c[][] = new int[a.length][a[0].length];
+       double c[][] = new double[a.length][a[0].length];
 		for(int i=0;i<a.length; i++)
-			for(int j=0;i<a[0].length; j++)
-				c[i][j]=a[i][j]+b[i][j];
-
+			for(int j=0;j<a[0].length; j++)
+				c[i][j]=a[i][j]+b[i][j] + d;
+		
         return c;
        // }
     }

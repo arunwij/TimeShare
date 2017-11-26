@@ -25,9 +25,9 @@ import java.util.logging.Logger;
 public class ProcessInPeer {
 
     static P2PJavaCompiler compiler;
-    private boolean error = true;
-    private String error_msg;
-    private String retrun_type;
+    
+    private Class<?>[] parameterTypes;
+    private Class<?> returnType;
 
     public synchronized void compileFile(String file) {
         InputStream is;
@@ -51,13 +51,12 @@ public class ProcessInPeer {
         }
     }
 
-    public synchronized <Any> Any run(String className, String methodName, Any data_a[], int datacount) {
+    public synchronized <Any> Any run(String className, String methodName, Object data_a[], int datacount) {
         
-        final Method m1;
+        final Method m1, m2;
         Object[] params = new Object[datacount];
         Object result = null;
         final Object results;
-        //Class<?>[]partype= getPrameters( className,  methodName) ;
         try {
             //
             m1 = compiler.compileMethod(methodName, className);
@@ -67,69 +66,60 @@ public class ProcessInPeer {
             int lenth = 10;
             float[] addarr = new float[lenth];
             //result = m1.invoke(null, condatatype(nums, m1.getReturnType()));
-           // Class<?>[] parameterTypes = m1.getParameterTypes();
-            //m1.getReturnType();
-            //retrun_type= m1.getReturnType().toString();
+            parameterTypes = m1.getParameterTypes();
             for (int cc = 0; cc < datacount; cc++) {
               /*  for (Map.Entry m : data_a[cc].entrySet()) {
              */       
                     params[cc] = data_a[cc];
-                    System.out.println(data_a[cc].getClass());
+                  //  System.out.println(data_a[cc].getClass());
                /* }*/
 
             }
-            System.out.println(methodName);
             if (datacount == 1) {
                 result = m1.invoke(null, params[0]);
-                error =false;
             } else if (datacount == 2) {
-                result = m1.invoke(null, params[0], params[1]);
-                error =false;
+               // System.out.println("2param");
+                result = m1.invoke(null, parameterTypes[0].cast( params[0] ), parameterTypes[1].cast(params[1] ) );
+                //System.out.println("2param end");
             } else if (datacount == 3) {
                 result = m1.invoke(null, params[0], params[1], params[2]);
-                error =false;
             } else if (datacount == 4) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3]);
-                error =false;
             } else if (datacount == 5) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4]);
-                error =false;
             } else if (datacount == 6) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5]);
-                error =false;
             } else if (datacount == 7) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6]);
-                error =false;
             } else if (datacount == 8) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7]);
-                error =false;
             } else if (datacount == 9) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8]);
-                error =false;
             } else if (datacount == 10) {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8], params[9]);
-                error =false;
-            }
 
+            }
+            returnType =m1.getReturnType();
             // float[] farr = conObj(result, m1.getReturnType());
             return (Any) result;
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException ex) {
-            System.out.println(ex);
-            error_msg= ex.toString();
+            System.out.println(ex);;
         }
         return null;
     }
     
-    public  boolean isError(){
-        return error;
+    public Class<?> getReturnType(){
+        return returnType;
     }
     
-    public String errorMessage(){
-        return error_msg;
-    }
-    
-    public String getReturnType(){
-        return retrun_type;
+    public Class<?>[] getParameterTypes(String methodName, String  className){
+        try {
+            Method m1 = compiler.compileMethod(methodName, className);
+            return m1.getParameterTypes();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProcessInPeer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public synchronized <Any> Any conObj(Object object, Class type) {

@@ -43,7 +43,7 @@ public  class JCudaVectorAdd
 		
 		
 	}''
-    public static int[][] test( int[][] a,int[][] b )
+    public static int[][] test( double[][] a,int[][] b )
     { 
 		int c[][] = new int[a.length][a[0].length]
 		for(int i=0;i<a.length; i++)

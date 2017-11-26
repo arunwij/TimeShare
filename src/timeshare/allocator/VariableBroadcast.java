@@ -11,49 +11,49 @@ package timeshare.allocator;
  */
 public class VariableBroadcast {
 
-    public synchronized static String[] vString(String org, int peers) {
-        String[] values = new String[peers];
+    public synchronized static String vString(String org, int peers) {
+        /*String[] values = new String[peers];
         for (int i = 0; i < peers; i++) {
             values[i] = org;
-        }
+        }*/
 
-        return values;
+        return  org;
     }
 
-    public synchronized static int[] vInt(int org, int peers) {
-        int[] values = new int[peers];
+    public synchronized static int vInt(int org, int peers) {
+        /*int[] values = new int[peers];
         for (int i = 0; i < peers; i++) {
             values[i] = org;
-        }
+        }*/
 
-        return values;
+        return org;
     }
 
-    public synchronized static double[] vDouble(double org, int peers) {
-        double[] values = new double[peers];
+    public synchronized static double vDouble(double org, int peers) {
+        /*double[] values = new double[peers];
         for (int i = 0; i < peers; i++) {
             values[i] = org;
-        }
+        }*/
 
-        return values;
+        return org;
     }
 
-    public synchronized static float[] vFloat(float org, int peers) {
-        float[] values = new float[peers];
+    public synchronized static float vFloat(float org, int peers) {
+        /*float[] values = new float[peers];
         for (int i = 0; i < peers; i++) {
             values[i] = org;
-        }
+        }*/
 
-        return values;
+        return org;
     }
 
-    public synchronized static Object[] vObject(Object org, int peers) {
-        Object[] values = new Object[peers];
+    public synchronized static Object vObject(Object org, int peers) {
+        /*Object[] values = new Object[peers];
         for (int i = 0; i < peers; i++) {
             values[i] = org;
-        }
+        }*/
 
-        return values;
+        return org;
     }
 
 }
