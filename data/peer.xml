@@ -6,7 +6,7 @@
 	<class_name>JCudaVectorAdd</class_name>
 	<arg>
 		<no>3</no>
-		<type>d_array</type>
+		<type>1d_array</type>
 		<data_type>String</data_type>
 		<data file='true'>filedata.csv</data>
 		<split>
