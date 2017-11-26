@@ -37,6 +37,14 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        RunningConfiguration.run();
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+            @Override
+            public void run() {
+                RunningConfiguration.LOCAL_JKNODE.getStatistician().createLog();
+            }
+        }));
     }
+    
     
 }
