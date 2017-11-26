@@ -5,8 +5,6 @@
  */
 package timeshare;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -46,6 +44,7 @@ public class RunningConfiguration {
     public static Node BOOTSTRAP_NODE; // bootstrap Node
 
     /* Startup node configurations */
+    
     public static final boolean IS_BOOTSTRAP_NODE = true;
     private static boolean IS_WORKING = false;
    

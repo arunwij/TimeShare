@@ -26,7 +26,9 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import kademlia.file.FileSender;
 import kademlia.routing.Contact;
+import static timeshare.RunningConfiguration.IS_BOOTSTRAP_NODE;
 
 
 /**
@@ -101,6 +103,7 @@ public class SceneController implements Initializable {
         String csvFile = selectedKernel.getName();
         Path target = Paths.get("data", csvFile);
         String fileNamexml = selectedxml.getName();
+
        
         // Files.copy(selectedcsv.toPath(), target);
         //Files.copy(selectedKernel.toPath(), target);
@@ -125,14 +128,10 @@ public class SceneController implements Initializable {
             if(!c.equals(RunningConfiguration.LOCAL_NODE_CONTACT)){
             /* This send method is for sending workloads*/   
             // FileSender.send(c.getNode(), selectedFile); 
-
-                System.out.println("not local node contact");
-                
+            System.out.println("not local node contact");    
              /*  FileSender.send(c.getNode(), selectedFile); 
             }
         } */
-        
-        
         try {
             Xmlreader xml  = new Xmlreader(selectedxml,selectedFile,selectedKernel);
             xml.run();

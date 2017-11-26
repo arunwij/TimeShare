@@ -177,7 +177,6 @@ public class Scheduler {
                     FileSender.send(c.getNode(), sim.javaFile, "data/javaFile/");
                     FileSender.send(c.getNode(), sim.kernel, "data/kernel/" );
                 }
-
                 // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;
                 boolean isRedundent = false; // eg
                 WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.STR1D,Serializer.toJson(params),isRedundent);
