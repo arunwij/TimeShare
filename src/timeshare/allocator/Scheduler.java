@@ -15,7 +15,6 @@ import java.util.Map;
 import kademlia.file.Serializer;
 import kademlia.message.WorkloadManager;
 import kademlia.message.WorkloadMessage;
-import kademlia.message.WorkloadReceiver;
 import kademlia.routing.Contact;
 /**
  *
@@ -143,7 +142,9 @@ public class Scheduler {
                     intparams[a]=(int[][])params[a];
                 }**/
                 
-                WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.STR1D,Serializer.toJson(params));
+                // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;
+                boolean isRedundent = false; // eg
+                WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.STR1D,Serializer.toJson(params),isRedundent);
                 WorkloadManager wmgr = new WorkloadManager();                
                 RunningConfiguration.KAD_SERVER.sendMessage(c.getNode(), wmsg, wmgr);
             }

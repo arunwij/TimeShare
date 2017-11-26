@@ -74,8 +74,10 @@ public class MessageFactory implements KademliaMessageFactory{
                 return new WorkloadReceiver(server);
             case SimpleMessage.CODE:
                 return new SimpleReceiver();
-             case ResultMessage.CODE:
+            case ResultMessage.CODE:
                 return new WorkloadManager();
+            case ExecuteMessage.CODE:
+                return new ExecuteReceiver();
             default:
                 System.out.println("there is no receiver for code :" + code);
                 return new SimpleReceiver();

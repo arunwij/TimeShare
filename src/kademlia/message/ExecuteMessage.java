@@ -16,7 +16,7 @@ public class ExecuteMessage implements Message
 {
 
     private Node origin;
-    public static final byte CODE = 0x0B;
+    public static final byte CODE = 0x0C;
 
     public ExecuteMessage(Node origin){
         this.origin = origin;
