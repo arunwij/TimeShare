@@ -25,6 +25,15 @@ import static jcuda.runtime.JCuda.cudaGetDeviceProperties;
 import static jcuda.runtime.JCuda.cudaMallocHost;
 import jcuda.runtime.cudaDeviceProp;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 /**
  * This is a sample class demonstrating how to use the JCuda driver
  * bindings to load and execute a CUDA vector addition kernel.
@@ -34,21 +43,105 @@ import jcuda.runtime.cudaDeviceProp;
  */
 public  class JCudaVectorAdd
 {
+	
+	List<String> fileList;
+    private static final String INPUT_ZIP_FILE = "C:\\zip\\uploads.zip";
+    private static final String OUTPUT_FOLDER = "C:\\zip";
+	
+	public JCudaVectorAdd(){
+		
+		
+	}
+    public static double[][] test( String[] a,int[][] b ,int[] d)
+    { 
+       double c[][] = new double[b.length][b[0].length];
+		for(int i=0;i<b.length; i++)
+			for(int j=0;j<b[0].length; j++){
+				System.out.println(a[j]);	
+				c[i][j]=b[i][j] + d[j];
+			}
+				
+		
+        return c;
+       // }
+    }
+
+    /**
+     * Unzip it
+     * @param zipFile input zip file
+     * @param output zip file output folder
+     */
+    public void unZipIt(String zipFile, String outputFolder){
+
+     byte[] buffer = new byte[1024];
+
+     try{
+
+    	//create output directory is not exists
+    	File folder = new File(OUTPUT_FOLDER);
+    	if(!folder.exists()){
+    		folder.mkdir();
+    	}
+
+    	//get the zip file content
+    	ZipInputStream zis =
+    		new ZipInputStream(new FileInputStream(zipFile));
+    	//get the zipped file list entry
+    	ZipEntry ze = zis.getNextEntry();
+
+    	while(ze!=null){
+
+    	   String fileName = ze.getName();
+           File newFile = new File(outputFolder + File.separator + fileName);
+
+          // System.out.println("file unzip : "+ newFile.getAbsoluteFile());
+
+            //create all non exists folders
+            //else you will hit FileNotFoundException for compressed folder
+            new File(newFile.getParent()).mkdirs();
+
+            FileOutputStream fos = new FileOutputStream(newFile);
+
+            int len;
+            while ((len = zis.read(buffer)) > 0) {
+       		fos.write(buffer, 0, len);
+            }
+
+            fos.close();
+            ze = zis.getNextEntry();
+    	}
+
+        zis.closeEntry();
+    	zis.close();
+
+    	System.out.println("Done");
+        
+        
+        
+          
+// ... the code being measured ...    
+        
+    }catch(IOException ex){
+       ex.printStackTrace();
+    }
+   }
+	
     /**
      * Entry point of this sample
      *
      * @param args Not used
      * @throws IOException If an IO error occurs
      */
-	public static float[][] test(int[][] a,int[][] b){
-		System.out.println("test method called");
-		float c[][] = new float[a.length][a[0].length];
-		for(int x=0;x<a.length;x++)
-			for(int y=0;y<a[0].length;y++)
+	public static String[][] testass(String[][] a,String[][] b){
+		//System.out.println("test method called");
+		//String c[][] = new String[a.length][a[0].length];
+		//for(int x=0;x<a.length;x++)
+		//	for(int y=0;y<a[0].length;y++)
 				//System.out.println(a[x][y]);
-				c[x][y]=a[x][y]+b[x][y];
+			//	c[x][y]=Integer.parseInt(a[x][y])+Integer.parseInt(b[x][y]);
+				//c[x][y]=a[x][y]+b[x][y];
 		
-		return c;
+		return a;
 	} 
 	
 	
@@ -63,13 +156,13 @@ public  class JCudaVectorAdd
 		return c;
 	} 
 	 
-    /*public static float[] add(int a) throws IOException
+    public static float[] add(int a) throws IOException
     {
         // Enable exceptions and omit all subsequent error checks
         JCudaDriver.setExceptionsEnabled(true);
 
         // Create the PTX file by calling the NVCC
-        String ptxFileName = preparePtxFile("JCudaVectorAddKernel.cu");
+        String ptxFileName = preparePtxFile("data/received/JCudaVectorAddKernel.cu");
         //String ptxFileName = "JCudaVectorAddKernel.ptx";
         
         // Initialize the driver and create a context for the first device.
@@ -167,7 +260,7 @@ public  class JCudaVectorAdd
                     " but expected "+expected);
                 passed = false;
                 break;
-            }
+            }*/
         }
         System.out.println("Test "+(passed?"PASSED":"FAILED"));
 

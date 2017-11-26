@@ -28,8 +28,8 @@ import kademlia.routing.Contact;
  */
 public class RunningConfiguration {
     
-    public final static int FILE_PORT = 11655;
-    
+    public final static int FILE_PORT = 13000;
+    public static int FILE_PORT_ID =0;
     public static int LOCAL_NODE_PORT;
     public static String LOCAL_NODE_NAME;
     public static JKademliaNode LOCAL_JKNODE;

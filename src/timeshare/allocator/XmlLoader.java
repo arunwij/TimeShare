@@ -45,9 +45,9 @@ public class XmlLoader {
     public Map<String, Object>[][] senddata;
     public ArrayList[] sendfiles;
 
-    public XmlLoader(String path) {
+    public XmlLoader(File path) {
         try {
-            File fXmlFile = new File(path);
+            File fXmlFile = path;
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(fXmlFile);

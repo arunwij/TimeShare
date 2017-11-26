@@ -5,6 +5,7 @@
  */
 package timeshare.allocator;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -66,9 +67,16 @@ public class Simulator {
     public  Map<String, Object>[][] senddata;
     public ArrayList<String> sendfiles[];
     public XmlLoader xl;
-
-    public Simulator(int NUM_MACHINES, int NUM_TASKS, double ARRIVAL_RATE, int metaSetSize, TaskHeterogeneity th, MachineHeterogeneity mh, String xmlFile) {
+    public File xmlFile;
+    public File javaFile;
+    public File kernel;
+    
+    public Simulator(int NUM_MACHINES, int NUM_TASKS, double ARRIVAL_RATE, int metaSetSize, TaskHeterogeneity th, MachineHeterogeneity mh, File xmlFile,File javaFile,File kernel) {
         try {
+            this.xmlFile = xmlFile;
+            this.javaFile=javaFile;
+            this.kernel = kernel;
+            
             xl = new XmlLoader(xmlFile);
             xl.ProcessData();
             senddata = xl.senddata;

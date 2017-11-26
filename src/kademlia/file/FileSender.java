@@ -51,6 +51,13 @@ public class FileSender {
         nioClient.sendFile(socketChannel);
     }
     
+    public static void send(Node to, File file,String filepath) throws IOException{
+        RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
+        FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
+        SocketChannel socketChannel = nioClient.createChannel();
+        nioClient.sendFile(socketChannel);
+    }
+    
 /**
 * Establishes a socket channel connection
 *
@@ -85,9 +92,9 @@ public class FileSender {
                 buffer.clear();
             }
         
-            Thread.sleep(1000);
+            Thread.sleep(400);
             System.out.println("End of file reached..");
-            socketChannel.close();
+           // socketChannel.close();
             aFile.close();
             
         } catch (FileNotFoundException e) { 

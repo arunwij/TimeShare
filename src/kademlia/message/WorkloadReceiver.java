@@ -36,7 +36,7 @@ public class WorkloadReceiver implements Receiver {
         //Integer objarray[][][] = msg.getData();
 
         System.out.println("------------run-----" + msg.getClassName());
-        pip.compileFile("data/received/" + msg.getClassName() + ".java");
+        pip.compileFile("data\\javaFile\\" + msg.getClassName() + ".java");
 
         //System.out.println(msg.data);
        /* int data[][][] = (int[][][]) msg.getData();
@@ -60,7 +60,7 @@ public class WorkloadReceiver implements Receiver {
             senddata[i] = json.fromJson(data[i],parameterTypes[i] );
         }
         
-         pip.compileFile("data/received/" + msg.getClassName() + ".java");
+         pip.compileFile("data\\javaFile\\" + msg.getClassName() + ".java");
         Object out = pip.run(msg.getClassName(), msg.getMethodName(), senddata , data.length);
         System.out.println("------------taks executed-----");
 
