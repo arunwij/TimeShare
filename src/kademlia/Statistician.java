@@ -1,7 +1,15 @@
 package kademlia;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class that keeps statistics for this Kademlia instance.
@@ -18,6 +26,7 @@ public class Statistician implements KadStatistician{
 
     /* Bootstrap timings */
     private long bootstrapTime;
+    private long onlineTime;
 
     /* Content lookup operation timing & route length */
     private int numContentLookups, numFailedContentLookups;
@@ -168,6 +177,36 @@ public class Statistician implements KadStatistician{
     
     @Override
     public void createLog(){
+        Path logPath = Paths.get("logs/statistician.csv");
+        
+        if(!Files.exists(logPath)){
+            try {
+                new File("logs/statistician.csv").createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Statistician.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        StringBuilder newRow = new StringBuilder("\n");
+        newRow.append(this.getBootstrapTime());
+        newRow.append(",");
+        newRow.append(this.numDataSent);
+        newRow.append(",");
+        newRow.append(this.numDataReceived);
+        newRow.append(",");
+        newRow.append(this.getTotalDataSent());
+        newRow.append(",");
+        newRow.append(this.getTotalDataReceived());
+        newRow.append(",");
+        newRow.append(this.onlineTime);
+        
+        try {
+            List<String> existingRecords = Files.readAllLines(logPath);
+            existingRecords.add(newRow.toString());
+            Files.write(logPath,existingRecords);
+        } catch (IOException ex) {
+            Logger.getLogger(Statistician.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 }
