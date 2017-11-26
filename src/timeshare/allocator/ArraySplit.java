@@ -340,20 +340,11 @@ public class ArraySplit {
         return split;
     }
 
-    public synchronized static void adddata() {
-        for (int a = 0; a < source.length; a++) {
-            //source_d[a][b]=(a*10)+(double)b;
-            for (int b = 0; b < source[0].length; b++) {
-                int val = ((a * 10) + b);
-                source[a][b] = Integer.toString(val);
-            }
 
-        }
-    }
 
     public static void main(String[] args) throws Exception {
 
-        adddata();
+        //adddata();
         String splitdata[][][] = splitDataCol2D(source, 4);
         for (int a = 0; a < source.length; a++) {
 

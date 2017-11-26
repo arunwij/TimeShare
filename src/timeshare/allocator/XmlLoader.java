@@ -89,14 +89,17 @@ public class XmlLoader {
                     Element e = (Element) nl.item(temp);
                     System.out.println("is file :" + e.getAttribute("file"));
                     String values = null;
-                    if (e.getAttribute("file").equals("false")) {
-                        values = eElement.getElementsByTagName("data").item(0).getTextContent();
-
-                    } else if (e.getAttribute("file").equals("true")) {
-                        CSVReader csv = new CSVReader();
-                        values = csv.read(eElement.getElementsByTagName("data").item(0).getTextContent());
-                    } else {
-                        values = "[]";
+                    switch (e.getAttribute("file")) {
+                        case "false":
+                            values = eElement.getElementsByTagName("data").item(0).getTextContent();
+                            break;
+                        case "true":
+                            CSVReader csv = new CSVReader();
+                            values = csv.read(eElement.getElementsByTagName("data").item(0).getTextContent());
+                            break;
+                        default:
+                            values = "[]";
+                            break;
                     }
 
                     boolean assests = false;
@@ -104,11 +107,10 @@ public class XmlLoader {
                         assests = true;
                         System.out.println("assesrt true");
                     }
-                    
+
                     ///String obj = values.replace(",[", "").replace("[", "");
                     //String[] ssarr = obj.split("]");
-                   // String[] syarr = ssarr[0].split(",");
-
+                    // String[] syarr = ssarr[0].split(",");
                     if (eElement.getElementsByTagName("split").getLength() > 0) {
                         Node snode = eElement.getElementsByTagName("split").item(0);
                         Element sElement = (Element) snode;
@@ -120,6 +122,9 @@ public class XmlLoader {
 
                         // Map<String, Object> map = splitdata(values, dataType, arrayType, splitType, splitCount);
                         System.out.println(dataToSend.addData(splitdata(values, dataType, arrayType, splitType, splitCount, assests)));
+
+                    } else if (eElement.getElementsByTagName("broadcast").getLength() > 0) {
+                        System.out.println(dataToSend.addData(braodcastArray(values, dataType, arrayType, peer_count, assests)));
 
                     }
 
@@ -137,13 +142,143 @@ public class XmlLoader {
 
     public String getDataType(String name, String type) {
 
-        if (type.equals("2d_array")) {
-            return name + "[][]";
-        } else if (type.equals("1d_array")) {
-            return name + "[]";
-        } else {
-            return name;
+        switch (type) {
+            case "2d_array":
+                return name + "[][]";
+            case "1d_array":
+                return name + "[]";
+            default:
+                return name;
         }
+
+    }
+
+    private Map<String, Object> braodcastArray(String values, String dataType, String vartype, int peerCount, boolean assests) {
+        ConvertDataType cdt = new ConvertDataType();
+        Map<String, Object> map = new HashMap<>();
+        if (vartype.equals("2d_array")) {
+
+            switch (dataType.toLowerCase()) {
+                case "String": {
+                    String[][][] dd = ArrayBroadcast.String2D((String[][]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    if (assests) {
+                        for (int a = 0; a < peerCount; a++) {
+                            for (int b = 0; b < dd.length; b++) {
+                                for (int c = 0; c < dd[0].length; c++) {
+                                    sendfiles[a].add(dd[a][b][c]);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+                case "int": {
+                    int[][][] dd = ArrayBroadcast.Int2D((int[][]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "double": {
+                    double[][][] dd = ArrayBroadcast.Double2D((double[][]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "float": {
+                    float[][][] dd = ArrayBroadcast.Float2D((float[][]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "boolean": {
+                    boolean[][][] dd = ArrayBroadcast.boolean2D((boolean[][]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                default:
+                    break;
+            }
+        } else if (vartype.equals("1d_array")) {
+            //System.out.println("1d array");
+            switch (dataType.toLowerCase()) {
+                case "string":
+                    {
+                        String[][] dd = ArrayBroadcast.String1D((String[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                        map.put(getDataType(dataType, vartype) + "[]", dd);
+                        System.out.println("assest split 1 " + assests + dd[0][0]);
+                        if (assests) {
+                            System.out.println("split assest");
+                            for (int a = 0; a < dd.length; a++) {
+                                for (int b = 0; b < dd[0].length; b++) {
+                                    sendfiles[a].add(dd[a][b]);
+                                }
+                            }
+                        }       break;
+                    }
+                case "int":
+                    {
+                        int[][] dd = ArrayBroadcast.Int1D((int[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                        map.put(getDataType(dataType, vartype) + "[]", dd);
+                        break;
+                    }
+                case "double":
+                    {
+                        double[][] dd = ArrayBroadcast.Double1D((double[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                        map.put(getDataType(dataType, vartype) + "[]", dd);
+                        break;
+                    }
+                case "float":
+                    {
+                        float[][] dd = ArrayBroadcast.Float1D((float[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                        map.put(getDataType(dataType, vartype) + "[]", dd);
+                        break;
+                    }
+                case "boolean":
+                    {
+                        boolean[][] dd = ArrayBroadcast.boolean1D((boolean[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                        map.put(getDataType(dataType, vartype) + "[]", dd);
+                        break;
+                    }
+                default:
+                    break;
+            }
+        } else if (vartype.equals("var")) {
+            switch (dataType.toLowerCase()) {
+                case "String": {
+                    String dd = VariableBroadcast.vString((String) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    if (assests) {
+                        for (int a = 0; a < peerCount; a++) {
+                            for (int b = 0; b < peer_count; b++) {
+
+                                sendfiles[a].add(dd);
+
+                            }
+                        }
+                    }
+                    break;
+                }
+                case "int": {
+                    int dd = VariableBroadcast.vInt((int) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "double": {
+                    double dd = VariableBroadcast.vDouble((double) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "float": {
+                    float dd = VariableBroadcast.vFloat((float) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                default: {
+                    Object dd = VariableBroadcast.vObject((Object) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+            }
+        }
+        return map;
 
     }
 
@@ -174,7 +309,7 @@ public class XmlLoader {
                 float[][][] dd = ArraySplit.splitDataCol2D((float[][]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
             }
-        }  else if (splitType.toLowerCase().equals("row") && vartype.equals("2d_array")) {
+        } else if (splitType.toLowerCase().equals("row") && vartype.equals("2d_array")) {
 
             if (dataType.equals("String")) {
                 String[][][] dd = ArraySplit.splitDataRow2D((String[][]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
@@ -222,7 +357,7 @@ public class XmlLoader {
                 float[][] dd = ArraySplit.splitDataRow1D((float[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
             }
-        }else if (vartype.equals("var")) {
+        } else if (vartype.equals("var")) {
             if (dataType.equals("String")) {
                 String dd = VariableBroadcast.vString((String) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
@@ -254,7 +389,7 @@ public class XmlLoader {
     }
 
     public void ProcessData() throws ClassNotFoundException, IOException {
-        
+
         System.out.println("process data");
         Map<String, Object>[] myobj = dataToSend.getData();
         //System.out.println(dataToSend.getDataCount());
@@ -294,14 +429,12 @@ public class XmlLoader {
                     }
                 } else {
                     System.out.println(m.getKey());
-                    
 
                     for (int p = 0; p < peer_count; p++) {
 
-                         
                         Map<String, Object> map1;
                         map1 = new HashMap<>();
-                        map1.put(m.getKey().toString(),m.getValue());
+                        map1.put(m.getKey().toString(), m.getValue());
                         senddata[p][cc] = map1;
                         //al.add(senddata[p][cc]);
                     }
