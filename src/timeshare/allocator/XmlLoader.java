@@ -403,7 +403,7 @@ public class XmlLoader {
                 System.out.println("show key" + m.getKey().toString() + m.getKey().toString().contains("[][]"));
                 if (m.getKey().toString().contains("[][]")) {
                     System.out.println(m.getKey());
-                    Object[][] obj = (Object[][]) m.getValue();
+                    Object[] obj = (Object[]) m.getValue();
 
                     for (int p = 0; p < obj.length; p++) {
 
@@ -416,7 +416,7 @@ public class XmlLoader {
                     }
                 } else if (m.getKey().toString().contains("[][][]")) {
                     System.out.println(m.getKey());
-                    Object[][][] obj = (Object[][][]) m.getValue();
+                    Object[] obj = (Object[]) m.getValue();
 
                     for (int p = 0; p < obj.length; p++) {
 
