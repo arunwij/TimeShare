@@ -165,7 +165,7 @@ public class SceneController implements Initializable {
     private void showProgress() throws InterruptedException{
         lblUpdate.setVisible(true);
         prgsUpdate.setVisible(true);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         stopProgress();
     }
     

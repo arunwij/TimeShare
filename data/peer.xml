@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<max_peers>2</max_peers>
+	<args>2</args>
+	<method_name>add</method_name>
+	<class_name>JCudaVectorAdd</class_name>
+	<arg>
+		<no>3</no>
+		<type>2d_array</type>
+		<data_type>String</data_type>
+		<data file='false'>[1.6,2.6,3.6,4.6],[5.6,6.6,7.6,8.6],[9.6,10.6,11.6,12.6],[13.6,14.6,15.6,16.6]</data>
+		<split>
+			<type>row</type>
+			<min_count>2</min_count>
+		</split>
+	</arg>
+	<arg>
+		<no>4</no>
+		<type>2d_array</type>
+		<data_type>String</data_type>
+		<data file='false'>[100,200,300,400],[500,600,700,800],[900,1000,1100,1200],[1300,1400,1500,1600]</data>
+		<split>
+			<type>row</type>
+			<min_count>2</min_count>
+		</split>
+	</arg>
+	<arg>
+		<no>4</no>
+		<type>var</type>
+		<data_type>int</data_type>
+		<data file='false'>10000</data>
+		<split>
+			<type>row</type>
+			<min_count>2</min_count>
+		</split>
+	</arg>
+	<!--<arg>
+		<no>3</no>
+		<type>1d_array</type>
+		<data_type>string</data_type>
+		<data file='true' assests='true'>C:/bank-data.csv</data>
+		<split>
+			<type>row</type>
+			<min_count>2</min_count>
+		</split>
+	</arg>
+	<arg>
+		<no>1</no>
+		<type>var</type>
+		<data_type>string</data_type>
+		<data  assests='true'>1223</data>
+		<split>
+			<type>row</type>
+			<min_count>2</min_count>
+		</split>
+	</arg>-->
+
+</config>	
+
+<!--<arg>
+		<no>1</no>
+		<type>2d_array</type>
+		<data_type>int</data_type>
+		<data file='true'>C:/data.csv</data>
+		<split>
+			<type>row</type>
+			<min_count>2</min_count>
+		</split>
+	</arg>
+	<arg>
+		<no>2</no>
+		<type>2d_array</type>
+		<data_type>int</data_type>
+		<data file='true'>C:/data.csv</data>
+		<split>
+			<type>row</type>
+			<min_count>2</min_count>
+		</split>
+	</arg>
+	-->

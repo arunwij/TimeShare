@@ -126,13 +126,13 @@ public class Scheduler {
                 Contact c = (Contact) list.get(i);
                 sim.mapTask(tbu.getTask(), i);
                 System.out.println("Adding task "+tbu.getTask().tid+" to machine "+i+". Completion time = "+tbu.getTask().cTime+" @time "+currentTime);
-                int datacount = 2;
+                int datacount = 3;
                 System.out.println("test");
                 Object [] params =new Object[datacount];
                 System.err.println("test 1");
                 for (int cc = 0; cc < datacount; cc++) {
                     for (Map.Entry m : tbu.getTask().data[cc].entrySet()) {
-                        params[cc] = m.getValue();
+                        params[cc] =Serializer.toJson( m.getValue());
                     }
                 }
 /*
@@ -143,7 +143,7 @@ public class Scheduler {
                     intparams[a]=(int[][])params[a];
                 }**/
                 
-                WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.STR3D,Serializer.toJson(params));
+                WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.STR1D,Serializer.toJson(params));
                 WorkloadManager wmgr = new WorkloadManager();                
                 RunningConfiguration.KAD_SERVER.sendMessage(c.getNode(), wmsg, wmgr);
             }

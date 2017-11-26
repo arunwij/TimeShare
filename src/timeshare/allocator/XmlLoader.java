@@ -224,28 +224,28 @@ public class XmlLoader {
             }
         }else if (vartype.equals("var")) {
             if (dataType.equals("String")) {
-                String[] dd = VariableBroadcast.vString((String) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                String dd = VariableBroadcast.vString((String) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
                 if (assests) {
                     for (int a = 0; a < peerCount; a++) {
-                        for (int b = 0; b < dd.length; b++) {
+                        for (int b = 0; b < peer_count; b++) {
 
-                            sendfiles[a].add(dd[a]);
+                            sendfiles[a].add(dd);
 
                         }
                     }
                 }
             } else if (dataType.equals("int")) {
-                int[] dd = VariableBroadcast.vInt((int) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                int dd = VariableBroadcast.vInt((int) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
             } else if (dataType.equals("double")) {
-                double[] dd = VariableBroadcast.vDouble((double) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                double dd = VariableBroadcast.vDouble((double) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
             } else if (dataType.equals("float")) {
-                float[] dd = VariableBroadcast.vFloat((float) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                float dd = VariableBroadcast.vFloat((float) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
             } else {
-                Object[] dd = VariableBroadcast.vObject((Object) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                Object dd = VariableBroadcast.vObject((Object) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
                 map.put(getDataType(dataType, vartype) + "[]", dd);
             }
         }
@@ -294,14 +294,14 @@ public class XmlLoader {
                     }
                 } else {
                     System.out.println(m.getKey());
-                    Object[] obj = (Object[]) m.getValue();
+                    
 
-                    for (int p = 0; p < obj.length; p++) {
+                    for (int p = 0; p < peer_count; p++) {
 
-                        Object pp = (Object) obj[p];
+                         
                         Map<String, Object> map1;
                         map1 = new HashMap<>();
-                        map1.put(m.getKey().toString(), obj[p]);
+                        map1.put(m.getKey().toString(),m.getValue());
                         senddata[p][cc] = map1;
                         //al.add(senddata[p][cc]);
                     }

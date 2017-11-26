@@ -25,6 +25,9 @@ import java.util.logging.Logger;
 public class ProcessInPeer {
 
     static P2PJavaCompiler compiler;
+    
+    private Class<?>[] parameterTypes;
+    private Class<?> returnType;
 
     public synchronized void compileFile(String file) {
         InputStream is;
@@ -48,7 +51,7 @@ public class ProcessInPeer {
         }
     }
 
-    public synchronized <Any> Any run(String className, String methodName, Object data_a[][][], int datacount) {
+    public synchronized <Any> Any run(String className, String methodName, Object data_a[], int datacount) {
         
         final Method m1, m2;
         Object[] params = new Object[datacount];
@@ -63,19 +66,21 @@ public class ProcessInPeer {
             int lenth = 10;
             float[] addarr = new float[lenth];
             //result = m1.invoke(null, condatatype(nums, m1.getReturnType()));
-            Class<?>[] parameterTypes = m1.getParameterTypes();
+            parameterTypes = m1.getParameterTypes();
             for (int cc = 0; cc < datacount; cc++) {
               /*  for (Map.Entry m : data_a[cc].entrySet()) {
              */       
                     params[cc] = data_a[cc];
-                    System.out.println(data_a[cc].getClass());
+                  //  System.out.println(data_a[cc].getClass());
                /* }*/
 
             }
             if (datacount == 1) {
                 result = m1.invoke(null, params[0]);
             } else if (datacount == 2) {
-                result = m1.invoke(null, params[0], params[1]);
+               // System.out.println("2param");
+                result = m1.invoke(null, parameterTypes[0].cast( params[0] ), parameterTypes[1].cast(params[1] ) );
+                //System.out.println("2param end");
             } else if (datacount == 3) {
                 result = m1.invoke(null, params[0], params[1], params[2]);
             } else if (datacount == 4) {
@@ -94,11 +99,25 @@ public class ProcessInPeer {
                 result = m1.invoke(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8], params[9]);
 
             }
-
+            returnType =m1.getReturnType();
             // float[] farr = conObj(result, m1.getReturnType());
             return (Any) result;
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException ex) {
             System.out.println(ex);;
+        }
+        return null;
+    }
+    
+    public Class<?> getReturnType(){
+        return returnType;
+    }
+    
+    public Class<?>[] getParameterTypes(String methodName, String  className){
+        try {
+            Method m1 = compiler.compileMethod(methodName, className);
+            return m1.getParameterTypes();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProcessInPeer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
