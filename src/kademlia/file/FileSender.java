@@ -16,6 +16,8 @@ import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.SocketChannel;
+import java.util.List;
+import java.util.ListIterator;
 import kademlia.message.FileListner;
 import kademlia.message.FileMessage;
 import kademlia.node.Node;
@@ -54,6 +56,17 @@ public class FileSender {
         FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
         SocketChannel socketChannel = nioClient.createChannel();
         nioClient.sendFile(socketChannel);
+    }
+    
+    public static void send(Node to,List<File> files,String filepath) throws IOException{
+        ListIterator ltr = files.listIterator();
+        while(ltr.hasNext()){
+            File file = (File) ltr.next();
+            RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
+            FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
+            SocketChannel socketChannel = nioClient.createChannel();
+            nioClient.sendFile(socketChannel);
+        }
     }
     
 /**
@@ -95,7 +108,7 @@ public class FileSender {
            // socketChannel.close();
             aFile.close();
             
-        } catch (FileNotFoundException e) { 
+        } catch (FileNotFoundException e ) { 
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
