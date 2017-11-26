@@ -52,7 +52,7 @@ public  class JCudaVectorAdd
 		
 		
 	}
-    public static double[][] test( String[][] a,int[][] b ,int[] d)
+    public static double[][] test( String[] a,int[][] b ,int[] d)
     { 
        double c[][] = new double[a.length][a[0].length];
 		for(int i=0;i<a.length; i++)
