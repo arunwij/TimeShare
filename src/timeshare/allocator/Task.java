@@ -5,6 +5,7 @@
  */
 package timeshare.allocator;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -30,7 +31,7 @@ public class Task {
     
     /*data on the task*/
     Map<String, Object>[] data;
-    
+    ArrayList files;
     int[] datas;
 
 //    public Task(int arrivalTime, int task_id, Map dataOfTask){
@@ -45,10 +46,11 @@ public class Task {
         datas = dataOfTask;
     }
 
-    public Task(int arrivalTime, int task_id, Map<String, Object>[]dataOfTask) {
+    public Task(int arrivalTime, int task_id, Map<String, Object>[]dataOfTask,ArrayList files) {
         tid=task_id;
         aTime=arrivalTime;
         data = dataOfTask;
+        this.files= files;
     }
 
     public int get_aTime() {

@@ -55,7 +55,7 @@ public class ConvertDataType {
                 for (int y = 0; y < ssarr.length; y++) {
                     String[] sarr = ssarr[y].trim().split(",");
                     for (int x = 0; x < sarr.length; x++) {
-                        arr[y][x] = Integer.parseInt(sarr[x]);
+                        arr[y][x] = Float.parseFloat(sarr[x]);
                     }
                 }
 
@@ -70,6 +70,7 @@ public class ConvertDataType {
                 arrayLenght[0] = sarr.length;
                 double[] arr = new double[sarr.length];
                 for (int x = 0; x < sarr.length; x++) {
+                    
                     arr[x] = Double.parseDouble(sarr[x]);
                 }
                 return (Object) arr;
@@ -90,7 +91,8 @@ public class ConvertDataType {
                 for (int y = 0; y < ssarr.length; y++) {
                     String[] sarr = ssarr[y].trim().split(",");
                     for (int x = 0; x < sarr.length; x++) {
-                        arr[y][x] = Integer.parseInt(sarr[x]);
+                        System.out.println("convert to double "+ sarr[x]);
+                        arr[y][x] = Double.parseDouble(sarr[x]);
                     }
                 }
 
@@ -135,7 +137,41 @@ public class ConvertDataType {
                 Component frame = null;
                 JOptionPane.showMessageDialog(frame, "Unable to converted to String 2d array.\n" + ex);
             }
-        } else if (type.toLowerCase().equals("string[]")) {
+        }else if (type.equals("boolean[]")) {
+            try {
+                String[] sarr = object.replace("[", "").replace("]", "").split(",");
+                arrayLenght[0] = sarr.length;
+                boolean[] arr = new boolean[sarr.length];
+                for (int x = 0; x < sarr.length; x++) {
+                    arr[x] = Boolean.parseBoolean(sarr[x]);
+                }
+                return (Object) arr;
+            } catch (NumberFormatException ex) {
+                Component frame = null;
+                JOptionPane.showMessageDialog(frame, "Unable to converted to int array.\n" + ex);
+            }
+        } else if (type.equals("boolean[][]")) {
+            StringBuffer sb = new StringBuffer(object);
+            String obj = object.replace(",[", "").replace("[", "");
+            String[] ssarr = obj.split("]");
+            String[] syarr = ssarr[0].split(",");
+
+            try {
+                
+                boolean[][] arr = new boolean[ssarr.length][syarr.length];
+                for (int y = 0; y < ssarr.length; y++) {
+                    String[] sarr = ssarr[y].trim().split(",");
+                    for (int x = 0; x < sarr.length; x++) {
+                        arr[y][x] = Boolean.parseBoolean(sarr[x]);
+                    }
+                }
+                return (Object) arr;
+            } catch (NumberFormatException ex) {
+                Component frame = null;
+                JOptionPane.showMessageDialog(frame, "Unable to converted to String 2d array.\n" + ex);
+            }
+        }  
+        else if (type.toLowerCase().equals("string[]")) {
             try {
 
                 String[] arr = object.replace("[", "").replace("]", "").split(",");

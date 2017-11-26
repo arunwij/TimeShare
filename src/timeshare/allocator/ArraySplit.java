@@ -340,39 +340,5 @@ public class ArraySplit {
         return split;
     }
 
-    public synchronized static void adddata() {
-        for (int a = 0; a < source.length; a++) {
-            //source_d[a][b]=(a*10)+(double)b;
-            for (int b = 0; b < source[0].length; b++) {
-                int val = ((a * 10) + b);
-                source[a][b] = Integer.toString(val);
-            }
 
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-
-        adddata();
-        String splitdata[][][] = splitDataCol2D(source, 4);
-        for (int a = 0; a < source.length; a++) {
-
-            for (int b = 0; b < source[0].length; b++) {
-                System.out.print(source[a][b] + " \t");
-
-            }
-            System.out.println("");
-        }
-        for (int a = 0; a < splitdata.length; a++) {
-            System.out.println("part " + a);
-            for (int b = 0; b < splitdata[0].length; b++) {
-                for (int c = 0; c < splitdata[0][0].length; c++) {
-                    System.out.print(splitdata[a][b][c] + " ");
-                }
-                System.out.println("");
-            }
-            System.out.println("");
-        }
-
-    }
 }

@@ -135,6 +135,9 @@ public class Scheduler {
                         params[cc] =Serializer.toJson( m.getValue());
                     }
                 }
+                for (int l = 0; l < tbu.getTask().files.size(); l++) {
+                    System.out.println(tbu.getTask().files.get(l).toString());
+                }
 /*
                 int [][]arr =(int[][])params[0];
                 int [][][] intparams= new int[datacount][arr.length][arr[0].length];

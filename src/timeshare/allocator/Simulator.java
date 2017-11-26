@@ -159,7 +159,7 @@ public class Simulator {
         /*Initialization*/
  /*Add the first S tasks to the meta set and schedule them*/
         for (int i = i1; i < i2; i++) {
-            Task t = new Task(arrivals[i], i, senddata[i]);
+            Task t = new Task(arrivals[i], i, senddata[i],sendfiles[i]);
             metaSet.add(t);
         }
         i1 = i2;
@@ -192,7 +192,7 @@ public class Simulator {
             metaSet = new Vector<Task>(i2 - i1);
 
             for (int i = i1; i < i2; i++) {
-                Task t = new Task(arrivals[i], i, senddata[i]);
+                Task t = new Task(arrivals[i], i, senddata[i],sendfiles[i]);
                 metaSet.add(t);
             }
             eng.schedule(metaSet, tick);

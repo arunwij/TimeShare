@@ -6,9 +6,9 @@
 	<class_name>JCudaVectorAdd</class_name>
 	<arg>
 		<no>3</no>
-		<type>2d_array</type>
+		<type>1d_array</type>
 		<data_type>String</data_type>
-		<data file='false'>[1.6,2.6,3.6,4.6],[5.6,6.6,7.6,8.6],[9.6,10.6,11.6,12.6],[13.6,14.6,15.6,16.6]</data>
+		<data file='true' assests='true'>filedata.csv</data>
 		<split>
 			<type>row</type>
 			<min_count>2</min_count>
@@ -17,7 +17,7 @@
 	<arg>
 		<no>4</no>
 		<type>2d_array</type>
-		<data_type>String</data_type>
+		<data_type>int</data_type>
 		<data file='false'>[100,200,300,400],[500,600,700,800],[900,1000,1100,1200],[1300,1400,1500,1600]</data>
 		<split>
 			<type>row</type>
@@ -26,13 +26,13 @@
 	</arg>
 	<arg>
 		<no>4</no>
-		<type>var</type>
+		<type>1d_array</type>
 		<data_type>int</data_type>
-		<data file='false'>10000</data>
-		<split>
+		<data file='false'>[1000,2000,3000,4000]</data>
+		<broadcast>
 			<type>row</type>
 			<min_count>2</min_count>
-		</split>
+		</broadcast>
 	</arg>
 	<!--<arg>
 		<no>3</no>
