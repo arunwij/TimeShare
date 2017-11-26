@@ -93,4 +93,11 @@ public interface KadStatistician
      * @return The average route length
      */
     public void createLog();
+    
+    public void setBootstrapTimestamp(long bootstrapTimestamp);
+    
+    public long getShutdownTimestamp();
+    
+    public long getOnlineTime();
+    
 }

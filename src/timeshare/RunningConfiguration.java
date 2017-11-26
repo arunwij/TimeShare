@@ -48,7 +48,7 @@ public class RunningConfiguration {
     /* Startup node configurations */
     public static final boolean IS_BOOTSTRAP_NODE = true;
     private static boolean IS_WORKING = false;
-  
+   
     static { 
         try {
             LOCAL_INETADDRESS = InetAddress.getLocalHost();
@@ -85,6 +85,7 @@ public class RunningConfiguration {
             } catch (IOException ex) {
                 Logger.getLogger(RunningConfiguration.class.getName()).log(Level.SEVERE, null, ex);
             }
+         
         }
     }
   

@@ -32,7 +32,8 @@ public class Statistician implements KadStatistician{
     private int numContentLookups, numFailedContentLookups;
     private long totalContentLookupTime;
     private long totalRouteLength;
-
+    private long bootstrapTimestamp;
+    private long shutdownTimestamp;
     
     {
         this.totalDataSent = 0;
@@ -41,6 +42,28 @@ public class Statistician implements KadStatistician{
         this.numContentLookups = 0;
         this.totalContentLookupTime = 0;
         this.totalRouteLength = 0;
+        this.bootstrapTimestamp = 0;
+        this.shutdownTimestamp = 0;
+    }
+    
+    public long getOnlineTime(){
+        return (this.bootstrapTimestamp - this.shutdownTimestamp) / 1000;
+    }
+    
+    public long getBootstrapTimestamp() {
+        return bootstrapTimestamp;
+    }
+
+    public void setBootstrapTimestamp(long bootstrapTimestamp) {
+        this.bootstrapTimestamp = bootstrapTimestamp;
+    }
+
+    public long getShutdownTimestamp() {
+        return shutdownTimestamp;
+    }
+
+    public void setShutdownTimestamp(long shutdownTimestamp) {
+        this.shutdownTimestamp = shutdownTimestamp;
     }
 
     @Override

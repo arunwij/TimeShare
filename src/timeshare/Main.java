@@ -6,6 +6,7 @@
 package timeshare;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,14 +17,11 @@ import javafx.stage.Stage;
  * @author Artista
  */
 public class Main extends Application {
-    private double xOffset = 0;
-    private double yOffset = 0;
     public static Stage primaryStage;
-    
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-       
+
         Parent root = FXMLLoader.load(getClass().getResource("Scene.fxml"));
         root.getStylesheets().add("/timeshare/Style.css");
        
@@ -31,19 +29,22 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    @Override
+    public void stop(){
+        System.out.println("System is shutting down");
+        // save statistician logs
+        RunningConfiguration.LOCAL_JKNODE.getStatistician().createLog();
+        Platform.exit();
+        System.exit(0);
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        RunningConfiguration.run();   
         launch(args);
-        RunningConfiguration.run();
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
-            @Override
-            public void run() {
-                RunningConfiguration.LOCAL_JKNODE.getStatistician().createLog();
-            }
-        }));
     }
     
     
