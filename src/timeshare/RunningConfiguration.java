@@ -35,7 +35,8 @@ public class RunningConfiguration {
     public static JKademliaNode LOCAL_JKNODE;
     public static InetAddress LOCAL_INETADDRESS;
     public static Contact LOCAL_NODE_CONTACT;
-    private static Node LOCAL_NODE;
+    private static final Node LOCAL_NODE;
+    private static boolean IS_WORKING;
     
     public final static String BOOTSTRAP_NODE_NAME = "bootstrap";
     public static final String BOOTSTRAP_ADDRESS = "192.168.1.20";
