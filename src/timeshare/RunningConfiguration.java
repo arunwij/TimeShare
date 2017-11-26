@@ -44,7 +44,7 @@ public class RunningConfiguration {
     public final static String BOOTSTRAP_NODE_NAME = "bootstrap"; // bootstrap name
     public static InetSocketAddress BOOTSTRAP_NODE_SOCKET; // bootstrap socket
     public static Node BOOTSTRAP_NODE; // bootstrap Node
-    
+
     /* Startup node configurations */
     public static final boolean IS_BOOTSTRAP_NODE = true;
     private static boolean IS_WORKING = false;
