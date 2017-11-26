@@ -5,13 +5,11 @@
  */
 package kademlia.file;
 
-import timeshare.Main;
 import timeshare.RunningConfiguration;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.lang.annotation.Documented;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -30,7 +28,7 @@ public class FileSender {
     //custom file sender constructor to accept socket of the reciever
     private final InetSocketAddress fileSocketAddress;
     private InetSocketAddress communicationSocketAddress;
-    private File file;
+    private final File file;
  
     public FileSender(InetAddress inetAddress, File file) throws IOException{
         this.fileSocketAddress = new InetSocketAddress(inetAddress,RunningConfiguration.FILE_PORT);

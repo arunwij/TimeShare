@@ -27,33 +27,29 @@ import kademlia.routing.Contact;
  * @author Artista
  */
 public class RunningConfiguration {
+    /* local node cofigurations */
+    public final static int FILE_PORT = 11655; // file port
+    public static int LOCAL_NODE_PORT; // message port
+    public static InetAddress LOCAL_INETADDRESS; //ip address
+    public static String LOCAL_NODE_NAME; // node name
+    private static final Node LOCAL_NODE; // Node
+    public static JKademliaNode LOCAL_JKNODE; // JKademlia node
+    public static Contact LOCAL_NODE_CONTACT; // Contact
+    public static KadServer KAD_SERVER; // Kad server
+    public static KadConfiguration KAD_CONFIGURATION; // Kad server configuraions
     
-    public final static int FILE_PORT = 11655;
+    /* bootstrap node configurations */
+    public static final int BOOTSTRAP_PORT = 11000; // bootstrap port
+    public static final String BOOTSTRAP_ADDRESS = "192.168.1.20"; // bootstrap ip
+    public final static String BOOTSTRAP_NODE_NAME = "bootstrap"; // bootstrap name
+    public static InetSocketAddress BOOTSTRAP_NODE_SOCKET; // bootstrap socket
+    public static Node BOOTSTRAP_NODE; // bootstrap Node
     
-    public static int LOCAL_NODE_PORT;
-    public static String LOCAL_NODE_NAME;
-    public static JKademliaNode LOCAL_JKNODE;
-    public static InetAddress LOCAL_INETADDRESS;
-    public static Contact LOCAL_NODE_CONTACT;
-    private static final Node LOCAL_NODE;
-    private static boolean IS_WORKING;
-    
-    public final static String BOOTSTRAP_NODE_NAME = "bootstrap";
-    public static final String BOOTSTRAP_ADDRESS = "192.168.1.20";
-    public static final int BOOTSTRAP_PORT = 11000;
-    public static InetSocketAddress BOOTSTRAP_NODE_SOCKET;
-    public static Node BOOTSTRAP_NODE;
-    
+    /* Startup node configurations */
     public static final boolean IS_BOOTSTRAP_NODE = true;
-    
-    public static KadServer KAD_SERVER;
-    public static KadConfiguration KAD_CONFIGURATION;
-    
-    public static int resultCount = 0;
-    public static String[] results = new String[2];
+    private static boolean IS_WORKING = false;
   
-    static {
-        
+    static { 
         try {
             LOCAL_INETADDRESS = InetAddress.getLocalHost();
             if(IS_BOOTSTRAP_NODE){
@@ -89,25 +85,7 @@ public class RunningConfiguration {
             } catch (IOException ex) {
                 Logger.getLogger(RunningConfiguration.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }
-    
-    public static void printResults(){
-        try {
-            File resultFile = new File("data/received/results/Results.txt");
-            resultFile.createNewFile();
-            FileWriter writer = new FileWriter(resultFile);
-            for (int i = 0; i < results.length; i++) {
-                 writer.write(results[i].toString());
-            }
-           
-            writer.flush();
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(RunningConfiguration.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
+  
 }

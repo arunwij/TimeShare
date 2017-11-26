@@ -50,6 +50,8 @@ public class MessageFactory implements KademliaMessageFactory{
                 return new WorkloadMessage(in);
             case ResultMessage.CODE:
                 return new ResultMessage(in);
+            case ExecuteMessage.CODE:
+                return new ExecuteMessage(in);
             default:
                 //System.out.println(this.localNode + " - No Message handler found for message. Code: " + code);
                 return new SimpleMessage(in);

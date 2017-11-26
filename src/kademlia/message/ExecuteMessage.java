@@ -12,8 +12,7 @@ import kademlia.node.Node;
  * @author Joshua Kissoon
  * @created 20140218
  */
-public class ExecuteMessage implements Message
-{
+public class ExecuteMessage implements Message{
 
     private Node origin;
     public static final byte CODE = 0x0C;

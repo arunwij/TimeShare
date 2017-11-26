@@ -104,10 +104,12 @@ public class SceneController implements Initializable {
         Path target = Paths.get("data", csvFile);
         String fileNamexml = selectedxml.getName();
         
-        //Files.copy(selectedcsv.toPath(), target);
+        // Files.copy(selectedcsv.toPath(), target);
         // Files.copy(selectedxml.toPath(), target);
         // Files.copy(selectedFile.toPath(), target);
-        //FileSender.send(to.getNode(), selectedFile);
+        
+        // this send method is for sending selected files
+        // FileSender.send(to.getNode(), selectedFile);
         showProgress();
                         
         List list = RunningConfiguration.LOCAL_JKNODE.getRoutingTable().getAllContacts();
@@ -118,7 +120,8 @@ public class SceneController implements Initializable {
         while(ltr.hasNext()){
             c = (Contact) ltr.next();
             if(!c.equals(RunningConfiguration.LOCAL_NODE_CONTACT)){
-              //  FileSender.send(c.getNode(), selectedFile); 
+            /* This send method is for sending workloads*/   
+            // FileSender.send(c.getNode(), selectedFile); 
             }
         } 
         
@@ -174,55 +177,7 @@ public class SceneController implements Initializable {
         lblUpdate.setVisible(false);
         prgsUpdate.setVisible(false);
         lblDone.setVisible(true);
-       // RunningConfiguration.printResults();
     }
-    
-//    @FXML
-//    private void runTask() {
-//
-//        final double wndwWidth = 300.0d;
-//        Label updateLabel = new Label();
-//        updateLabel.setPrefWidth(wndwWidth);
-//        ProgressBar progress = new ProgressBar();
-//        progress.setPrefWidth(wndwWidth);
-//
-//        VBox updatePane = new VBox();
-//        updatePane.setSpacing(5.0d);
-//        updatePane.getChildren().addAll(updateLabel, progress);
-//        final Stage taskUpdateStage = new Stage(StageStyle.UTILITY);
-//        taskUpdateStage.setScene(new Scene(updatePane));
-//        taskUpdateStage.show();
-//
-//        Task longTask = new Task<Void>() {
-//            @Override
-//            protected Void call() throws Exception {
-//                int max = 50;
-//                for (int i = 1; i <= max; i++) {
-//                    if (isCancelled()) {
-//                        break;
-//                    }
-//                    updateProgress(i, max);
-//                    updateMessage("Task part " + String.valueOf(i) + " complete");
-//
-//                    Thread.sleep(100);
-//                }
-//                return null;
-//            }
-//        };
-//
-//        longTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-//            @Override
-//            public void handle(WorkerStateEvent t) {
-//                taskUpdateStage.hide();
-//            }
-//        });
-//        progress.progressProperty().bind(longTask.progressProperty());
-//        updateLabel.textProperty().bind(longTask.messageProperty());
-//
-//        taskUpdateStage.show();
-//        new Thread(longTask).start();
-//    }
-            
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
