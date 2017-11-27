@@ -67,7 +67,7 @@ import kademlia.NameGenerator;
 
         RandomAccessFile aFile = null;
         try {
-            aFile = new RandomAccessFile( NameGenerator.get()+".jpg", "rw");
+            aFile = new RandomAccessFile(this.fileName, "rw");
             ByteBuffer buffer = ByteBuffer.allocate(1024);
             FileChannel fileChannel = aFile.getChannel();
             while (socketChannel.read(buffer) > 0) {
