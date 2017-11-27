@@ -24,7 +24,6 @@ import kademlia.NameGenerator;
 
     private String fileName;
 
-    //custom constructor for accept files
     public FileReceiver(String fileName) {
         this.fileName = fileName;
     }

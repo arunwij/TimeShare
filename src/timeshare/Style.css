@@ -29,6 +29,7 @@ and open the template in the editor.
 
 .anchorPane{
     -fx-background-image:url('bg.jpg');
+    -fx-background-position: center center;
 }
 
 #titleLbl{
