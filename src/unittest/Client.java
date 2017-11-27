@@ -5,12 +5,10 @@
  */
 package unittest;
 
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
 
 /**
@@ -23,7 +21,7 @@ public class Client {
         
         int bytesRead;
         int currentTot = 0;
-        Socket socket = new Socket("192.168.1.30", 15123);
+        Socket socket = new Socket("192.168.1.20", 15123);
         DataInputStream dis = new DataInputStream(socket.getInputStream());
         int size = dis.readInt();
         byte[] nameInBytes = new byte[size];
