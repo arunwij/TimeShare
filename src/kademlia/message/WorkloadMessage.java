@@ -1,11 +1,9 @@
 package kademlia.message;
 
 import timeshare.RunningConfiguration;
-import timeshare.allocator.XmlLoader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Map;
 import kademlia.file.Serializer;
 import kademlia.node.Node;
 
@@ -26,13 +24,15 @@ public class WorkloadMessage implements Message {
     private String type;
     public String data;
     private Node origin;
-  
-    public WorkloadMessage( String className,String methodName, String type, String data){
+    private boolean isRedundent;
+    
+    public WorkloadMessage( String className,String methodName, String type, String data, boolean workloadState){
         this.methodName = methodName;
         this.className = className;
         this.type = type;
         this.data = data;
         this.origin = RunningConfiguration.LOCAL_JKNODE.getNode();
+        this.isRedundent = workloadState;
     }
 
     public WorkloadMessage(DataInputStream in) {
@@ -57,6 +57,10 @@ public class WorkloadMessage implements Message {
     
     public Node getOrigin(){
         return this.origin;
+    }
+    
+    public boolean getWorkloadState(){
+        return this.isRedundent;
     }
     
     public <Any>Any getData(){
@@ -99,6 +103,7 @@ public class WorkloadMessage implements Message {
             out.writeBytes(this.type);
             out.writeInt(this.data.length());
             out.writeBytes(this.data);
+            out.writeBoolean(this.isRedundent);
             origin.toStream(out);
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,11 +121,14 @@ public class WorkloadMessage implements Message {
             in.readFully(typeBuff);
             byte[] dataBuff = new byte[in.readInt()];
             in.readFully(dataBuff);
-
+            byte[] workloadStateBuff = new byte[in.readInt()];
+            in.readFully(workloadStateBuff);
+            
             this.className = new String(classBuff);
             this.methodName = new String(methodBuff);
             this.type = new String(typeBuff);
             this.data = new String(dataBuff);
+            this.isRedundent = Boolean.parseBoolean(new String(workloadStateBuff));
             this.origin = new Node(in);
             
         } catch (IOException e) {

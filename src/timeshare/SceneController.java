@@ -7,9 +7,7 @@ package timeshare;
 
 import timeshare.allocator.Xmlreader;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -28,7 +26,9 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import kademlia.file.FileSender;
 import kademlia.routing.Contact;
+import static timeshare.RunningConfiguration.IS_BOOTSTRAP_NODE;
 
 
 /**
@@ -65,7 +65,7 @@ public class SceneController implements Initializable {
     File selectedFile;
     List<File> selectedFiles;
     File selectedxml;
-    File selectedcsv;
+    File selectedKernel;
     
     
     
@@ -97,33 +97,43 @@ public class SceneController implements Initializable {
     }
     
     @FXML
-    private void sendFile() throws UnknownHostException, IOException, InterruptedException {
+    private void sendFile() throws InterruptedException  {
         
         String fileName = selectedFile.getName();
-        String csvFile = selectedcsv.getName();
+        String csvFile = selectedKernel.getName();
         Path target = Paths.get("data", csvFile);
         String fileNamexml = selectedxml.getName();
-        
-        //Files.copy(selectedcsv.toPath(), target);
+
+       
+        // Files.copy(selectedcsv.toPath(), target);
+        //Files.copy(selectedKernel.toPath(), target);
         // Files.copy(selectedxml.toPath(), target);
         // Files.copy(selectedFile.toPath(), target);
-        //FileSender.send(to.getNode(), selectedFile);
+        // this send method is for sending selected files
+        // FileSender.send(to.getNode(), selectedFile);
+        
         showProgress();
                         
         List list = RunningConfiguration.LOCAL_JKNODE.getRoutingTable().getAllContacts();
         ListIterator ltr = list.listIterator();
         System.out.println("total contacts :"+list.size());
         Contact c;
-        
-        while(ltr.hasNext()){
+        //System.out.println("org boot : "+RunningConfiguration.BOOTSTRAP_NODE.toString());
+        /*while(ltr.hasNext()){
             c = (Contact) ltr.next();
-            if(!c.equals(RunningConfiguration.LOCAL_NODE_CONTACT)){
-              //  FileSender.send(c.getNode(), selectedFile); 
+            System.out.println(c.getNode().getNodeId());
+            if (c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE)) {
+                System.out.println("bootstap node ; "+c.getNode().toString());
             }
-        } 
-        
-        Xmlreader xml  = new Xmlreader();
+            if(!c.equals(RunningConfiguration.LOCAL_NODE_CONTACT)){
+            /* This send method is for sending workloads*/   
+            // FileSender.send(c.getNode(), selectedFile); 
+            System.out.println("not local node contact");    
+             /*  FileSender.send(c.getNode(), selectedFile); 
+            }
+        } */
         try {
+            Xmlreader xml  = new Xmlreader(selectedxml,selectedFile,selectedKernel);
             xml.run();
         } catch (Exception ex) {
             Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,9 +161,9 @@ public class SceneController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select the CSV File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv*"));
-        selectedcsv = fileChooser.showOpenDialog(null);
-        if(selectedcsv != null){
-            lblCsv.setText(selectedcsv.getName());
+        selectedKernel = fileChooser.showOpenDialog(null);
+        if(selectedKernel != null){
+            lblCsv.setText(selectedKernel.getName());
             indicatorCsv.setVisible(true);
         }else{
             lblCsv.setText("no file selected");
@@ -174,58 +184,11 @@ public class SceneController implements Initializable {
         lblUpdate.setVisible(false);
         prgsUpdate.setVisible(false);
         lblDone.setVisible(true);
-       // RunningConfiguration.printResults();
     }
-    
-//    @FXML
-//    private void runTask() {
-//
-//        final double wndwWidth = 300.0d;
-//        Label updateLabel = new Label();
-//        updateLabel.setPrefWidth(wndwWidth);
-//        ProgressBar progress = new ProgressBar();
-//        progress.setPrefWidth(wndwWidth);
-//
-//        VBox updatePane = new VBox();
-//        updatePane.setSpacing(5.0d);
-//        updatePane.getChildren().addAll(updateLabel, progress);
-//        final Stage taskUpdateStage = new Stage(StageStyle.UTILITY);
-//        taskUpdateStage.setScene(new Scene(updatePane));
-//        taskUpdateStage.show();
-//
-//        Task longTask = new Task<Void>() {
-//            @Override
-//            protected Void call() throws Exception {
-//                int max = 50;
-//                for (int i = 1; i <= max; i++) {
-//                    if (isCancelled()) {
-//                        break;
-//                    }
-//                    updateProgress(i, max);
-//                    updateMessage("Task part " + String.valueOf(i) + " complete");
-//
-//                    Thread.sleep(100);
-//                }
-//                return null;
-//            }
-//        };
-//
-//        longTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-//            @Override
-//            public void handle(WorkerStateEvent t) {
-//                taskUpdateStage.hide();
-//            }
-//        });
-//        progress.progressProperty().bind(longTask.progressProperty());
-//        updateLabel.textProperty().bind(longTask.messageProperty());
-//
-//        taskUpdateStage.show();
-//        new Thread(longTask).start();
-//    }
-            
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println(RunningConfiguration.LOCAL_JKNODE.getRoutingTable());
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
         @Override

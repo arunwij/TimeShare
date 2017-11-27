@@ -12,48 +12,40 @@ import kademlia.node.Node;
  * @author Joshua Kissoon
  * @created 20140218
  */
-public class ExecuteMessage implements Message
-{
+public class ExecuteMessage implements Message{
 
     private Node origin;
-    public static final byte CODE = 0x0B;
+    public static final byte CODE = 0x0C;
 
-    public ExecuteMessage(Node origin)
-    {
+    public ExecuteMessage(Node origin){
         this.origin = origin;
     }
 
-    public ExecuteMessage(DataInputStream in) throws IOException
-    {
+    public ExecuteMessage(DataInputStream in) throws IOException{
         this.fromStream(in);
     }
 
     @Override
-    public final void fromStream(DataInputStream in) throws IOException
-    {
+    public final void fromStream(DataInputStream in) throws IOException{
         this.origin = new Node(in);
     }
 
     @Override
-    public void toStream(DataOutputStream out) throws IOException
-    {
+    public void toStream(DataOutputStream out) throws IOException{
         origin.toStream(out);
     }
 
-    public Node getOrigin()
-    {
+    public Node getOrigin(){
         return this.origin;
     }
 
     @Override
-    public byte code()
-    {
+    public byte code(){
         return CODE;
     }
 
     @Override
-    public String toString()
-    {
-        return "AcknowledgeMessage[origin=" + origin.getNodeId() + "]";
+    public String toString(){
+        return "ExecuteMessage[origin=" + origin.getNodeId() + "]";
     }
 }

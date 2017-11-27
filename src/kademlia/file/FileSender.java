@@ -5,19 +5,19 @@
  */
 package kademlia.file;
 
-import timeshare.Main;
 import timeshare.RunningConfiguration;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.lang.annotation.Documented;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.SocketChannel;
+import java.util.List;
+import java.util.ListIterator;
 import kademlia.message.FileListner;
 import kademlia.message.FileMessage;
 import kademlia.node.Node;
@@ -30,7 +30,7 @@ public class FileSender {
     //custom file sender constructor to accept socket of the reciever
     private final InetSocketAddress fileSocketAddress;
     private InetSocketAddress communicationSocketAddress;
-    private File file;
+    private final File file;
  
     public FileSender(InetAddress inetAddress, File file) throws IOException{
         this.fileSocketAddress = new InetSocketAddress(inetAddress,RunningConfiguration.FILE_PORT);
@@ -49,6 +49,24 @@ public class FileSender {
         FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
         SocketChannel socketChannel = nioClient.createChannel();
         nioClient.sendFile(socketChannel);
+    }
+    
+    public static void send(Node to, File file,String filepath) throws IOException{
+        RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
+        FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
+        SocketChannel socketChannel = nioClient.createChannel();
+        nioClient.sendFile(socketChannel);
+    }
+    
+    public static void send(Node to,List<File> files,String filepath) throws IOException{
+        ListIterator ltr = files.listIterator();
+        while(ltr.hasNext()){
+            File file = (File) ltr.next();
+            RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
+            FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
+            SocketChannel socketChannel = nioClient.createChannel();
+            nioClient.sendFile(socketChannel);
+        }
     }
     
 /**
@@ -85,12 +103,12 @@ public class FileSender {
                 buffer.clear();
             }
         
-            Thread.sleep(1000);
+            Thread.sleep(400);
             System.out.println("End of file reached..");
-            socketChannel.close();
+           // socketChannel.close();
             aFile.close();
             
-        } catch (FileNotFoundException e) { 
+        } catch (FileNotFoundException e ) { 
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

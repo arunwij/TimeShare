@@ -13,25 +13,21 @@ import kademlia.dht.KademliaDHT;
  * @author Joshua Kissoon
  * @since 20140202
  */
-public class MessageFactory implements KademliaMessageFactory
-{
+public class MessageFactory implements KademliaMessageFactory{
 
     private final KademliaNode localNode;
     private final KademliaDHT dht;
     private final KadConfiguration config;
 
-    public MessageFactory(KademliaNode local, KademliaDHT dht, KadConfiguration config)
-    {
+    public MessageFactory(KademliaNode local, KademliaDHT dht, KadConfiguration config){
         this.localNode = local;
         this.dht = dht;
         this.config = config;
     }
 
     @Override
-    public Message createMessage(byte code, DataInputStream in) throws IOException
-    {
-        switch (code)
-        {
+    public Message createMessage(byte code, DataInputStream in) throws IOException{
+        switch (code){
             case AcknowledgeMessage.CODE:
                 return new AcknowledgeMessage(in);
             case ConnectMessage.CODE:
@@ -54,6 +50,8 @@ public class MessageFactory implements KademliaMessageFactory
                 return new WorkloadMessage(in);
             case ResultMessage.CODE:
                 return new ResultMessage(in);
+            case ExecuteMessage.CODE:
+                return new ExecuteMessage(in);
             default:
                 //System.out.println(this.localNode + " - No Message handler found for message. Code: " + code);
                 return new SimpleMessage(in);
@@ -64,7 +62,6 @@ public class MessageFactory implements KademliaMessageFactory
     @Override
     public Receiver createReceiver(byte code, KadServer server){
         switch (code){
-            
             case ConnectMessage.CODE:
                 return new ConnectReceiver(server, this.localNode);
             case ContentLookupMessage.CODE:
@@ -79,8 +76,10 @@ public class MessageFactory implements KademliaMessageFactory
                 return new WorkloadReceiver(server);
             case SimpleMessage.CODE:
                 return new SimpleReceiver();
-             case ResultMessage.CODE:
+            case ResultMessage.CODE:
                 return new WorkloadManager();
+            case ExecuteMessage.CODE:
+                return new ExecuteReceiver();
             default:
                 System.out.println("there is no receiver for code :" + code);
                 return new SimpleReceiver();
