@@ -7,7 +7,6 @@ package timeshare.allocator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -20,14 +19,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import timeshare.RunningConfiguration;
 //Imports for Scheduler
-import java.util.Vector;
-import java.util.Iterator;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  *
@@ -58,7 +52,7 @@ public class XmlLoader {
             NodeList nList = doc.getElementsByTagName("arg");
             NodeList peers = doc.getElementsByTagName("max_peers");
             System.out.println("max peers :" + peers.item(0).getTextContent());
-            peer_count = Integer.parseInt(peers.item(0).getTextContent());
+            peer_count = RunningConfiguration.getPeersCount();
             sendfiles = new ArrayList[peer_count];
             for (int i = 0; i < peer_count; i++) {
                 sendfiles[i] = new ArrayList();
@@ -76,19 +70,17 @@ public class XmlLoader {
                 System.out.print("\nCurrent Element :" + nNode.getNodeName() + " ");
                 System.out.println("no : " + eElement.getElementsByTagName("no").item(0).getTextContent());
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
                     // System.out.println("Staff id : " + eElement.getAttribute("id"));
                     System.out.println("type : " + eElement.getElementsByTagName("type").item(0).getTextContent());
                     System.out.println("Data Type : " + eElement.getElementsByTagName("data_type").item(0).getTextContent());
-
                     System.out.println("Value(s) : " + eElement.getElementsByTagName("data").item(0).getTextContent());
-
                     String dataType = eElement.getElementsByTagName("data_type").item(0).getTextContent();
                     String arrayType = eElement.getElementsByTagName("type").item(0).getTextContent();
                     NodeList nl = doc.getElementsByTagName("data");
                     Element e = (Element) nl.item(temp);
                     System.out.println("is file :" + e.getAttribute("file"));
                     String values = null;
+
                     switch (e.getAttribute("file")) {
                         case "false":
                             values = eElement.getElementsByTagName("data").item(0).getTextContent();
@@ -103,6 +95,7 @@ public class XmlLoader {
                     }
 
                     boolean assests = false;
+
                     if (e.getAttribute("assests").equals("true") && dataType.toLowerCase().equals("string")) {
                         assests = true;
                         System.out.println("assesrt true");
@@ -199,44 +192,40 @@ public class XmlLoader {
         } else if (vartype.equals("1d_array")) {
             //System.out.println("1d array");
             switch (dataType.toLowerCase()) {
-                case "string":
-                    {
-                        String[][] dd = ArrayBroadcast.String1D((String[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
-                        map.put(getDataType(dataType, vartype) + "[]", dd);
-                        System.out.println("assest split 1 " + assests + dd[0][0]);
-                        if (assests) {
-                            System.out.println("split assest");
-                            for (int a = 0; a < dd.length; a++) {
-                                for (int b = 0; b < dd[0].length; b++) {
-                                    sendfiles[a].add(dd[a][b]);
-                                }
+                case "string": {
+                    String[][] dd = ArrayBroadcast.String1D((String[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    System.out.println("assest split 1 " + assests + dd[0][0]);
+                    if (assests) {
+                        System.out.println("split assest");
+                        for (int a = 0; a < dd.length; a++) {
+                            for (int b = 0; b < dd[0].length; b++) {
+                                sendfiles[a].add(dd[a][b]);
                             }
-                        }       break;
+                        }
                     }
-                case "int":
-                    {
-                        int[][] dd = ArrayBroadcast.Int1D((int[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
-                        map.put(getDataType(dataType, vartype) + "[]", dd);
-                        break;
-                    }
-                case "double":
-                    {
-                        double[][] dd = ArrayBroadcast.Double1D((double[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
-                        map.put(getDataType(dataType, vartype) + "[]", dd);
-                        break;
-                    }
-                case "float":
-                    {
-                        float[][] dd = ArrayBroadcast.Float1D((float[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
-                        map.put(getDataType(dataType, vartype) + "[]", dd);
-                        break;
-                    }
-                case "boolean":
-                    {
-                        boolean[][] dd = ArrayBroadcast.boolean1D((boolean[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
-                        map.put(getDataType(dataType, vartype) + "[]", dd);
-                        break;
-                    }
+                    break;
+                }
+                case "int": {
+                    int[][] dd = ArrayBroadcast.Int1D((int[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "double": {
+                    double[][] dd = ArrayBroadcast.Double1D((double[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "float": {
+                    float[][] dd = ArrayBroadcast.Float1D((float[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
+                case "boolean": {
+                    boolean[][] dd = ArrayBroadcast.boolean1D((boolean[]) cdt.conObj(values, getDataType(dataType, vartype)), peerCount);
+                    map.put(getDataType(dataType, vartype) + "[]", dd);
+                    break;
+                }
                 default:
                     break;
             }

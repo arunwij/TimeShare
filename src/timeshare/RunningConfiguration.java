@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kademlia.JKademliaNode;
@@ -72,6 +74,25 @@ public class RunningConfiguration {
         KAD_CONFIGURATION = LOCAL_JKNODE.getCurrentConfiguration();
         LOCAL_NODE = LOCAL_JKNODE.getNode();
         LOCAL_NODE_CONTACT = new Contact(LOCAL_NODE);
+    }
+    
+    public static int getPeersCount(){
+        //without bootstrap node
+        return (LOCAL_JKNODE.getRoutingTable().getAllContacts().size()-1);
+    }
+    
+    public static List<Node> getNodeList(){
+        List list = RunningConfiguration.LOCAL_JKNODE.getRoutingTable().getAllContacts();
+        ListIterator lt = list.listIterator();
+        List<Node> nodes = null;
+        while(lt.hasNext()){
+            Contact c = (Contact)lt.next();   
+            System.err.println("Node id:"+ c.getNode().getNodeId());
+            if(!c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE) && !c.getNode().equals(LOCAL_NODE)) {
+                nodes.add(c.getNode());
+            }
+        }
+        return nodes;
     }
     
     public static void run(){

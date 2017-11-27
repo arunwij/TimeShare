@@ -96,11 +96,11 @@ and open the template in the editor.
     -fx-font-size: 80px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-text-shadow:
+/*    -fx-text-shadow:
 	1px 1px 0 #CCC,
-	2px 2px 0 #CCC, /* end of 2 level deep grey shadow */
+	2px 2px 0 #CCC,  end of 2 level deep grey shadow 
 	3px 3px 0 #444,
 	4px 4px 0 #444,
 	5px 5px 0 #444,
-	6px 6px 0 #444; /* end of 4 level deep dark shadow */
+	6px 6px 0 #444;  end of 4 level deep dark shadow */
 }

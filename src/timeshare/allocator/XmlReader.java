@@ -15,14 +15,14 @@ import java.util.List;
  *
  * @author Sanjula
  */
-public class Xmlreader {
+public class XmlReader {
 
-    private File xml,javaFile,kernel;
+    private File xml,javaFile,csv;
 
-    public Xmlreader(File xml, File javaFile, File csv) {
+    public XmlReader(File xml, File javaFile, File csv) {
         this.xml = xml;
         this.javaFile = javaFile;
-        this.kernel = csv;
+        this.csv = csv;
     }
 
     
@@ -33,7 +33,7 @@ public class Xmlreader {
         //CSVReader csv = new CSVReader();
         //System.out.println(csv.read("bank-data.csv"));
         long t1 = System.currentTimeMillis();
-        int NUM_MACHINES = 1;
+        int NUM_MACHINES = RunningConfiguration.getPeersCount();
         int NUM_TASKS = 2;
         double ARRIVAL_RATE = 3;
         int metaSetSize = NUM_TASKS;
@@ -49,7 +49,7 @@ public class Xmlreader {
         //Specify the parameters here
         long sigmaMakespan = 0;
         long avgMakespan = 0;
-        Simulator se = new Simulator(NUM_MACHINES, NUM_TASKS, ARRIVAL_RATE, metaSetSize, th, mh, xml,javaFile,kernel);
+        Simulator se = new Simulator(NUM_MACHINES, NUM_TASKS, ARRIVAL_RATE, metaSetSize, th, mh, xml,javaFile,csv);
 
         for (int i = 0; i < no_of_simulations; i++) {
 
