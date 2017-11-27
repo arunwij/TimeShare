@@ -29,6 +29,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import timeshare.allocator.XmlReader;
 
 /**
  *
@@ -191,8 +192,8 @@ public class SceneController implements Initializable {
         String csvFile = selectedCsv.getName();
         String xmlName = selectedXml.getName();
         try {
-//            Xmlreader xml  = new Xmlreader(selectedXml,selectedSource,selectedCsv);
-//            xml.run();
+            XmlReader xml  = new XmlReader(selectedXml,selectedSource,selectedCsv);
+            xml.run();
         } catch (Exception ex) {
             Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
         }

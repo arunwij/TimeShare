@@ -21,7 +21,6 @@ import kademlia.node.Node;
 import kademlia.node.Port;
 import kademlia.operation.ConnectOperation;
 import kademlia.routing.Contact;
-
 /**
  *
  * @author Artista
@@ -46,7 +45,6 @@ public class RunningConfiguration {
     public static Node BOOTSTRAP_NODE; // bootstrap Node
 
     /* Startup node configurations */
-    
     public static final boolean IS_BOOTSTRAP_NODE = true;
     private static boolean IS_WORKING = false;
    
