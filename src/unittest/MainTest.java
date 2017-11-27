@@ -19,23 +19,24 @@ import timeshare.RunningConfiguration;
  * @author Artista
  */
 public class MainTest {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, InterruptedException{
         RunningConfiguration.run();
-        
-        List<File> files = new <File>ArrayList();
-        
-        File a = new File("pics/city.jpg");
-        File b = new File("pics/desert.jpg");
-        File c = new File("pics/flower.jpg");
-        File d = new File("pics/night.jpg");
-        
-        List<Node> nodes = RunningConfiguration.getNodeList();
-        ListIterator li = nodes.listIterator();
-        
-        while(li.hasNext()){
-            Node n = (Node)li.next();
-            FileSender.send(n, a, "/test");
-        }
+//        Thread.sleep(5000);
+//        List<File> files = new <File>ArrayList();
+//        
+//        File a = new File("pics/city.jpg");
+//        File b = new File("pics/desert.jpg");
+//        File c = new File("pics/flower.jpg");
+//        File d = new File("pics/night.jpg");
+//        
+//        List<Node> nodes = RunningConfiguration.getNodeList();
+//        System.out.println("Size"+ nodes.size());
+//        ListIterator li = nodes.listIterator();
+//        
+//        while(li.hasNext()){
+//            Node n = (Node)li.next();
+//            FileSender.send(n, a, "pics/received/");
+//        }
         
     }
 }

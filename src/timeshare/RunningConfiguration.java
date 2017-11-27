@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
@@ -82,11 +83,11 @@ public class RunningConfiguration {
     public static List<Node> getNodeList(){
         List list = RunningConfiguration.LOCAL_JKNODE.getRoutingTable().getAllContacts();
         ListIterator lt = list.listIterator();
-        List<Node> nodes = null;
+        List<Node> nodes = new <Node>ArrayList();
         while(lt.hasNext()){
             Contact c = (Contact)lt.next();   
             System.err.println("Node id:"+ c.getNode().getNodeId());
-            if(!c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE) && !c.getNode().equals(LOCAL_NODE)) {
+            if(!c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE)) {
                 nodes.add(c.getNode());
             }
         }
