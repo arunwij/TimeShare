@@ -5,13 +5,9 @@
  */
 package timeshare;
 
-import timeshare.allocator.Xmlreader;
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,9 +22,6 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
-import kademlia.file.FileSender;
-import kademlia.routing.Contact;
-import static timeshare.RunningConfiguration.IS_BOOTSTRAP_NODE;
 
 
 /**
@@ -62,10 +55,10 @@ public class SceneController implements Initializable {
     @FXML private ProgressBar prgsUpdate;
     
     
-    File selectedFile;
+    File selectedSource;
     List<File> selectedFiles;
-    File selectedxml;
-    File selectedKernel;
+    File selectedXml;
+    File selectedCsv;
     
     
     
@@ -86,9 +79,9 @@ public class SceneController implements Initializable {
     private void uploadSource(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select the Source File");
-        selectedFile = fileChooser.showOpenDialog(null);
-        if(selectedFile != null){
-            lblUploadSource.setText(selectedFile.getName());
+        selectedSource = fileChooser.showOpenDialog(null);
+        if(selectedSource != null){
+            lblUploadSource.setText(selectedSource.getName());
             indicatorSource.setVisible(true);
         }else{
             lblUploadSource.setText("no file selected");
@@ -96,59 +89,14 @@ public class SceneController implements Initializable {
         }
     }
     
-    @FXML
-    private void sendFile() throws InterruptedException  {
-        
-        String fileName = selectedFile.getName();
-        String csvFile = selectedKernel.getName();
-        Path target = Paths.get("data", csvFile);
-        String fileNamexml = selectedxml.getName();
-
-       
-        // Files.copy(selectedcsv.toPath(), target);
-        //Files.copy(selectedKernel.toPath(), target);
-        // Files.copy(selectedxml.toPath(), target);
-        // Files.copy(selectedFile.toPath(), target);
-        // this send method is for sending selected files
-        // FileSender.send(to.getNode(), selectedFile);
-        
-        showProgress();
-                        
-        List list = RunningConfiguration.LOCAL_JKNODE.getRoutingTable().getAllContacts();
-        ListIterator ltr = list.listIterator();
-        System.out.println("total contacts :"+list.size());
-        Contact c;
-        //System.out.println("org boot : "+RunningConfiguration.BOOTSTRAP_NODE.toString());
-        /*while(ltr.hasNext()){
-            c = (Contact) ltr.next();
-            System.out.println(c.getNode().getNodeId());
-            if (c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE)) {
-                System.out.println("bootstap node ; "+c.getNode().toString());
-            }
-            if(!c.equals(RunningConfiguration.LOCAL_NODE_CONTACT)){
-            /* This send method is for sending workloads*/   
-            // FileSender.send(c.getNode(), selectedFile); 
-            System.out.println("not local node contact");    
-             /*  FileSender.send(c.getNode(), selectedFile); 
-            }
-        } */
-        try {
-            Xmlreader xml  = new Xmlreader(selectedxml,selectedFile,selectedKernel);
-            xml.run();
-        } catch (Exception ex) {
-            Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    
-    @FXML
+     @FXML
     private void uploadXML(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select the XML File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML Files", "*.xml*"));
-        selectedxml = fileChooser.showOpenDialog(null);
-        if(selectedxml != null){
-            lblUploadXml.setText(selectedxml.getName());
+        selectedXml = fileChooser.showOpenDialog(null);
+        if(selectedXml != null){
+            lblUploadXml.setText(selectedXml.getName());
             indicatorXml.setVisible(true);
         }else{
             lblUploadXml.setText("no file selected");
@@ -161,9 +109,9 @@ public class SceneController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select the CSV File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv*"));
-        selectedKernel = fileChooser.showOpenDialog(null);
-        if(selectedKernel != null){
-            lblCsv.setText(selectedKernel.getName());
+        selectedCsv = fileChooser.showOpenDialog(null);
+        if(selectedCsv != null){
+            lblCsv.setText(selectedCsv.getName());
             indicatorCsv.setVisible(true);
         }else{
             lblCsv.setText("no file selected");
@@ -171,6 +119,19 @@ public class SceneController implements Initializable {
         }
     }
     
+    @FXML
+    private void sendFile() throws InterruptedException  {
+        String sourceName = selectedSource.getName();
+        String csvFile = selectedCsv.getName();
+        String xmlName = selectedXml.getName(); 
+        try {
+//            Xmlreader xml  = new Xmlreader(selectedXml,selectedSource,selectedCsv);
+//            xml.run();
+        } catch (Exception ex) {
+            Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
     @FXML 
     private void showProgress() throws InterruptedException{
         lblUpdate.setVisible(true);
@@ -188,7 +149,6 @@ public class SceneController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(RunningConfiguration.LOCAL_JKNODE.getRoutingTable());
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
         @Override

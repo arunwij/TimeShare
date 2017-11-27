@@ -5,12 +5,15 @@
  */
 package timeshare;
 
+import java.util.List;
+import java.util.ListIterator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import kademlia.routing.Contact;
 import timeshare.rating.DeviceRating;
 
 /**
@@ -34,7 +37,6 @@ public class Main extends Application {
     @Override
     public void stop(){
         System.out.println("System is shutting down");
-        // save statistician logs
         RunningConfiguration.LOCAL_JKNODE.getStatistician().createLog();
         Platform.exit();
         System.exit(0);
@@ -43,8 +45,17 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DeviceRating.deviceQuery();
+        //DeviceRating.deviceQuery();
         RunningConfiguration.run();
+        
+        List list = RunningConfiguration.LOCAL_JKNODE.getRoutingTable().getAllContacts();
+        
+        ListIterator lt = list.listIterator();
+        while(lt.hasNext()){
+            Contact c = (Contact)lt.next();
+            
+            System.err.println("Node id:"+ c.getNode().getNodeId());
+        }
         launch(args);
     }
     

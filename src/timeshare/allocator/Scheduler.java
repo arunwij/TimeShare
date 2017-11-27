@@ -143,6 +143,15 @@ public class Scheduler {
                         params[cc] = Serializer.toJson(m.getValue());
                     }
                 }
+                
+                //modified
+//                List<File> files = new ArrayList<File>();
+//                for (int l = 0; l < tbu.getTask().files.size(); l++) {
+//                    files.add(new File(tbu.getTask().files.get(l).toString()));
+//                }
+                
+                //FileSender.send(c.getNode(), files, "data/executor/files/" );
+                
                 for (int l = 0; l < tbu.getTask().files.size(); l++) {
                     System.out.println(tbu.getTask().files.get(l).toString());
                     File file = new File(tbu.getTask().files.get(l).toString());
