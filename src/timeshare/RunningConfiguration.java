@@ -30,7 +30,7 @@ public class RunningConfiguration {
     public static int LOCAL_NODE_PORT; // message port
     public static InetAddress LOCAL_INETADDRESS; //ip address
     public static String LOCAL_NODE_NAME; // node name
-    private static final Node LOCAL_NODE; // Node
+    public static Node LOCAL_NODE; // Node
     public static JKademliaNode LOCAL_JKNODE; // JKademlia node
     public static Contact LOCAL_NODE_CONTACT; // Contact
     public static KadServer KAD_SERVER; // Kad server

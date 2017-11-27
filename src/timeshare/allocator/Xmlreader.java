@@ -6,27 +6,7 @@
 package timeshare.allocator;
 
 import timeshare.RunningConfiguration;
-import java.awt.Component;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.JOptionPane;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -37,17 +17,12 @@ import java.util.List;
  */
 public class Xmlreader {
 
-    /**
-     * @param args the command line arguments
-     */
-    private File xml;
-    private File javaFile;
-    private File kernel;
+    private File xml,javaFile,kernel;
 
-    public Xmlreader(File xml, File javaFile, File kernel) {
+    public Xmlreader(File xml, File javaFile, File csv) {
         this.xml = xml;
         this.javaFile = javaFile;
-        this.kernel = kernel;
+        this.kernel = csv;
     }
 
     
@@ -57,12 +32,7 @@ public class Xmlreader {
         // xml.ProcessData();
         //CSVReader csv = new CSVReader();
         //System.out.println(csv.read("bank-data.csv"));
-
-        //Scheduler_Main
-        String xmlFile = "data/peer.xml";
         long t1 = System.currentTimeMillis();
-        List list = RunningConfiguration.LOCAL_JKNODE.getRoutingTable().getAllContacts();
-
         int NUM_MACHINES = 1;
         int NUM_TASKS = 2;
         double ARRIVAL_RATE = 3;
