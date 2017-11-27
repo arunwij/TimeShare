@@ -21,7 +21,7 @@ import timeshare.RunningConfiguration;
  * @author Artista
  */
 public class MainTest {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, InterruptedException{
         RunningConfiguration.run();
         
         List<File> files = new <File>ArrayList();

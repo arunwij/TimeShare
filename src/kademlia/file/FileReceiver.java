@@ -14,6 +14,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import kademlia.NameGenerator;
 
 /**
  *
@@ -66,7 +67,7 @@ import java.nio.channels.SocketChannel;
 
         RandomAccessFile aFile = null;
         try {
-            aFile = new RandomAccessFile( this.fileName, "rw");
+            aFile = new RandomAccessFile( NameGenerator.get()+".jpg", "rw");
             ByteBuffer buffer = ByteBuffer.allocate(1024);
             FileChannel fileChannel = aFile.getChannel();
             while (socketChannel.read(buffer) > 0) {

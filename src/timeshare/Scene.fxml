@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="AnchorPane" prefHeight="590.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timeshare.SceneController">
+<BorderPane id="AnchorPane" prefHeight="590.0" prefWidth="863.0" style="-fx-background-image: C:\Users\Great HARI\Documents\Timeshare\pics;" styleClass="borderPane" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timeshare.SceneController">
     <top>
       <VBox id="titleVbox" prefHeight="120.0" prefWidth="645.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,17 +39,6 @@
                         <Label layoutX="203.0" layoutY="-14.0" prefHeight="118.0" prefWidth="426.0" styleClass="timeShareTitle" text="Time Share" />
                         <TextArea fx:id="txtFileList" layoutX="172.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0" />
                         <Button layoutX="378.0" layoutY="43.0" mnemonicParsing="false" onAction="#uploadData" text="Upload data" />
-                        <Pane id="footerPane" layoutX="24.0" layoutY="137.0" prefHeight="31.0" prefWidth="831.0">
-                           <children>
-                              <Pane layoutX="726.0" layoutY="4.0" prefHeight="27.0" prefWidth="91.0">
-                                 <children>
-                                    <Label layoutY="5.0" prefHeight="17.0" prefWidth="31.0" text="DHT:" />
-                                    <Label fx:id="lblNodeCount" layoutX="31.0" layoutY="5.0" prefHeight="17.0" prefWidth="20.0" text="100" />
-                                    <Label layoutX="52.0" layoutY="5.0" prefHeight="17.0" prefWidth="42.0" text="Nodes" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </Pane>
                      </children>
                   </Pane>
                </children></HBox>
@@ -63,7 +52,7 @@
       <Pane prefHeight="445.0" prefWidth="477.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnSource" layoutX="24.0" layoutY="85.0" mnemonicParsing="false" onAction="#uploadSource" prefHeight="25.0" prefWidth="130.0" text="Upload Source" />
-            <Button fx:id="sendFile" layoutX="190.0" layoutY="268.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="106.0" prefWidth="106.0" text="PROCESS" />
+            <Button fx:id="sendFile" layoutX="190.0" layoutY="268.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="106.0" prefWidth="106.0" stylesheets="@Style.css" text="PROCESS" />
             <Button fx:id="btnRules" layoutX="163.0" layoutY="85.0" mnemonicParsing="false" onAction="#uploadXML" prefHeight="25.0" prefWidth="156.0" text="Rules" />
             <Button fx:id="btnCSV" layoutX="326.0" layoutY="85.0" mnemonicParsing="false" onAction="#uploadCSV" prefHeight="25.0" prefWidth="128.0" text="Upload CSV" />
             <Label fx:id="lblUploadSource" layoutX="69.0" layoutY="144.0" prefHeight="17.0" prefWidth="231.0" text="Please Select the Source File" />
@@ -101,4 +90,17 @@
          </children>
       </Pane>
    </center>
+   <bottom>
+      <Pane prefHeight="27.0" prefWidth="91.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane id="footerPane" prefHeight="31.0" prefWidth="863.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="31.0" text="DHT:" />
+                  <Label fx:id="lblNodeCount" layoutX="33.0" prefHeight="17.0" prefWidth="20.0" text="100" />
+                  <Label layoutX="61.0" prefHeight="17.0" prefWidth="42.0" text="Nodes" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>
