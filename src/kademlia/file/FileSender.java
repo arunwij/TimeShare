@@ -62,7 +62,7 @@ public class FileSender {
         ListIterator ltr = files.listIterator();
         while(ltr.hasNext()){
             File file = (File) ltr.next();
-            //RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
+            RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
             FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
             SocketChannel socketChannel = nioClient.createChannel();
             nioClient.sendFile(socketChannel);
