@@ -40,6 +40,8 @@ public class SceneController implements Initializable {
     @FXML
     private TextArea txtFileList;
     @FXML
+    private TextArea txtAreaConsole;
+    @FXML
     private BorderPane borderPane;
     @FXML
     private Button buttonExit;
@@ -221,6 +223,14 @@ public class SceneController implements Initializable {
         lblUpdate.setVisible(false);
         prgsUpdate.setVisible(false);
         lblDone.setVisible(true);
+    }
+    
+    @FXML
+    public void statusConsole(String status){
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(status + "\n");
+//        txtAreaConsole.setText(sb.toString());
+          //txtAreaConsole.setText(status);
     }
 
     @Override

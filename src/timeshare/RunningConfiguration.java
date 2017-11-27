@@ -50,6 +50,8 @@ public class RunningConfiguration {
     
     public static final boolean IS_BOOTSTRAP_NODE = false;
     private static boolean IS_WORKING = false;
+    public static SceneController sc = new SceneController();
+    public StringBuilder sb = new StringBuilder();
    
     static { 
         try {
@@ -59,11 +61,14 @@ public class RunningConfiguration {
                 LOCAL_JKNODE = new JKademliaNode(BOOTSTRAP_NODE_NAME,BOOTSTRAP_NODE_SOCKET);
                 LOCAL_NODE_NAME = BOOTSTRAP_NODE_NAME;
                 System.out.println("Kad-network bootstrap node started..");
+//                sb.append("Kad-network bootstrap node started..\n");
+//                sc.statusConsole("Kad-network bootstrap node started..");
             }else{
                 BOOTSTRAP_NODE_SOCKET = new InetSocketAddress(BOOTSTRAP_ADDRESS,BOOTSTRAP_PORT);
                 LOCAL_NODE_NAME = NameGenerator.get();
                 LOCAL_JKNODE = new JKademliaNode(LOCAL_NODE_NAME,Port.RandomPort());
                 System.out.println("Jkademlia local node created...");
+//                sc.statusConsole("Jkademlia local node created...");
                 BOOTSTRAP_NODE = new Node(BOOTSTRAP_NODE_SOCKET);
             }
         } catch (UnknownHostException ex) {
@@ -99,10 +104,12 @@ public class RunningConfiguration {
     public static void run(){
         if(!IS_BOOTSTRAP_NODE){
             System.out.println("Connect operation starting");
+//            sc.statusConsole("Connect operation starting");
             ConnectOperation connectOperation = new ConnectOperation(KAD_SERVER,LOCAL_JKNODE,BOOTSTRAP_NODE,KAD_CONFIGURATION);
             try {
                 connectOperation.execute();
                 System.out.println("Connect operation done..");
+//                sc.statusConsole("Connect operation done..");
             } catch (IOException ex) {
                 Logger.getLogger(RunningConfiguration.class.getName()).log(Level.SEVERE, null, ex);
             }

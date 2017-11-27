@@ -57,16 +57,16 @@
          </children>
       </Pane>
    </bottom>
-   <left>
+   <center>
       <Pane id="leftPane" prefHeight="441.0" prefWidth="799.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblTM" layoutX="375.0" layoutY="502.0" prefHeight="17.0" prefWidth="82.0" text="Total Memory" textFill="#6490e7" />
+            <Label fx:id="lblTM" layoutX="375.0" layoutY="502.0" prefHeight="17.0" prefWidth="82.0" text="Total Memory" textFill="#f2d41f" />
             <ProgressBar fx:id="prgsTotMem" layoutX="310.0" layoutY="480.0" prefHeight="11.0" prefWidth="200.0" progress="0.0" />
             <ProgressIndicator fx:id="indicatorTotMem" layoutX="521.0" layoutY="468.0" progress="0.0" />
-            <Label fx:id="lblTM1" layoutX="667.0" layoutY="503.0" prefHeight="17.0" prefWidth="82.0" text="Used Memory" textFill="#6490e7" />
+            <Label fx:id="lblTM1" layoutX="667.0" layoutY="503.0" prefHeight="17.0" prefWidth="82.0" text="Used Memory" textFill="#f2d41f" />
             <ProgressBar fx:id="prgsUsdMem" layoutX="605.0" layoutY="484.0" prefHeight="11.0" prefWidth="200.0" progress="0.0" />
             <ProgressIndicator fx:id="indicatorUsdMem" layoutX="235.0" layoutY="473.0" progress="0.0" />
-            <Label fx:id="lblTM2" layoutX="80.0" layoutY="503.0" prefHeight="17.0" prefWidth="82.0" text="Free Memory" textFill="#6490e7" />
+            <Label fx:id="lblTM2" layoutX="80.0" layoutY="503.0" prefHeight="17.0" prefWidth="82.0" text="Free Memory" textFill="#f2d41f" />
             <ProgressBar fx:id="prgsFreeMem" layoutX="24.0" layoutY="479.0" prefHeight="11.0" prefWidth="200.0" progress="0.0" />
             <ProgressIndicator fx:id="indicatorFreeMem" layoutX="817.0" layoutY="476.0" progress="0.0" />
             <Label fx:id="lblOs" layoutX="90.0" layoutY="103.0" styleClass="os-info" text="Os" />
@@ -74,12 +74,21 @@
             <Label fx:id="lblArch" layoutX="368.0" layoutY="103.0" styleClass="os-info" text="Arch" />
             <Label fx:id="lblProcess" layoutX="579.0" layoutY="103.0" styleClass="os-info" text="Avail" />
             <Button fx:id="btnSource" layoutX="93.0" layoutY="171.0" mnemonicParsing="false" onAction="#uploadSource" prefHeight="25.0" prefWidth="130.0" text="Upload Source" />
-            <Button fx:id="sendFile" layoutX="363.0" layoutY="253.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="106.0" prefWidth="106.0" stylesheets="@Style.css" text="PROCESS" />
+            <Button fx:id="sendFile" layoutX="357.0" layoutY="247.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="119.0" prefWidth="118.0" stylesheets="@Style.css" text="PROCESS" />
             <Button fx:id="btnRules" layoutX="338.0" layoutY="171.0" mnemonicParsing="false" onAction="#uploadXML" prefHeight="25.0" prefWidth="156.0" text="Rules" />
             <Button fx:id="btnCSV" layoutX="627.0" layoutY="171.0" mnemonicParsing="false" onAction="#uploadCSV" prefHeight="25.0" prefWidth="128.0" text="Upload CSV" />
-            <Label fx:id="lblUploadSource" layoutX="85.0" layoutY="145.0" prefHeight="17.0" prefWidth="155.0" text="Please Select the Source File" textFill="#6490e7" />
-            <Label fx:id="lblUploadXml" layoutX="336.0" layoutY="145.0" prefHeight="17.0" prefWidth="174.0" text="Please Select the Rules XML File" textFill="#6490e7" />
-            <Label fx:id="lblCsv" layoutX="634.0" layoutY="145.0" prefHeight="17.0" prefWidth="142.0" text="PLease Select the CSV File" textFill="#6490e7" />
+            <Label fx:id="lblUploadSource" layoutX="76.0" layoutY="145.0" prefHeight="17.0" prefWidth="173.0" text="Please Select the Source File" textFill="#f2d41f">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="lblUploadXml" layoutX="322.0" layoutY="145.0" prefHeight="17.0" prefWidth="188.0" text="Please Select the Rules XML File" textFill="#f2d41f">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="lblCsv" layoutX="615.0" layoutY="145.0" prefHeight="17.0" prefWidth="163.0" text="PLease Select the CSV File" textFill="#f2d41f">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <ProgressIndicator fx:id="indicatorSource" layoutX="146.0" layoutY="203.0" progress="1.0" styleClass="prgs-indicator" visible="false" />
             <ProgressIndicator fx:id="indicatorXml" layoutX="402.0" layoutY="203.0" progress="1.0" styleClass="prgs-indicator" visible="false" />
             <ProgressIndicator fx:id="indicatorCsv" layoutX="682.0" layoutY="202.0" prefWidth="29.0" progress="1.0" styleClass="percentage" visible="false" />
@@ -92,8 +101,13 @@
             <Label fx:id="lblDone" layoutX="506.0" layoutY="298.0" styleClass="os-info" text="Done" visible="false" />
             <TextArea fx:id="txtFileList" editable="false" layoutX="576.0" layoutY="260.0" prefHeight="172.0" prefWidth="200.0" />
             <Button layoutX="341.0" layoutY="394.0" mnemonicParsing="false" onAction="#uploadData" prefHeight="25.0" prefWidth="150.0" text="Upload data" />
-            <Label layoutX="198.0" layoutY="-15.0" prefHeight="118.0" prefWidth="436.0" styleClass="timeShareTitle" text="Time Share" textAlignment="CENTER" />
+            <Label layoutX="224.0" layoutY="-15.0" prefHeight="118.0" prefWidth="436.0" styleClass="timeShareTitle" text="Time Share" textAlignment="CENTER" />
+            <TextArea id="txtAreaConsole" editable="false" layoutX="20.0" layoutY="264.0" prefHeight="85.0" prefWidth="276.0" styleClass="console" text="sample">
+               <font>
+                  <Font name="Lucida Console" size="12.0" />
+               </font>
+            </TextArea>
          </children>
       </Pane>
-   </left>
+   </center>
 </BorderPane>

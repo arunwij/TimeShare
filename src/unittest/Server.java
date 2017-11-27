@@ -6,9 +6,11 @@
 package unittest;
 
 import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,35 +28,23 @@ public class Server {
         Socket socket = serverSocket.accept();
         System.out.println ("Accepted connection : " + socket);
         
-        List<File> files = new <File>ArrayList();
-        File a = new File("city.jpg");
-        File b = new File("night.jpg");
+        DataInputStream dis = new DataInputStream(socket.getInputStream());
+        int files = dis.readInt();
+        FileOutputStream fos = null;
         
-       
-        
-    }
-    
-    public void send(List<File> files, Socket socket) throws IOException{
-        ListIterator li = files.listIterator();
-        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-        dos.writeInt(files.size());
-        while(li.hasNext()){
-            File file = (File) li.next();
-            byte[] nameInBytes = file.getName().getBytes("UTF-8");
-            File transferFile = new File(file.getName());
-            byte[] contents = new byte[(int) transferFile.length()];
-            FileInputStream fin = new FileInputStream(transferFile);
-            BufferedInputStream bin = new BufferedInputStream(fin);
-            bin.read(contents,0,contents.length);
-            
-            dos.writeInt(nameInBytes.length);
-            dos.write(nameInBytes);
-            dos.writeInt(contents.length);
-            dos.write(contents);     
+        for(int i=1;i<=files;i++){
+            int size = dis.readInt();
+            byte[] nameInBytes = new byte[size];
+            dis.readFully(nameInBytes);
+            String fileName = new String(nameInBytes, "UTF-8");
+            size = dis.readInt();
+            byte[] contents = new byte[size];
+            dis.readFully(contents);
+            fos = new FileOutputStream("pics/received/"+fileName);
+            fos.write(contents);
+            fos.close();
         }
-        dos.flush();
-        socket.close ();
-        System.out.println ("File transfer complete");
+        socket.close();
     }
-    
+   
 }
