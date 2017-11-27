@@ -19,22 +19,24 @@ public class Client {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         
-        int bytesRead;
-        int currentTot = 0;
+     
         Socket socket = new Socket("192.168.1.20", 15123);
         DataInputStream dis = new DataInputStream(socket.getInputStream());
-        int size = dis.readInt();
-        byte[] nameInBytes = new byte[size];
-        dis.readFully(nameInBytes);
-        String fileName = new String(nameInBytes, "UTF-8");
-        size = dis.readInt();
-        byte[] contents = new byte[size];
-        dis.readFully(contents);
+        int files = dis.readInt();
+        FileOutputStream fos = null;
         
-        
-        FileOutputStream fos = new FileOutputStream("pics/received/"+fileName);
-        fos.write(contents);
-        fos.close();
+        for(int i=1;i<=files;i++){
+            int size = dis.readInt();
+            byte[] nameInBytes = new byte[size];
+            dis.readFully(nameInBytes);
+            String fileName = new String(nameInBytes, "UTF-8");
+            size = dis.readInt();
+            byte[] contents = new byte[size];
+            dis.readFully(contents);
+            fos = new FileOutputStream("pics/received/"+fileName);
+            fos.write(contents);
+            fos.close();
+        }
         socket.close();
     }
 }

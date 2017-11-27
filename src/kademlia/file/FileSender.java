@@ -26,8 +26,6 @@ import kademlia.node.Node;
  * @author Artista
  */
 public class FileSender {
-
-    //custom file sender constructor to accept socket of the reciever
     private final InetSocketAddress fileSocketAddress;
     private InetSocketAddress communicationSocketAddress;
     private final File file;
