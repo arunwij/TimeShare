@@ -46,11 +46,7 @@
       <DropShadow height="89.2" radius="37.3675" spread="0.27" width="62.27" />
    </effect>
    <right>
-      <Pane prefHeight="441.0" prefWidth="1.0" BorderPane.alignment="CENTER">
-         <children>
-            <ProgressIndicator fx:id="indicatorXml" progress="1.0" styleClass="prgs-indicator" visible="false" />
-            <ProgressIndicator fx:id="indicatorCsv" prefWidth="29.0" progress="1.0" styleClass="percentage" visible="false" />
-         </children></Pane>
+      <Pane prefHeight="441.0" prefWidth="1.0" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
       <Pane prefHeight="27.0" prefWidth="91.0" BorderPane.alignment="CENTER">
@@ -77,27 +73,29 @@
             <Label fx:id="lblTM2" layoutX="80.0" layoutY="418.0" prefHeight="17.0" prefWidth="82.0" text="Free Memory" textFill="#6490e7" />
             <ProgressBar fx:id="prgsFreeMem" layoutX="24.0" layoutY="394.0" prefHeight="11.0" prefWidth="200.0" progress="0.0" />
             <ProgressIndicator fx:id="indicatorFreeMem" layoutX="817.0" layoutY="391.0" progress="0.0" />
-            <Label fx:id="lblOs" layoutX="32.0" layoutY="18.0" styleClass="os-info" text="Os" />
-            <Label fx:id="lblVersion" layoutX="154.0" layoutY="18.0" styleClass="os-info" text="Ver" />
-            <Label fx:id="lblArch" layoutX="310.0" layoutY="18.0" styleClass="os-info" text="Arch" />
-            <Label fx:id="lblProcess" layoutX="521.0" layoutY="18.0" styleClass="os-info" text="Avail" />
+            <Label fx:id="lblOs" layoutX="90.0" layoutY="18.0" styleClass="os-info" text="Os" />
+            <Label fx:id="lblVersion" layoutX="212.0" layoutY="18.0" styleClass="os-info" text="Ver" />
+            <Label fx:id="lblArch" layoutX="368.0" layoutY="18.0" styleClass="os-info" text="Arch" />
+            <Label fx:id="lblProcess" layoutX="579.0" layoutY="18.0" styleClass="os-info" text="Avail" />
             <Button fx:id="btnSource" layoutX="93.0" layoutY="86.0" mnemonicParsing="false" onAction="#uploadSource" prefHeight="25.0" prefWidth="130.0" text="Upload Source" />
             <Button fx:id="sendFile" layoutX="363.0" layoutY="168.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="106.0" prefWidth="106.0" stylesheets="@Style.css" text="PROCESS" />
-            <Button fx:id="btnRules" layoutX="339.0" layoutY="86.0" mnemonicParsing="false" onAction="#uploadXML" prefHeight="25.0" prefWidth="156.0" text="Rules" />
+            <Button fx:id="btnRules" layoutX="338.0" layoutY="86.0" mnemonicParsing="false" onAction="#uploadXML" prefHeight="25.0" prefWidth="156.0" text="Rules" />
             <Button fx:id="btnCSV" layoutX="627.0" layoutY="86.0" mnemonicParsing="false" onAction="#uploadCSV" prefHeight="25.0" prefWidth="128.0" text="Upload CSV" />
             <Label fx:id="lblUploadSource" layoutX="85.0" layoutY="60.0" prefHeight="17.0" prefWidth="155.0" text="Please Select the Source File" textFill="#6490e7" />
             <Label fx:id="lblUploadXml" layoutX="336.0" layoutY="60.0" prefHeight="17.0" prefWidth="174.0" text="Please Select the Rules XML File" textFill="#6490e7" />
             <Label fx:id="lblCsv" layoutX="634.0" layoutY="60.0" prefHeight="17.0" prefWidth="142.0" text="PLease Select the CSV File" textFill="#6490e7" />
-            <ProgressIndicator fx:id="indicatorSource" progress="1.0" styleClass="prgs-indicator" visible="false" />
+            <ProgressIndicator fx:id="indicatorSource" layoutX="146.0" layoutY="118.0" progress="1.0" styleClass="prgs-indicator" visible="false" />
+            <ProgressIndicator fx:id="indicatorXml" layoutX="402.0" layoutY="118.0" progress="1.0" styleClass="prgs-indicator" visible="false" />
+            <ProgressIndicator fx:id="indicatorCsv" layoutX="682.0" layoutY="117.0" prefWidth="29.0" progress="1.0" styleClass="percentage" visible="false" />
             <ProgressBar fx:id="prgsUpdate" layoutX="40.0" layoutY="276.0" prefHeight="18.0" prefWidth="268.0" visible="false" />
-            <Label fx:id="lblUpdate" layoutX="39.0" layoutY="168.0" text="Running Tasks...!" textFill="#1a0dba" visible="false">
+            <Label fx:id="lblUpdate" layoutX="370.0" layoutY="151.0" text="Running Tasks...!" textFill="#1a0dba" visible="false">
                <font>
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="lblDone" layoutX="39.0" layoutY="168.0" styleClass="os-info" text="Done" visible="false" />
-            <TextArea fx:id="txtFileList" layoutX="335.0" layoutY="332.0" prefHeight="31.0" prefWidth="200.0" />
-            <Button layoutX="227.0" layoutY="317.0" mnemonicParsing="false" onAction="#uploadData" text="Upload data" />
+            <Label fx:id="lblDone" layoutX="506.0" layoutY="213.0" styleClass="os-info" text="Done" visible="false" />
+            <TextArea fx:id="txtFileList" editable="false" layoutX="576.0" layoutY="175.0" prefHeight="172.0" prefWidth="200.0" />
+            <Button layoutX="341.0" layoutY="309.0" mnemonicParsing="false" onAction="#uploadData" prefHeight="25.0" prefWidth="150.0" text="Upload data" />
          </children>
       </Pane>
    </left>

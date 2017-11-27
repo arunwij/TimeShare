@@ -5,12 +5,10 @@
  */
 package unittest;
 
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
 
 /**
@@ -19,7 +17,7 @@ import java.net.Socket;
  */
 public class Client {
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
         
         int bytesRead;
         int currentTot = 0;
@@ -36,6 +34,8 @@ public class Client {
         
         FileOutputStream fos = new FileOutputStream("pics/received/"+fileName);
         fos.write(contents);
+        
+        Thread.sleep(1000);
         fos.close();
         socket.close();
     }

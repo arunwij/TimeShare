@@ -27,6 +27,10 @@ and open the template in the editor.
     -fx-background-image: url("pics\bg.jpg");
 }
 
+.anchorPane{
+    -fx-background-image:url('bg.jpg');
+}
+
 #titleLbl{
     -fx-font-family: Gill Sans / Gill Sans MT, sans-serif;
     -fx-font-size: 17px;
@@ -89,7 +93,7 @@ and open the template in the editor.
     -fx-font-family: "Helvetica";
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: #9d4024;
+    -fx-text-fill: whitesmoke;
 }
 
 .timeShareTitle{

@@ -52,6 +52,5 @@ public class MainTest {
 //                FileSender.send(n, files.get(i), "pics/received/");
 //            }
         }
-        
     }
 }

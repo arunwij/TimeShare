@@ -107,7 +107,7 @@ public class SceneController implements Initializable {
     }
 
     @FXML
-    private void uploadData() throws IOException {
+    private void uploadData() throws IOException, InterruptedException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Data files");
         fileChooser.setInitialDirectory(new File("C:\\Users\\"));
@@ -122,6 +122,7 @@ public class SceneController implements Initializable {
                 fileNames.append(selectedFiles.get(i).getName()+"\n");
             }
             txtFileList.setText(fileNames.toString());
+            showTextArea();
         } else {
             txtFileList.setText("Data file selection cancelled.");
         }
@@ -197,6 +198,14 @@ public class SceneController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @FXML
+    private void showTextArea() throws InterruptedException {
+        
+        txtFileList.setVisible(true);
+        Thread.sleep(3000);
+        txtFileList.setVisible(false);
     }
 
     @FXML
