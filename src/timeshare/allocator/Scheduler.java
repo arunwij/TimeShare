@@ -157,18 +157,6 @@ public class Scheduler {
                     }
                 }
 
-/*
-                int [][]arr =(int[][])params[0];
-                int [][][] intparams= new int[datacount][arr.length][arr[0].length];
-                
-                for (int a=0;a<datacount;a++){
-                    intparams[a]=(int[][])params[a];
-                }**/
-                
-                // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;
-                        
-
-
                 if (c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE)) {
                     System.out.println("bootstap node ; " + c.getNode().toString());
                 } else {
