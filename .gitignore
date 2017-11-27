@@ -1,3 +1,9 @@
 /build/
 /dist/
+<<<<<<< HEAD
 logs/statistician.csv
+=======
+/data/
+/logs/
+/pics/
+>>>>>>> 982cf16bf735e56dc39a4f86bd9000b7b2b13d33

@@ -58,7 +58,7 @@ public class FileSender {
         nioClient.sendFile(socketChannel);
     }
     
-    public static void send(Node to,List<File> files,String filepath) throws IOException{
+    public static void send(Node to,List<File> files,String filepath) throws IOException, InterruptedException{
         ListIterator ltr = files.listIterator();
         while(ltr.hasNext()){
             File file = (File) ltr.next();
@@ -66,6 +66,7 @@ public class FileSender {
             FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
             SocketChannel socketChannel = nioClient.createChannel();
             nioClient.sendFile(socketChannel);
+            Thread.sleep(5000);
         }
     }
     
@@ -105,7 +106,7 @@ public class FileSender {
         
             Thread.sleep(400);
             System.out.println("End of file reached..");
-           // socketChannel.close();
+            //socketChannel.close();
             aFile.close();
             
         } catch (FileNotFoundException e ) { 
