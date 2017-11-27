@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timeshare.SceneController">
+<BorderPane id="AnchorPane" prefHeight="590.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timeshare.SceneController">
     <top>
       <VBox id="titleVbox" prefHeight="120.0" prefWidth="645.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane id="titlePane" opacity="0.84" prefHeight="31.0" prefWidth="707.0">
+            <Pane id="titlePane" opacity="0.84" prefHeight="31.0" prefWidth="707.0" stylesheets="@Style.css">
                <children>
                   <Label id="titleLbl" layoutX="14.0" layoutY="-7.0" prefHeight="43.0" prefWidth="100.0" text="TimeShare" textFill="WHITE" />
                   <Button id="buttonExit" fx:id="buttonExit" layoutX="799.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="18.0" prefWidth="18.0" styleClass="buttonbar">
@@ -41,6 +37,19 @@
                   <Pane prefHeight="90.0" prefWidth="842.0">
                      <children>
                         <Label layoutX="203.0" layoutY="-14.0" prefHeight="118.0" prefWidth="426.0" styleClass="timeShareTitle" text="Time Share" />
+                        <TextArea fx:id="txtFileList" layoutX="172.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0" />
+                        <Button layoutX="378.0" layoutY="43.0" mnemonicParsing="false" onAction="#uploadData" text="Upload data" />
+                        <Pane id="footerPane" layoutX="24.0" layoutY="137.0" prefHeight="31.0" prefWidth="831.0">
+                           <children>
+                              <Pane layoutX="726.0" layoutY="4.0" prefHeight="27.0" prefWidth="91.0">
+                                 <children>
+                                    <Label layoutY="5.0" prefHeight="17.0" prefWidth="31.0" text="DHT:" />
+                                    <Label fx:id="lblNodeCount" layoutX="31.0" layoutY="5.0" prefHeight="17.0" prefWidth="20.0" text="100" />
+                                    <Label layoutX="52.0" layoutY="5.0" prefHeight="17.0" prefWidth="42.0" text="Nodes" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children></HBox>
@@ -50,19 +59,6 @@
    <effect>
       <DropShadow height="89.2" radius="37.3675" spread="0.27" width="62.27" />
    </effect>
-   <bottom>
-      <Pane id="footerPane" prefHeight="31.0" prefWidth="831.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane layoutX="726.0" layoutY="4.0" prefHeight="27.0" prefWidth="91.0">
-               <children>
-                  <Label layoutY="5.0" prefHeight="17.0" prefWidth="31.0" text="DHT:" />
-                  <Label fx:id="lblNodeCount" layoutX="31.0" layoutY="5.0" prefHeight="17.0" prefWidth="20.0" text="100" />
-                  <Label layoutX="52.0" layoutY="5.0" prefHeight="17.0" prefWidth="42.0" text="Nodes" />
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-   </bottom>
    <right>
       <Pane prefHeight="445.0" prefWidth="477.0" BorderPane.alignment="CENTER">
          <children>
