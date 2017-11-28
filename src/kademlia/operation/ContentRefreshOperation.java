@@ -16,8 +16,6 @@ import kademlia.node.Node;
 /**
  * Refresh/Restore the data on this node by sending the data to the K-Closest nodes to the data
  *
- * @author Joshua Kissoon
- * @since 20140306
  */
 public class ContentRefreshOperation implements Operation
 {

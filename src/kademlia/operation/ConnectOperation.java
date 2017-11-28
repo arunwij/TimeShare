@@ -1,6 +1,4 @@
 /**
- * @author Joshua Kissoon
- * @created 20140218
  * @desc Operation that handles connecting to an existing Kademlia network using a bootstrap node
  */
 package kademlia.operation;

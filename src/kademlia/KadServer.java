@@ -16,8 +16,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import kademlia.exceptions.KadServerDownException;
 import kademlia.message.KademliaMessageFactory;
 import kademlia.message.Message;
@@ -27,8 +25,6 @@ import kademlia.message.Receiver;
 /**
  * The server that handles sending and receiving messages between nodes on the Kad Network
  *
- * @author Joshua Kissoon
- * @created 20140215
  */
 public class KadServer
 {

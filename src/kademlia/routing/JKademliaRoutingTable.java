@@ -11,8 +11,6 @@ import kademlia.node.KademliaId;
 /**
  * Implementation of a Kademlia routing table
  *
- * @author Joshua Kissoon
- * @created 20140215
  */
 public class JKademliaRoutingTable implements KademliaRoutingTable
 {

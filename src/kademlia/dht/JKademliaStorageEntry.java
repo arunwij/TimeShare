@@ -3,8 +3,6 @@ package kademlia.dht;
 /**
  * A JKademliaStorageEntry class that is used to store a content on the DHT
  *
- * @author Joshua Kissoon
- * @since 20140402
  */
 public class JKademliaStorageEntry implements KademliaStorageEntry
 {

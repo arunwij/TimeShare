@@ -9,10 +9,6 @@ import java.io.IOException;
  *
  * Here we define the structure of any Serializer used in Kademlia
  *
- * @author Joshua Kissoon
- * @param <T> The type of content being serialized
- *
- * @since 20140225
  */
 public interface KadSerializer<T>
 {

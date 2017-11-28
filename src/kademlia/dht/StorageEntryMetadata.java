@@ -6,9 +6,6 @@ import kademlia.node.KademliaId;
 /**
  * Keeps track of data for a Content stored in the DHT
  * Used by the StorageEntryManager class
- *
- * @author Joshua Kissoon
- * @since 20140226
  */
 public class StorageEntryMetadata implements KademliaStorageEntryMetadata
 {

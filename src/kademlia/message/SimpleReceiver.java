@@ -7,8 +7,6 @@ import kademlia.file.Serializer;
 /**
  * Default receiver if none other is called
  *
- * @author Joshua Kissoon
- * @created 20140202
  */
 public class SimpleReceiver implements Receiver{
    

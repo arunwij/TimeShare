@@ -8,8 +8,6 @@ import kademlia.dht.KademliaDHT;
 /**
  * Receiver for incoming StoreContentMessage
  *
- * @author Joshua Kissoon
- * @since 20140225
  */
 public class StoreContentReceiver implements Receiver
 {

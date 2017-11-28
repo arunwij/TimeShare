@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/Scheduler.java</file>
-            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/XmlLoader.java</file>
-            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/XmlReader.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/file/FileType.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/timeshare/RunningConfiguration.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/timeshare/allocator/Scheduler.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/file/FileReceiver.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/file/FileSender.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/timeshare/scheduler/P2PJavaCompiler.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/message/WorkloadReceiver.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/unittest/Client.java</file>
+            <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/node/Node.java</file>
         </group>
     </open-files>
 </project-private>

@@ -30,8 +30,6 @@ import kademlia.util.RouteLengthChecker;
 /**
  * Looks up a specified identifier and returns the value associated with it
  *
- * @author Joshua Kissoon
- * @since 20140226
  */
 public class ContentLookupOperation implements Operation, Receiver
 {

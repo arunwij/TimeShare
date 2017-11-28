@@ -17,8 +17,6 @@ import kademlia.routing.KademliaRoutingTable;
 /**
  * The main Kademlia Node on the network, this node manages everything for this local system.
  *
- * @author Joshua Kissoon
- * @since 20140523
  *
  */
 public interface KademliaNode

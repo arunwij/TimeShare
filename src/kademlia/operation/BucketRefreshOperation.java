@@ -10,8 +10,6 @@ import kademlia.node.KademliaId;
  * At each time interval t, nodes need to refresh their K-Buckets
  * This operation takes care of refreshing this node's K-Buckets
  *
- * @author Joshua Kissoon
- * @created 20140224
  */
 public class BucketRefreshOperation implements Operation
 {

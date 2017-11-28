@@ -11,8 +11,6 @@ import kademlia.util.serializer.JsonSerializer;
 /**
  * A StoreContentMessage used to send a store message to a node
  *
- * @author Joshua Kissoon
- * @since 20140225
  */
 public class StoreContentMessage implements Message
 {

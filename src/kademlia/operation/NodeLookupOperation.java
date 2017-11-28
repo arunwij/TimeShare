@@ -24,8 +24,6 @@ import kademlia.node.KademliaId;
  * The algorithm terminates when it has gotten responses from the K closest nodes it has seen.
  * Nodes that fail to respond are removed from consideration
  *
- * @author Joshua Kissoon
- * @created 20140219
  */
 public class NodeLookupOperation implements Operation, Receiver
 {

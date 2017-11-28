@@ -11,8 +11,6 @@ import kademlia.dht.KademliaDHT;
  * Responds to a ContentLookupMessage by sending a ContentMessage containing the requested content;
  * if the requested content is not found, a NodeReplyMessage containing the K closest nodes to the request key is sent.
  *
- * @author Joshua Kissoon
- * @since 20140226
  */
 public class ContentLookupReceiver implements Receiver
 {

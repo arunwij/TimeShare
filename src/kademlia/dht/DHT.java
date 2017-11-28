@@ -19,8 +19,6 @@ import kademlia.util.serializer.KadSerializer;
 /**
  * The main Distributed Hash Table class that manages the entire DHT
  *
- * @author Joshua Kissoon
- * @since 20140226
  */
 public class DHT implements KademliaDHT
 {

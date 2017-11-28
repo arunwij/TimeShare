@@ -9,8 +9,6 @@ import kademlia.message.SimpleReceiver;
 /**
  * Test 1: Try sending a simple message between nodes
  *
- * @author Joshua Kissoon
- * @created 20140218
  */
 public class SimpleMessageTest
 {

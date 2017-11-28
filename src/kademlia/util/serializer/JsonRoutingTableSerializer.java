@@ -36,9 +36,6 @@ import kademlia.routing.KademliaRoutingTable;
  - Simply store all Nodes in the serialized object
  - When reloading, re-add all nodes to the JKademliaRoutingTable
  *
- * @author Joshua Kissoon
- *
- * @since 20140310
  */
 public class JsonRoutingTableSerializer implements KadSerializer<KademliaRoutingTable>
 {

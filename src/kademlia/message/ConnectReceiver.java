@@ -7,8 +7,6 @@ import kademlia.KademliaNode;
 /**
  * Receives a ConnectMessage and sends an AcknowledgeMessage as reply.
  *
- * @author Joshua Kissoon
- * @created 20140219
  */
 public class ConnectReceiver implements Receiver
 {

@@ -7,8 +7,6 @@ import kademlia.routing.KademliaRoutingTable;
 /**
  * Testing how the routing table works and checking if everything works properly
  *
- * @author Joshua Kissoon
- * @since 20140426
  */
 public class RoutingTableSimulation
 {

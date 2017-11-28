@@ -9,8 +9,6 @@ import kademlia.node.KademliaId;
  *
  * We use a class since the number of filtering parameters can change later
  *
- * @author Joshua Kissoon
- * @since 20140224
  */
 public class GetParameter
 {

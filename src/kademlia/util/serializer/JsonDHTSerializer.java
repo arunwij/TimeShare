@@ -35,9 +35,6 @@ import kademlia.dht.KademliaStorageEntryMetadata;
  * - Simply store all StorageEntry in the serialized object
  * - When reloading, re-add all StorageEntry to the DHT
  *
- * @author Joshua Kissoon
- *
- * @since 20140310
  */
 public class JsonDHTSerializer implements KadSerializer<KademliaDHT>
 {

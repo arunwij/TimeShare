@@ -11,8 +11,6 @@ import kademlia.util.serializer.JsonSerializer;
 /**
  * A Message used to send content between nodes
  *
- * @author Joshua Kissoon
- * @since 20140226
  */
 public class ContentMessage implements Message
 {

@@ -14,8 +14,6 @@ import kademlia.node.KademliaId;
  * Instead we store content into files
  * We use this Class to keep track of all content stored
  *
- * @author Joshua Kissoon
- * @since 20140226
  */
 class StoredContentManager
 {

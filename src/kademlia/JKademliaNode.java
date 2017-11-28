@@ -39,8 +39,6 @@ import kademlia.util.serializer.JsonSerializer;
 /**
  * The main Kademlia Node on the network, this node manages everything for this local system.
  *
- * @author Joshua Kissoon
- * @since 20140215
  *
  * @todo When we receive a store message - if we have a newer version of the content, re-send this newer version to that node so as to update their version
  * @todo Handle IPv6 Addresses

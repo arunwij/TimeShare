@@ -9,8 +9,6 @@ import kademlia.node.KademliaId;
  * Testing the save and retrieve state operations.
  * Here we also try to look for content on a restored node
  *
- * @author Joshua Kissoon
- * @since 20140309
  */
 public class SaveStateTest2
 {

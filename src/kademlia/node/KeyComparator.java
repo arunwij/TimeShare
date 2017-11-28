@@ -6,8 +6,6 @@ import java.util.Comparator;
 /**
  * A Comparator to compare 2 keys to a given key
  *
- * @author Joshua Kissoon
- * @since 20140322
  */
 public class KeyComparator implements Comparator<Node>
 {

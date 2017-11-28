@@ -7,7 +7,7 @@ import kademlia.node.KademliaId;
 /**
  * Testing connecting 2 nodes to each other
  *
- * @author Joshua Kissoon
+ * @author Tharaka
  * @created 20140219
  */
 public class NodeConnectionTest

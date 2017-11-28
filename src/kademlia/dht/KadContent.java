@@ -5,9 +5,6 @@ import kademlia.node.KademliaId;
 /**
  * Any piece of content that needs to be stored on the DHT
  *
- * @author Joshua Kissoon
- *
- * @since 20140224
  */
 public interface KadContent
 {

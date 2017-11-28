@@ -7,15 +7,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import kademlia.message.Streamable;
 
 /**
  * A Node in the Kademlia network - Contains basic node network information.
  *
- * @author Joshua Kissoon
- * @since 20140202
  * @version 0.1
  */
 public class Node implements Streamable, Serializable

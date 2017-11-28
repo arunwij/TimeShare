@@ -12,8 +12,6 @@ import kademlia.util.serializer.KadSerializer;
 /**
  * The main Distributed Hash Table interface that manages the entire DHT
  *
- * @author Joshua Kissoon
- * @since 20140523
  */
 public interface KademliaDHT
 {

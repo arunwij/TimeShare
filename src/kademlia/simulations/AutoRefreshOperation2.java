@@ -10,8 +10,6 @@ import kademlia.node.KademliaId;
 /**
  * Testing the Kademlia Auto Content and Node table refresh operations
  *
- * @author Joshua Kissoon
- * @since 20140309
  */
 public class AutoRefreshOperation2 implements Simulation
 {

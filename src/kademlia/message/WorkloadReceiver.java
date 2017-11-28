@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import kademlia.KadServer;
 import kademlia.file.FileSender;
 import kademlia.file.Serializer;
@@ -35,8 +32,9 @@ public class WorkloadReceiver implements Receiver {
 
     @Override
     public void receive(Message incoming, int comm) throws IOException {
-
-        //System.out.println("Received message: " + incoming.toString());
+        
+        if(!RunningConfiguration.IS_REDUNDANT){
+            //System.out.println("Received message: " + incoming.toString());
         WorkloadMessage msg = (WorkloadMessage) incoming;
         System.out.println("message data: " + msg.getStringData());
         //Integer objarray[][][] = msg.getData();
@@ -88,7 +86,7 @@ public class WorkloadReceiver implements Receiver {
         File folder = new File("data/executor/results/");
         results = Arrays.asList(folder.listFiles());
         FileSender.send(msg.getOrigin().getSocketAddress().getAddress(), results);
-
+        }
     }
 
     @Override

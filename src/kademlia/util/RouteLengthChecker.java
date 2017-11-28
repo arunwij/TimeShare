@@ -13,8 +13,6 @@ import kademlia.node.Node;
  * - Add the original set of nodes with route length 0;
  * - When we get a node reply with a set of nodes, we add those nodes and set the route length to their sender route length + 1
  *
- * @author Joshua Kissoon
- * @since 20140510
  */
 public class RouteLengthChecker
 {

@@ -10,8 +10,6 @@ import kademlia.util.serializer.JsonSerializer;
 /**
  * Messages used to send to another node requesting content.
  *
- * @author Joshua Kissoon
- * @since 20140226
  */
 public class ContentLookupMessage implements Message
 {

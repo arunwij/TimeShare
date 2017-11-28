@@ -1,6 +1,4 @@
 /**
- * @author Joshua Kissoon
- * @created 20140215
  * @desc Represents a Kademlia Node ID
  */
 package kademlia.node;

@@ -10,8 +10,6 @@ import kademlia.node.Node;
 /**
  * A bucket in the Kademlia routing table
  *
- * @author Joshua Kissoon
- * @created 20140215
  */
 public class JKademliaBucket implements KademliaBucket
 {

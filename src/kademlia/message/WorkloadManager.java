@@ -9,8 +9,6 @@ import java.util.List;
 /**
  * Default receiver if none other is called
  *
- * @author Artista
- * @created 20140202
  */
 public class WorkloadManager implements Receiver{
    

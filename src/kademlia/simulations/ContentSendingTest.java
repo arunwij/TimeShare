@@ -11,8 +11,6 @@ import kademlia.node.KademliaId;
 /**
  * Testing sending and receiving content between 2 Nodes on a network
  *
- * @author Joshua Kissoon
- * @since 20140224
  */
 public class ContentSendingTest
 {

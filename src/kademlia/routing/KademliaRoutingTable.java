@@ -8,8 +8,6 @@ import kademlia.node.KademliaId;
 /**
  * Specification for Kademlia's Routing Table
  *
- * @author Joshua Kissoon
- * @since 20140501
  */
 public interface KademliaRoutingTable
 {

@@ -6,8 +6,6 @@ import kademlia.node.KademliaId;
 /**
  * Testing the save and retrieve state operations
  *
- * @author Joshua Kissoon
- * @since 20140309
  */
 public class SaveStateTest
 {

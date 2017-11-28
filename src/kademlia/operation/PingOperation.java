@@ -2,8 +2,6 @@
  * Implementation of the Kademlia Ping operation,
  * This is on hold at the moment since I'm not sure if we'll use ping given the improvements mentioned in the paper.
  *
- * @author Joshua Kissoon
- * @since 20140218
  */
 package kademlia.operation;
 

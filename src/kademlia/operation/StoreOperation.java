@@ -15,8 +15,6 @@ import kademlia.node.Node;
 /**
  * Operation that stores a DHT Content onto the K closest nodes to the content Key
  *
- * @author Joshua Kissoon
- * @since 20140224
  */
 public class StoreOperation implements Operation
 {

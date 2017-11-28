@@ -5,8 +5,6 @@ import java.util.Comparator;
 /**
  * A Comparator to compare 2 contacts by their last seen time
  *
- * @author Joshua Kissoon
- * @since 20140426
  */
 public class ContactLastSeenComparator implements Comparator<Contact>
 {

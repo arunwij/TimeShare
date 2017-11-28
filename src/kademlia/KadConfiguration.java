@@ -5,8 +5,6 @@ package kademlia;
 /**
  * Interface that defines a KadConfiguration object
  *
- * @author Joshua Kissoon
- * @since 20140329
  */
 public interface KadConfiguration
 {

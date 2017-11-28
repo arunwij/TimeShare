@@ -9,8 +9,6 @@ import kademlia.node.KademliaId;
 /**
  * Testing how the routing table works and it's state after different operations
  *
- * @author Joshua Kissoon
- * @since 20140426
  */
 public class RoutingTableStateTesting
 {

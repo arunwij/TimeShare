@@ -7,8 +7,6 @@ import kademlia.KadServer;
 /**
  * A factory that handles creating messages and receivers
  *
- * @author Joshua Kissoon
- * @since 20140523
  */
 public interface KademliaMessageFactory
 {

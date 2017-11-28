@@ -9,8 +9,6 @@ import kademlia.dht.KademliaDHT;
 /**
  * An operation that handles refreshing the entire Kademlia Systems including buckets and content
  *
- * @author Joshua Kissoon
- * @since 20140306
  */
 public class KadRefreshOperation implements Operation
 {

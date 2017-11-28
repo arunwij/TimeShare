@@ -6,8 +6,6 @@ import java.security.NoSuchAlgorithmException;
 /**
  * A class that is used to calculate the hash of strings.
  *
- * @author Joshua Kissoon
- * @since 20140405
  */
 public class HashCalculator
 {

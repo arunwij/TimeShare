@@ -10,8 +10,6 @@ import kademlia.node.Node;
 /**
  * Receives a NodeLookupMessage and sends a NodeReplyMessage as reply with the K-Closest nodes to the ID sent.
  *
- * @author Joshua Kissoon
- * @created 20140219
  */
 public class NodeLookupReceiver implements Receiver
 {

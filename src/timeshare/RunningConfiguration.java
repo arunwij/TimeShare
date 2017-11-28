@@ -57,6 +57,7 @@ public class RunningConfiguration {
     
     public static final boolean IS_BOOTSTRAP_NODE = false;
     private static boolean IS_WORKING = false;
+    public static boolean IS_REDUNDANT = false;
    
     static { 
         try {
@@ -111,15 +112,17 @@ public class RunningConfiguration {
         if(!IS_BOOTSTRAP_NODE){
             System.out.println("Connect operation starting");
             CONNECTION_STATUS = "Connect operation starting\n";
+            long startTime = System.nanoTime();
             ConnectOperation connectOperation = new ConnectOperation(KAD_SERVER,LOCAL_JKNODE,BOOTSTRAP_NODE,KAD_CONFIGURATION);
             try {
                 connectOperation.execute();
                 System.out.println("Connect operation done..");
+                long endTime = System.nanoTime();
+                LOCAL_JKNODE.getStatistician().setBootstrapTime(endTime - startTime);
                 CONNECTION_STATUS += "Connect operation done..\n";
             } catch (IOException ex) {
                 Logger.getLogger(RunningConfiguration.class.getName()).log(Level.SEVERE, null, ex);
             }
-         
         }
     }
     

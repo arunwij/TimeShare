@@ -14,9 +14,6 @@ import java.io.OutputStreamWriter;
  *
  * @param <T> The type of content to serialize
  *
- * @author Joshua Kissoon
- *
- * @since 20140225
  */
 public class JsonSerializer<T> implements KadSerializer<T>
 {
