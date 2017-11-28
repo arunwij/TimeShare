@@ -43,7 +43,7 @@ public class RunningConfiguration {
     
     /* bootstrap node configurations */
     public static final int BOOTSTRAP_PORT = 11000; // bootstrap port
-    public static final String BOOTSTRAP_ADDRESS = "192.168.1.20"; // bootstrap ip
+    public static final String BOOTSTRAP_ADDRESS = "192.168.1.5"; // bootstrap ip
     public final static String BOOTSTRAP_NODE_NAME = "bootstrap"; // bootstrap name
     public static InetSocketAddress BOOTSTRAP_NODE_SOCKET; // bootstrap socket
     public static Node BOOTSTRAP_NODE; // bootstrap Node
