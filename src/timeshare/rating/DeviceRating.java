@@ -55,15 +55,23 @@ public class DeviceRating extends GetDeviceInfo {
         String json =gson.toJson(devices);
         File deviceInfo = new File("logs/devices.json");
         
-        try {
-            deviceInfo.createNewFile();
-            FileWriter writer = new FileWriter(deviceInfo);
-            writer.write(json);
-            writer.flush();
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(DeviceRating.class.getName()).log(Level.SEVERE, null, ex);
+        if(deviceInfo.exists() && !deviceInfo.isFile()){
+            try {
+                FileWriter writer = new FileWriter(deviceInfo);
+                writer.write(json);
+                writer.flush();
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(DeviceRating.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                deviceInfo.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(DeviceRating.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
         
         return json;
     }

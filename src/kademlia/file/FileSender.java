@@ -5,99 +5,71 @@
  */
 package kademlia.file;
 
-import timeshare.Main;
-import timeshare.RunningConfiguration;
+import java.io.BufferedInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.lang.annotation.Documented;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.SocketChannel;
-import kademlia.message.FileListner;
-import kademlia.message.FileMessage;
-import kademlia.node.Node;
+import java.net.Socket;
+import java.util.List;
+import java.util.ListIterator;
+
 /**
  *
  * @author Artista
  */
 public class FileSender {
+    
+    public static String FILE_TYPE = null;
+    
+    public static void send(Socket socket, List<File> files) throws IOException{
+        ListIterator li = files.listIterator();
+        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+        dos.writeInt(files.size());
+        while (li.hasNext()) {
+            File file = (File) li.next();
+            if(file.exists() && file.isFile()){
+                FILE_TYPE = getFileType(file.getName());
+                byte[] typeInBytes = FILE_TYPE.getBytes("UTF-8");
+                byte[] nameInBytes = file.getName().getBytes("UTF-8");
+                File transferFile = new File(file.getName());
+                byte[] contents = new byte[(int) transferFile.length()];
+                FileInputStream fin = new FileInputStream(transferFile);
+                BufferedInputStream bin = new BufferedInputStream(fin);
+                bin.read(contents, 0, contents.length);
 
-    //custom file sender constructor to accept socket of the reciever
-    private final InetSocketAddress fileSocketAddress;
-    private InetSocketAddress communicationSocketAddress;
-    private File file;
- 
-    public FileSender(InetAddress inetAddress, File file) throws IOException{
-        this.fileSocketAddress = new InetSocketAddress(inetAddress,RunningConfiguration.FILE_PORT);
-        this.file = file;
-    }
-    
-    public static void send(InetSocketAddress inetSocketAddress, File file) throws IOException{
-        RunningConfiguration.KAD_SERVER.sendMessage(inetSocketAddress, new FileMessage(file.getName()), new FileListner());
-        FileSender nioClient = new FileSender(inetSocketAddress.getAddress(),file);
-        SocketChannel socketChannel = nioClient.createChannel();
-        nioClient.sendFile(socketChannel);
-    }
-    
-    public static void send(Node to, File file) throws IOException{
-        RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(file.getName()), new FileListner());
-        FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
-        SocketChannel socketChannel = nioClient.createChannel();
-        nioClient.sendFile(socketChannel);
-    }
-    
-/**
-* Establishes a socket channel connection
-*
-* @return
-*/
-    public SocketChannel createChannel() {
-        SocketChannel socketChannel = null;
-        
-        try {
-            socketChannel = SocketChannel.open();
-            SocketAddress socketAddress = this.fileSocketAddress;
-            socketChannel.connect(socketAddress);
-            System.out.println("Connected..Now sending the file");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return socketChannel;
-    }
-
-    
-    public void sendFile(SocketChannel socketChannel) {
-        RandomAccessFile aFile = null;
-        try {
-            //File file = new File("data\\web.exe");
-            aFile = new RandomAccessFile(this.file, "r");
-            FileChannel inChannel = aFile.getChannel();
-            ByteBuffer buffer = ByteBuffer.allocate(1024);
-            
-            while (inChannel.read(buffer) > 0) {
-                buffer.flip();
-                socketChannel.write(buffer);
-                buffer.clear();
+                dos.writeInt(typeInBytes.length);
+                dos.write(typeInBytes);
+                dos.writeInt(nameInBytes.length);
+                dos.write(nameInBytes);
+                dos.writeInt(contents.length);
+                dos.write(contents);
+            }else{
+                throw new FileNotFoundException();
             }
-        
-            Thread.sleep(1000);
-            System.out.println("End of file reached..");
-            socketChannel.close();
-            aFile.close();
-            
-        } catch (FileNotFoundException e) { 
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-
+        dos.flush();
+        System.out.println("File transfer complete... closing the stream");
+        socket.close();
     }
-
+    
+    public static String getExtention(String fileName){
+        int i = fileName.lastIndexOf(".");
+        if( i > 0){
+            return fileName.substring(i+1);
+        }
+        return null;
+    }
+    
+    public static String getFileType(String fileName){
+        String extention = getExtention(fileName);
+        if(extention.equals(FileType.SOURCE)){
+            return FileType.SOURCE;
+        }else if(extention.equals(FileType.KERNEL)){
+            return FileType.KERNEL;
+        }else{
+            return FileType.DATA;
+        }
+    }
 }

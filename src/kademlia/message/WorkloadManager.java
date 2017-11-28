@@ -1,20 +1,15 @@
 package kademlia.message;
 
 import timeshare.RunningConfiguration;
-import timeshare.scheduler.ProcessInPeer;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import kademlia.KadServer;
-import kademlia.file.Serializer;
 
 
 /**
  * Default receiver if none other is called
  *
- * @author Joshua Kissoon
+ * @author Artista
  * @created 20140202
  */
 public class WorkloadManager implements Receiver{
@@ -23,8 +18,15 @@ public class WorkloadManager implements Receiver{
     private static int WOKLOAD_RECEIVED = 0;
     private static List<int[][]> RESULTS = new ArrayList<int[][]>();
     private static List<Object> String_RESULTS = new ArrayList<Object>();
-     ResultMessage public_msg[] =  new ResultMessage[2];
-    public WorkloadManager(){}
+    ResultMessage public_msg[] =  new ResultMessage[2];
+    
+    private static WorkloadManager instance = new WorkloadManager();
+    
+    public static WorkloadManager getInstance(){
+        return instance;
+    }
+    
+    private WorkloadManager(){}
     
     public static void IncreaseWorkloadCount(){
         WORKLOAD_COUNT++;
@@ -46,15 +48,6 @@ public class WorkloadManager implements Receiver{
             ResultMessage msg = (ResultMessage) incoming;
            
             System.out.println("Result received: " + msg.toString());
-            //String_RESULTS.add(msg.getData().toString());
-            //System.out.println(msg.getData().toString());
-            RunningConfiguration.results[RunningConfiguration.resultCount] = msg.toString();
-            //RunningConfiguration.results[RunningConfiguration.resultCount+1] = msg.toString();
-            RunningConfiguration.resultCount ++;
-            if(RunningConfiguration.resultCount == 2){
-                System.out.println("print result");
-                RunningConfiguration.printResults();
-            }
         } 
         
 

@@ -5,10 +5,10 @@
  */
 package timeshare.allocator;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
-import java.util.Iterator;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -66,9 +66,16 @@ public class Simulator {
     public  Map<String, Object>[][] senddata;
     public ArrayList<String> sendfiles[];
     public XmlLoader xl;
-
-    public Simulator(int NUM_MACHINES, int NUM_TASKS, double ARRIVAL_RATE, int metaSetSize, TaskHeterogeneity th, MachineHeterogeneity mh, String xmlFile) {
+    public File xmlFile;
+    public File javaFile;
+    public File kernel;
+    
+    public Simulator(int NUM_MACHINES, int NUM_TASKS, double ARRIVAL_RATE, int metaSetSize, TaskHeterogeneity th, MachineHeterogeneity mh, File xmlFile,File javaFile,File kernel) {
         try {
+            this.xmlFile = xmlFile;
+            this.javaFile=javaFile;
+            this.kernel = kernel;
+            
             xl = new XmlLoader(xmlFile);
             xl.ProcessData();
             senddata = xl.senddata;
@@ -166,7 +173,11 @@ public class Simulator {
         i2 = (int) min(i1 + S, arrivals.length);
         /*Set tick to the time of the first mapping event*/
         tick = arrivals[i1 - 1];
-        eng.schedule(metaSet, tick);
+        try {
+            eng.schedule(metaSet, tick);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         /*Set tick to the time of the next mapping event*/
         tick = arrivals[i2 - 1];
@@ -195,8 +206,12 @@ public class Simulator {
                 Task t = new Task(arrivals[i], i, senddata[i],sendfiles[i]);
                 metaSet.add(t);
             }
-            eng.schedule(metaSet, tick);
-            /**/
+            try {
+                eng.schedule(metaSet, tick);
+                /**/
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
  /*Set values for next iteration.*/
             i1 = i2;

@@ -86,4 +86,22 @@ public interface KadStatistician
      * @return The average route length
      */
     public double averageContentLookupRouteLength();
+    
+    /**
+     * Save all Statisician counts to log file.
+     *
+     * @return The average route length
+     */
+    public void createLog();
+    
+    public void setBootstrapTimestamp(long bootstrapTimestamp);
+    
+    public long getBootstrapTimestamp();
+    
+    public long getShutdownTimestamp();
+    
+    public void setShutdownTimestamp(long shutDownTimestamp);
+    
+    public long getOnlineTime();
+    
 }

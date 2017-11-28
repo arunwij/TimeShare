@@ -15,27 +15,22 @@ import java.io.IOException;
  * @author Sanjula
  */
 public class CSVReader {
-    
-    
-    public String read(String path){
-    
+
+    public String read(String path) {
+
         String csvFile = path;//"/Users/mkyong/csv/country.csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
-        StringBuilder stringBuffer =new StringBuilder(); 
+        StringBuilder stringBuffer = new StringBuilder();
         try {
 
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-               
                 // use comma as separator
-                stringBuffer.append("["+line+"],");
-
-               
-
+                stringBuffer.append("[" + line + "],");
             }
-           stringBuffer.deleteCharAt( stringBuffer.lastIndexOf(","));
+            stringBuffer.deleteCharAt(stringBuffer.lastIndexOf(","));
             System.out.println(stringBuffer.toString());
 
         } catch (FileNotFoundException e) {
@@ -53,5 +48,5 @@ public class CSVReader {
         }
         return stringBuffer.toString();
     }
-    
+
 }

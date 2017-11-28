@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timeshare.allocator;
+package kademlia.simulations;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import timeshare.allocator.MachineHeterogeneity;
+import timeshare.allocator.Simulator;
+import timeshare.allocator.TaskHeterogeneity;
 /**
  *
  * @author Great HARI
@@ -40,7 +44,8 @@ public class Sheduling_Main {
         long sigmaMakespan = 0;
         long avgMakespan=0;
         String xmlFile="data/peer.xml";
-        Simulator se=new Simulator(NUM_MACHINES, NUM_TASKS, ARRIVAL_RATE, metaSetSize,th, mh,xmlFile);
+        File xml = new File("data/peer.xml");
+        Simulator se=new Simulator(NUM_MACHINES, NUM_TASKS, ARRIVAL_RATE, metaSetSize,th, mh,xml,xml,xml);
 
         for(int i=0;i<no_of_simulations;i++){
               

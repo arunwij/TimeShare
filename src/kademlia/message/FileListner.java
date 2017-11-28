@@ -6,7 +6,6 @@
 package kademlia.message;
 
 import java.io.IOException;
-import kademlia.file.FileReceiver;
 
 /**
  *
@@ -17,7 +16,8 @@ public class FileListner implements Receiver{
     @Override
     public void receive(Message incoming, int conversationId) throws IOException {
         System.out.println("Received "+ incoming);
-        FileReceiver.receive(incoming.toString());
+        //Deprecated
+        //.receive(incoming.toString());
     }
 
     @Override
