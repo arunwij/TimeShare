@@ -162,10 +162,10 @@ public class Scheduler {
              
              
                 // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;
-                boolean isRedundent = false; // eg
-                WorkloadMessage wmsg = new WorkloadMessage(xl.className, xl.methodName, Serializer.STR1D, Serializer.toJson(params));
-                WorkloadManager wmgr =  new WorkloadManager();
-                RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, wmsg, wmgr);
+//                boolean isRedundent = false; // eg
+//                WorkloadMessage wmsg = new WorkloadMessage(xl.className, xl.methodName, Serializer.STR1D, Serializer.toJson(params));
+//                WorkloadManager wmgr =  new WorkloadManager();
+//                RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, wmsg, wmgr);
 
             }
         }
