@@ -49,7 +49,7 @@ public class RunningConfiguration {
     
 
     /* Startup node configurations */
-    public static final boolean IS_BOOTSTRAP_NODE = true;
+    public static final boolean IS_BOOTSTRAP_NODE = false;
     private static boolean IS_WORKING = false;
    
     static { 
