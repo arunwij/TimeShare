@@ -27,7 +27,7 @@ public class Node implements Streamable, Serializable
     private final String strRep;
     private int filePort;
     private final int FILE_PORT = RunningConfiguration.FILE_PORT;
-    private Socket filSocket;
+   
     
     public Node(KademliaId nid, InetAddress ip, int port) throws IOException{
         this.nodeId = nid;
@@ -35,7 +35,7 @@ public class Node implements Streamable, Serializable
         this.port = port;
         this.filePort = FILE_PORT;
         this.strRep = this.nodeId.toString();
-        this.filSocket = new Socket(inetAddress, this.filePort);
+        
     }
     
     public Node() throws UnknownHostException, IOException{
@@ -44,7 +44,7 @@ public class Node implements Streamable, Serializable
         this.port = Port.RandomPort();
         this.filePort = FILE_PORT;
         this.inetAddress = InetAddress.getLocalHost();
-        this.filSocket = new Socket(this.inetAddress,this.filePort);
+        
     }
     
     public Node(InetAddress ip) throws IOException{
@@ -53,7 +53,7 @@ public class Node implements Streamable, Serializable
         this.port = Port.RandomPort();
         this.filePort = FILE_PORT;
         this.inetAddress = ip;
-        this.filSocket = new Socket(this.inetAddress,this.filePort);
+        
     }
     
     public Node(InetSocketAddress inetSocketAddress) throws IOException{
@@ -62,7 +62,7 @@ public class Node implements Streamable, Serializable
         this.port = inetSocketAddress.getPort();
         this.filePort = FILE_PORT;
         this.inetAddress = inetSocketAddress.getAddress();
-        this.filSocket = new Socket(this.inetAddress,this.filePort);
+        
     }
     
     public Node(int port) throws UnknownHostException, IOException{
@@ -71,7 +71,7 @@ public class Node implements Streamable, Serializable
         this.port = port;
         this.filePort = FILE_PORT;
         this.inetAddress = InetAddress.getLocalHost();
-        this.filSocket = new Socket(this.inetAddress,this.filePort);
+        
     }
 
     public int getPort() {
@@ -86,13 +86,7 @@ public class Node implements Streamable, Serializable
         return filePort;
     }
 
-    public Socket getFileSocket() {
-        return filSocket;
-    }
-
-    public void setFilSocket(Socket filSocket) {
-        this.filSocket = filSocket;
-    }
+   
     
     /**
      * Load the Node's data from a DataInput stream

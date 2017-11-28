@@ -41,7 +41,7 @@ public class RunningConfiguration {
     public static KadConfiguration KAD_CONFIGURATION; // Kad server configuraions
     
     /* bootstrap node configurations */
-    public static final int BOOTSTRAP_PORT = 11000; // bootstrap port
+    public static final int BOOTSTRAP_PORT = 12000; // bootstrap port
     public static final String BOOTSTRAP_ADDRESS = "192.168.1.20"; // bootstrap ip
     public final static String BOOTSTRAP_NODE_NAME = "bootstrap"; // bootstrap name
     public static InetSocketAddress BOOTSTRAP_NODE_SOCKET; // bootstrap socket
@@ -49,7 +49,7 @@ public class RunningConfiguration {
     
 
     /* Startup node configurations */
-    public static final boolean IS_BOOTSTRAP_NODE = false;
+    public static final boolean IS_BOOTSTRAP_NODE = true;
     private static boolean IS_WORKING = false;
    
     static { 
