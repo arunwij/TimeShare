@@ -59,7 +59,7 @@ public class FileReceiver {
                 return "data/executor/source/kernel/";
             
             default:
-                return "data/executor/files";
+                return "data/executor/files/";
         }
     }
    
