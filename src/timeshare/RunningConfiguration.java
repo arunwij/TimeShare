@@ -8,6 +8,7 @@ package timeshare;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import kademlia.routing.Contact;
 public class RunningConfiguration {
     /* local node cofigurations */
     public final static int FILE_PORT = 11655; // file port
+    public static ServerSocket SERVER_SOCKET;
     public static int LOCAL_NODE_PORT; // message port
     public static InetAddress LOCAL_INETADDRESS; //ip address
     public static String LOCAL_NODE_NAME; // node name
@@ -44,6 +46,7 @@ public class RunningConfiguration {
     public final static String BOOTSTRAP_NODE_NAME = "bootstrap"; // bootstrap name
     public static InetSocketAddress BOOTSTRAP_NODE_SOCKET; // bootstrap socket
     public static Node BOOTSTRAP_NODE; // bootstrap Node
+    
 
     /* Startup node configurations */
     public static final boolean IS_BOOTSTRAP_NODE = true;
@@ -52,6 +55,7 @@ public class RunningConfiguration {
     static { 
         try {
             LOCAL_INETADDRESS = InetAddress.getLocalHost();
+            SERVER_SOCKET = new ServerSocket(FILE_PORT);
             if(IS_BOOTSTRAP_NODE){
                 BOOTSTRAP_NODE_SOCKET = new InetSocketAddress(LOCAL_INETADDRESS,BOOTSTRAP_PORT);
                 LOCAL_JKNODE = new JKademliaNode(BOOTSTRAP_NODE_NAME,BOOTSTRAP_NODE_SOCKET);
@@ -69,6 +73,7 @@ public class RunningConfiguration {
         } catch (IOException ex) {
             Logger.getLogger(RunningConfiguration.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         KAD_SERVER = LOCAL_JKNODE.getServer();
         KAD_CONFIGURATION = LOCAL_JKNODE.getCurrentConfiguration();
         LOCAL_NODE = LOCAL_JKNODE.getNode();
@@ -106,6 +111,10 @@ public class RunningConfiguration {
             }
          
         }
+    }
+    
+    public ServerSocket serverSocket(){
+        return SERVER_SOCKET;
     }
   
 }

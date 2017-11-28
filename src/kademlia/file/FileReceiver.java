@@ -5,26 +5,18 @@
  */
 package kademlia.file;
 
-import java.io.BufferedInputStream;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-import javax.swing.SpringLayout;
 
 /**
  *
  * @author Artista
  */
 public class FileReceiver {
-    public static void main(String[] args) throws IOException, InterruptedException{
+    public static void receive() throws IOException{
         ServerSocket serverSocket = new ServerSocket(15123);
         Socket socket = serverSocket.accept();
         System.out.println ("Accepted connection : " + socket);
@@ -64,7 +56,7 @@ public class FileReceiver {
                 return "data/executor/source/host/";
             
             case FileType.KERNEL:
-                return "data/executor/source/kernel";
+                return "data/executor/source/kernel/";
             
             default:
                 return "data/executor/files";

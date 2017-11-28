@@ -26,46 +26,31 @@ public class FileSender {
     
     public static String FILE_TYPE = null;
     
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-
-        Socket socket = new Socket("192.168.1.20", 15123);
-
-        List<File> files = new <File>ArrayList();
-        File a = new File("JCudaVectorAdd.java");
-        File b = new File("peer.xml");
-        File c = new File("desert.jpg");
-        File d = new File("kernel.jpg");
-        File e = new File("Tharumini.mp3");
-        files.add(a);
-        files.add(b);
-        files.add(c);
-        files.add(d);
-        files.add(e);
-
-        send(socket, files);
-    }
-    
     public static void send(Socket socket, List<File> files) throws IOException{
         ListIterator li = files.listIterator();
         DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
         dos.writeInt(files.size());
         while (li.hasNext()) {
             File file = (File) li.next();
-            FILE_TYPE = getFileType(file.getName());
-            byte[] typeInBytes = FILE_TYPE.getBytes("UTF-8");
-            byte[] nameInBytes = file.getName().getBytes("UTF-8");
-            File transferFile = new File(file.getName());
-            byte[] contents = new byte[(int) transferFile.length()];
-            FileInputStream fin = new FileInputStream(transferFile);
-            BufferedInputStream bin = new BufferedInputStream(fin);
-            bin.read(contents, 0, contents.length);
-            
-            dos.writeInt(typeInBytes.length);
-            dos.write(typeInBytes);
-            dos.writeInt(nameInBytes.length);
-            dos.write(nameInBytes);
-            dos.writeInt(contents.length);
-            dos.write(contents);
+            if(file.exists() && file.isFile()){
+                FILE_TYPE = getFileType(file.getName());
+                byte[] typeInBytes = FILE_TYPE.getBytes("UTF-8");
+                byte[] nameInBytes = file.getName().getBytes("UTF-8");
+                File transferFile = new File(file.getName());
+                byte[] contents = new byte[(int) transferFile.length()];
+                FileInputStream fin = new FileInputStream(transferFile);
+                BufferedInputStream bin = new BufferedInputStream(fin);
+                bin.read(contents, 0, contents.length);
+
+                dos.writeInt(typeInBytes.length);
+                dos.write(typeInBytes);
+                dos.writeInt(nameInBytes.length);
+                dos.write(nameInBytes);
+                dos.writeInt(contents.length);
+                dos.write(contents);
+            }else{
+                throw new FileNotFoundException();
+            }
         }
         dos.flush();
         System.out.println("File transfer complete... closing the stream");
