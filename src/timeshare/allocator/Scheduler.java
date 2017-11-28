@@ -8,7 +8,6 @@ package timeshare.allocator;
 import java.io.File;
 import timeshare.RunningConfiguration;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -158,7 +157,7 @@ public class Scheduler {
                 FileMessage fm = new FileMessage("");
                 FileListner fl = new FileListner();
                 RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, fm, fl);
-                //FileSender.send(destinationNode.getFileSocket(), files);
+                FileSender.send(destinationNode.getSocketAddress().getAddress(), files);
              
              
                 // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;

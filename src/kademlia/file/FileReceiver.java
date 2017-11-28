@@ -10,13 +10,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import timeshare.RunningConfiguration;
 /**
  *
  * @author Artista
  */
 public class FileReceiver {
     public static void receive() throws IOException{
-        ServerSocket serverSocket = new ServerSocket(15123);
+        ServerSocket serverSocket = new ServerSocket(RunningConfiguration.FILE_PORT);
         Socket socket = serverSocket.accept();
         System.out.println ("Accepted connection : " + socket);
         

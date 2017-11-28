@@ -10,9 +10,11 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.List;
 import java.util.ListIterator;
+import timeshare.RunningConfiguration;
 
 /**
  *
@@ -21,6 +23,10 @@ import java.util.ListIterator;
 public class FileSender {
     
     public static String FILE_TYPE = null;
+    
+    public static void send(InetAddress ip, List<File> files) throws IOException{
+        send(new Socket(ip,RunningConfiguration.FILE_PORT),files);
+    }
     
     public static void send(Socket socket, List<File> files) throws IOException{
         
