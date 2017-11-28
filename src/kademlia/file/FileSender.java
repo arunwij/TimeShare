@@ -5,116 +5,89 @@
  */
 package kademlia.file;
 
-import timeshare.RunningConfiguration;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.SocketChannel;
+import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import kademlia.message.FileListner;
-import kademlia.message.FileMessage;
-import kademlia.node.Node;
+
 /**
  *
  * @author Artista
  */
 public class FileSender {
-    private final InetSocketAddress fileSocketAddress;
-    private InetSocketAddress communicationSocketAddress;
-    private final File file;
- 
-    public FileSender(InetAddress inetAddress, File file) throws IOException{
-        this.fileSocketAddress = new InetSocketAddress(inetAddress,RunningConfiguration.FILE_PORT);
-        this.file = file;
-    }
     
-    public static void send(InetSocketAddress inetSocketAddress, File file) throws IOException{
-        RunningConfiguration.KAD_SERVER.sendMessage(inetSocketAddress, new FileMessage(file.getName()), new FileListner());
-        FileSender nioClient = new FileSender(inetSocketAddress.getAddress(),file);
-        SocketChannel socketChannel = nioClient.createChannel();
-        nioClient.sendFile(socketChannel);
-    }
+    public static String FILE_TYPE = null;
     
-    public static void send(Node to, File file) throws IOException{
-        RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(file.getName()), new FileListner());
-        FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
-        SocketChannel socketChannel = nioClient.createChannel();
-        nioClient.sendFile(socketChannel);
-    }
-    
-    public static void send(Node to, File file,String filepath) throws IOException{
-        RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
-        FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
-        SocketChannel socketChannel = nioClient.createChannel();
-        nioClient.sendFile(socketChannel);
-    }
-    
-    public static void send(Node to,List<File> files,String filepath) throws IOException, InterruptedException{
-        ListIterator ltr = files.listIterator();
-        while(ltr.hasNext()){
-            File file = (File) ltr.next();
-            RunningConfiguration.KAD_SERVER.sendMessage(to, new FileMessage(filepath+file.getName()), new FileListner());
-            FileSender nioClient = new FileSender(to.getSocketAddress().getAddress(),file);
-            SocketChannel socketChannel = nioClient.createChannel();
-            nioClient.sendFile(socketChannel);
-            Thread.sleep(5000);
-        }
-    }
-    
-/**
-* Establishes a socket channel connection
-*
-* @return
-*/
-    public SocketChannel createChannel() {
-        SocketChannel socketChannel = null;
-        
-        try {
-            socketChannel = SocketChannel.open();
-            SocketAddress socketAddress = this.fileSocketAddress;
-            socketChannel.connect(socketAddress);
-            System.out.println("Connected..Now sending the file");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return socketChannel;
-    }
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 
+        Socket socket = new Socket("192.168.1.20", 15123);
+
+        List<File> files = new <File>ArrayList();
+        File a = new File("JCudaVectorAdd.java");
+        File b = new File("peer.xml");
+        File c = new File("desert.jpg");
+        File d = new File("kernel.cu");
+        File e = new File("Tharumini.mp3");
+        files.add(a);
+        files.add(b);
+        files.add(c);
+        files.add(d);
+        files.add(e);
+
+        send(socket, files);
+    }
     
-    public void sendFile(SocketChannel socketChannel) {
-        RandomAccessFile aFile = null;
-        try {
-            //File file = new File("data\\web.exe");
-            aFile = new RandomAccessFile(this.file, "r");
-            FileChannel inChannel = aFile.getChannel();
-            ByteBuffer buffer = ByteBuffer.allocate(1024);
+    public static void send(Socket socket, List<File> files) throws IOException{
+        ListIterator li = files.listIterator();
+        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+        dos.writeInt(files.size());
+        while (li.hasNext()) {
+            File file = (File) li.next();
+            FILE_TYPE = getFileType(file.getName());
+            byte[] typeInBytes = FILE_TYPE.getBytes("UTF-8");
+            byte[] nameInBytes = file.getName().getBytes("UTF-8");
+            File transferFile = new File(file.getName());
+            byte[] contents = new byte[(int) transferFile.length()];
+            FileInputStream fin = new FileInputStream(transferFile);
+            BufferedInputStream bin = new BufferedInputStream(fin);
+            bin.read(contents, 0, contents.length);
             
-            while (inChannel.read(buffer) > 0) {
-                buffer.flip();
-                socketChannel.write(buffer);
-                buffer.clear();
-            }
-        
-            Thread.sleep(400);
-            System.out.println("End of file reached..");
-//            socketChannel.close();
-            aFile.close();
-            
-        } catch (FileNotFoundException e ) { 
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            dos.writeInt(typeInBytes.length);
+            dos.write(typeInBytes);
+            dos.writeInt(nameInBytes.length);
+            dos.write(nameInBytes);
+            dos.writeInt(contents.length);
+            dos.write(contents);
         }
-
+        dos.flush();
+        System.out.println("File transfer complete... closing the stream");
+        socket.close();
     }
-
+    
+    public static String getExtention(String fileName){
+        int i = fileName.lastIndexOf(".");
+        if( i > 0){
+            return fileName.substring(i+1);
+        }
+        return null;
+    }
+    
+    public static String getFileType(String fileName){
+        String extention = getExtention(fileName);
+        if(extention.equals(FileType.SOURCE)){
+            return FileType.SOURCE;
+        }else if(extention.equals(FileType.KERNEL)){
+            return FileType.KERNEL;
+        }else{
+            return FileType.DATA;
+        }
+    }
 }

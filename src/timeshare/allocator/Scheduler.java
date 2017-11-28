@@ -13,11 +13,11 @@ import java.util.Vector;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import kademlia.file.FileSender;
 import kademlia.file.Serializer;
 import kademlia.message.WorkloadManager;
 import kademlia.message.WorkloadMessage;
 import kademlia.routing.Contact;
+import kademlia.node.Node;
 
 /**
  *
@@ -155,25 +155,33 @@ public class Scheduler {
                 for (int l = 0; l < tbu.getTask().files.size(); l++) {
                     System.out.println(tbu.getTask().files.get(l).toString());
                     File file = new File(tbu.getTask().files.get(l).toString());
-                    if (c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE)) {
-                        System.out.println("bootstap node ; " + c.getNode().toString());
-                    } else {
-                        System.out.println("send assest : " + "data/executor/files/" + file.getName());
 
-                        FileSender.send(c.getNode(), file, "data/executor/files/" );
+                    
+
+                       // FileSender.send(c.getNode(), file, "data/executor/files/" );
                         //Thread.sleep(5000);
 
-                    }
+                    //Replace File Sender
+                    //.send(destiationNode, file, "data/executor/files/");
+
+                    
                 }
 
-                if (c.getNode().equals(RunningConfiguration.BOOTSTRAP_NODE)) {
-                    System.out.println("bootstap node ; " + c.getNode().toString());
-                } else {
-                    System.out.println("send assest : " + "data/javaFile/" + sim.javaFile.getName());
-                    System.out.println("send assest : " + "data/kernel/" + sim.kernel.getName());
-                    FileSender.send(c.getNode(), sim.javaFile, "data/javaFile/");
-                    FileSender.send(c.getNode(), sim.kernel, "data/kernel/" );
-                }
+
+                
+//                    System.out.println("send assest : " + "data/javaFile/" + sim.javaFile.getName());
+//                    System.out.println("send assest : " + "data/kernel/" + sim.kernel.getName());
+//                    FileSender.send(c.getNode(), sim.javaFile, "data/javaFile/");
+//                    FileSender.send(c.getNode(), sim.kernel, "data/kernel/" );
+                
+
+//                System.out.println("send assest : " + "data/javaFile/" + sim.javaFile.getName());
+//                System.out.println("send assest : " + "data/kernel/" + sim.kernel.getName());
+               // Replace File Sender
+              //  FileSender.send(destiationNode, sim.javaFile, "data/javaFile/");
+              //  FileSender.send(destiationNode, sim.kernel, "data/kernel/");
+
+
                 // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;
                 boolean isRedundent = false; // eg
                 WorkloadMessage wmsg = new WorkloadMessage(xl.className,xl.methodName,Serializer.STR1D,Serializer.toJson(params),isRedundent);

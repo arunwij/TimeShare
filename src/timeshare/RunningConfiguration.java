@@ -45,13 +45,14 @@ public class RunningConfiguration {
     public final static String BOOTSTRAP_NODE_NAME = "bootstrap"; // bootstrap name
     public static InetSocketAddress BOOTSTRAP_NODE_SOCKET; // bootstrap socket
     public static Node BOOTSTRAP_NODE; // bootstrap Node
+    public static String NODE_STATUS;
+    public static String CONNECTION_STATUS;
+    public static StringBuilder sb = new StringBuilder();
 
     /* Startup node configurations */
     
     public static final boolean IS_BOOTSTRAP_NODE = false;
     private static boolean IS_WORKING = false;
-    public static SceneController sc = new SceneController();
-    public StringBuilder sb = new StringBuilder();
    
     static { 
         try {
@@ -62,13 +63,13 @@ public class RunningConfiguration {
                 LOCAL_NODE_NAME = BOOTSTRAP_NODE_NAME;
                 System.out.println("Kad-network bootstrap node started..");
 //                sb.append("Kad-network bootstrap node started..\n");
-//                sc.statusConsole("Kad-network bootstrap node started..");
+                NODE_STATUS = "Kad-network bootstrap node started..";
             }else{
                 BOOTSTRAP_NODE_SOCKET = new InetSocketAddress(BOOTSTRAP_ADDRESS,BOOTSTRAP_PORT);
                 LOCAL_NODE_NAME = NameGenerator.get();
                 LOCAL_JKNODE = new JKademliaNode(LOCAL_NODE_NAME,Port.RandomPort());
                 System.out.println("Jkademlia local node created...");
-//                sc.statusConsole("Jkademlia local node created...");
+                NODE_STATUS = "Jkademlia local node created...";
                 BOOTSTRAP_NODE = new Node(BOOTSTRAP_NODE_SOCKET);
             }
         } catch (UnknownHostException ex) {
@@ -104,17 +105,25 @@ public class RunningConfiguration {
     public static void run(){
         if(!IS_BOOTSTRAP_NODE){
             System.out.println("Connect operation starting");
-//            sc.statusConsole("Connect operation starting");
+            CONNECTION_STATUS = "Connect operation starting\n";
             ConnectOperation connectOperation = new ConnectOperation(KAD_SERVER,LOCAL_JKNODE,BOOTSTRAP_NODE,KAD_CONFIGURATION);
             try {
                 connectOperation.execute();
                 System.out.println("Connect operation done..");
-//                sc.statusConsole("Connect operation done..");
+                CONNECTION_STATUS += "Connect operation done..\n";
             } catch (IOException ex) {
                 Logger.getLogger(RunningConfiguration.class.getName()).log(Level.SEVERE, null, ex);
             }
          
         }
+    }
+    
+    public static String checkNodeStatus(){
+        return NODE_STATUS;
+    }
+    
+    public static String connetionStatus(){
+        return CONNECTION_STATUS;
     }
   
 }

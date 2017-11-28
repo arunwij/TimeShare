@@ -29,6 +29,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import kademlia.operation.ConnectOperation;
 import timeshare.allocator.XmlReader;
 
 /**
@@ -45,6 +46,8 @@ public class SceneController implements Initializable {
     private BorderPane borderPane;
     @FXML
     private Button buttonExit;
+    @FXML
+    private Button buttonStat;
     @FXML
     private TextField txtFileSelected;
     @FXML
@@ -92,7 +95,8 @@ public class SceneController implements Initializable {
     List<File> selectedFiles;
     File selectedXml;
     File selectedCsv;
-
+    public static StringBuilder status = new StringBuilder();
+    
     @FXML
     private void handleExit() {
         System.exit(0);
@@ -124,7 +128,7 @@ public class SceneController implements Initializable {
                 fileNames.append(selectedFiles.get(i).getName()+"\n");
             }
             txtFileList.setText(fileNames.toString());
-            showTextArea();
+//            showTextArea();
         } else {
             txtFileList.setText("Data file selection cancelled.");
         }
@@ -202,13 +206,13 @@ public class SceneController implements Initializable {
         }
     }
     
-    @FXML
-    private void showTextArea() throws InterruptedException {
-        
-        txtFileList.setVisible(true);
-        Thread.sleep(3000);
-        txtFileList.setVisible(false);
-    }
+//    @FXML
+//    private void showTextArea() throws InterruptedException {
+//        
+//        txtFileList.setVisible(true);
+//        Thread.sleep(3000);
+//        txtFileList.setVisible(false);
+//    }
 
     @FXML
     private void showProgress() throws InterruptedException {
@@ -226,11 +230,10 @@ public class SceneController implements Initializable {
     }
     
     @FXML
-    public void statusConsole(String status){
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(status + "\n");
-//        txtAreaConsole.setText(sb.toString());
-          //txtAreaConsole.setText(status);
+    private void statusConsole(){
+        status.append(RunningConfiguration.checkNodeStatus());
+        status.append(RunningConfiguration.connetionStatus());
+        txtAreaConsole.setText(status.toString());
     }
 
     @Override
@@ -239,6 +242,7 @@ public class SceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                buttonStat.fire();
                 long totalMemory = Runtime.getRuntime().totalMemory();
                 long freeMemory = Runtime.getRuntime().freeMemory();
                 long usedMemory = totalMemory - freeMemory;
