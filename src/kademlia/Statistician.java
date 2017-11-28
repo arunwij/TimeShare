@@ -46,22 +46,27 @@ public class Statistician implements KadStatistician{
         this.shutdownTimestamp = 0;
     }
     
+    @Override
     public long getOnlineTime(){
         return (this.bootstrapTimestamp - this.shutdownTimestamp) / 1000;
     }
     
+    @Override
     public long getBootstrapTimestamp() {
         return bootstrapTimestamp;
     }
 
+    @Override
     public void setBootstrapTimestamp(long bootstrapTimestamp) {
         this.bootstrapTimestamp = bootstrapTimestamp;
     }
 
+    @Override
     public long getShutdownTimestamp() {
         return shutdownTimestamp;
     }
 
+    @Override
     public void setShutdownTimestamp(long shutdownTimestamp) {
         this.shutdownTimestamp = shutdownTimestamp;
     }
