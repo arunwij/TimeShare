@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kademlia.simulations;
+package timeshare.allocator;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import timeshare.allocator.MachineHeterogeneity;
-import timeshare.allocator.Simulator;
-import timeshare.allocator.TaskHeterogeneity;
 /**
  *
  * @author Great HARI

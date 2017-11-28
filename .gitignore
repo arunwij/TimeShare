@@ -1,6 +1,13 @@
 /build/
 /dist/
+<<<<<<< HEAD
+logs/statistician.csv
+=======
 /data/
 /logs/
 /pics/
+<<<<<<< HEAD
+>>>>>>> 982cf16bf735e56dc39a4f86bd9000b7b2b13d33
+=======
 /nbproject/private/
+>>>>>>> f7840895677d7ebed7f1242b209634e7c3e6bc04

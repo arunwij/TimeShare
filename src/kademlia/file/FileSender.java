@@ -24,8 +24,28 @@ public class FileSender {
     
     public static String FILE_TYPE = null;
     
+<<<<<<< HEAD
     public static void send(InetAddress ip, List<File> files) throws IOException{
         send(new Socket(ip,RunningConfiguration.FILE_PORT),files);
+=======
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+
+        Socket socket = new Socket("192.168.1.20", 15123);
+
+        List<File> files = new <File>ArrayList();
+        File a = new File("JCudaVectorAdd.java");
+        File b = new File("peer.xml");
+        File c = new File("desert.jpg");
+        File d = new File("kernel.cu");
+        File e = new File("Tharumini.mp3");
+        files.add(a);
+        files.add(b);
+        files.add(c);
+        files.add(d);
+        files.add(e);
+
+        send(socket, files);
+>>>>>>> f080ad1403529ae148b614410106f03fd269159b
     }
     
     public static void send(Socket socket, List<File> files) throws IOException{
