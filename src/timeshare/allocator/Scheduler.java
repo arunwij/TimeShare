@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import kademlia.file.FileSender;
 import kademlia.file.Serializer;
+import kademlia.message.FileListner;
+import kademlia.message.FileMessage;
 import kademlia.message.WorkloadManager;
 import kademlia.message.WorkloadMessage;
 import kademlia.node.Node;
@@ -132,7 +134,7 @@ public class Scheduler {
                 
                 TaskWrapper tbu = pCopy[i].elementAt(j);
                 Node destinationNode = RunningConfiguration.getNodeList().get(i);
-                Socket socket = new Socket(destinationNode.getSocketAddress().getAddress(), destinationNode.getFileSocketAddress().getPort());
+        
                 sim.mapTask(tbu.getTask(), i);
                 System.out.println("Adding task " + tbu.getTask().tid + " to machine " + i + ". Completion time = " + tbu.getTask().cTime + " @time " + currentTime);
                 int datacount = 3;
@@ -150,18 +152,18 @@ public class Scheduler {
                     files.add(new File(tbu.getTask().files.get(l).toString()));
                 }
                 
-                files.add(sim.javaFile);
-                files.add(sim.kernel);
-                FileSender.send(socket, files);
+                //files.add(sim.javaFile);
+                //files.add(sim.kernel);
+                FileMessage fm = new FileMessage("");
+                FileListner fl = new FileListner();
+                RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, fm, fl);
+                //FileSender.send(destinationNode.getFileSocket(), files);
              
-               // Replace File Sender
-              //  FileSender.send(destiationNode, sim.javaFile, "data/javaFile/");
-              //  FileSender.send(destiationNode, sim.kernel, "data/kernel/");
-
+             
                 // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;
                 boolean isRedundent = false; // eg
                 WorkloadMessage wmsg = new WorkloadMessage(xl.className, xl.methodName, Serializer.STR1D, Serializer.toJson(params));
-                WorkloadManager wmgr =  WorkloadManager.getInstance();
+                WorkloadManager wmgr =  new WorkloadManager();
                 RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, wmsg, wmgr);
 
             }

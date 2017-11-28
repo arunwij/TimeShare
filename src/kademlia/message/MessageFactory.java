@@ -77,7 +77,7 @@ public class MessageFactory implements KademliaMessageFactory{
             case SimpleMessage.CODE:
                 return new SimpleReceiver();
             case ResultMessage.CODE:
-                return WorkloadManager.getInstance();
+                return new WorkloadManager();
             case ExecuteMessage.CODE:
                 return new ExecuteReceiver();
             default:

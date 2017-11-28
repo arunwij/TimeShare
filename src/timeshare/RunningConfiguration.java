@@ -55,7 +55,6 @@ public class RunningConfiguration {
     static { 
         try {
             LOCAL_INETADDRESS = InetAddress.getLocalHost();
-            SERVER_SOCKET = new ServerSocket(FILE_PORT);
             if(IS_BOOTSTRAP_NODE){
                 BOOTSTRAP_NODE_SOCKET = new InetSocketAddress(LOCAL_INETADDRESS,BOOTSTRAP_PORT);
                 LOCAL_JKNODE = new JKademliaNode(BOOTSTRAP_NODE_NAME,BOOTSTRAP_NODE_SOCKET);
@@ -111,10 +110,6 @@ public class RunningConfiguration {
             }
          
         }
-    }
-    
-    public ServerSocket serverSocket(){
-        return SERVER_SOCKET;
     }
   
 }

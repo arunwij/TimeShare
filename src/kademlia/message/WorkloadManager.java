@@ -20,13 +20,13 @@ public class WorkloadManager implements Receiver{
     private static List<Object> String_RESULTS = new ArrayList<Object>();
     ResultMessage public_msg[] =  new ResultMessage[2];
     
-    private static WorkloadManager instance = new WorkloadManager();
+    //public static WorkloadManager instance = new WorkloadManager();
     
-    public static WorkloadManager getInstance(){
-        return instance;
-    }
+//    public static WorkloadManager getInstance(){
+//        return instance;
+//    }
     
-    private WorkloadManager(){}
+    public WorkloadManager(){}
     
     public static void IncreaseWorkloadCount(){
         WORKLOAD_COUNT++;

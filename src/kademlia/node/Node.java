@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import kademlia.message.Streamable;
 
@@ -26,47 +27,73 @@ public class Node implements Streamable, Serializable
     private final String strRep;
     private int filePort;
     private final int FILE_PORT = RunningConfiguration.FILE_PORT;
+    private Socket filSocket;
     
-    public Node(KademliaId nid, InetAddress ip, int port){
+    public Node(KademliaId nid, InetAddress ip, int port) throws IOException{
         this.nodeId = nid;
         this.inetAddress = ip;
         this.port = port;
         this.filePort = FILE_PORT;
         this.strRep = this.nodeId.toString();
+        this.filSocket = new Socket(inetAddress, this.filePort);
     }
     
-    public Node() throws UnknownHostException{
+    public Node() throws UnknownHostException, IOException{
         this.nodeId = new KademliaId();
         this.strRep = this.nodeId.toString();
         this.port = Port.RandomPort();
         this.filePort = FILE_PORT;
         this.inetAddress = InetAddress.getLocalHost();
+        this.filSocket = new Socket(this.inetAddress,this.filePort);
     }
     
-    public Node(InetAddress ip){
+    public Node(InetAddress ip) throws IOException{
         this.nodeId = new KademliaId();
         this.strRep = this.nodeId.toString();
         this.port = Port.RandomPort();
         this.filePort = FILE_PORT;
         this.inetAddress = ip;
+        this.filSocket = new Socket(this.inetAddress,this.filePort);
     }
     
-    public Node(InetSocketAddress inetSocketAddress){
+    public Node(InetSocketAddress inetSocketAddress) throws IOException{
         this.nodeId = new KademliaId();
         this.strRep = this.nodeId.toString();
         this.port = inetSocketAddress.getPort();
         this.filePort = FILE_PORT;
         this.inetAddress = inetSocketAddress.getAddress();
+        this.filSocket = new Socket(this.inetAddress,this.filePort);
     }
     
-    public Node(int port) throws UnknownHostException{
+    public Node(int port) throws UnknownHostException, IOException{
         this.nodeId = new KademliaId();
         this.strRep = this.nodeId.toString();
         this.port = port;
         this.filePort = FILE_PORT;
         this.inetAddress = InetAddress.getLocalHost();
+        this.filSocket = new Socket(this.inetAddress,this.filePort);
     }
 
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public int getFilePort() {
+        return filePort;
+    }
+
+    public Socket getFileSocket() {
+        return filSocket;
+    }
+
+    public void setFilSocket(Socket filSocket) {
+        this.filSocket = filSocket;
+    }
+    
     /**
      * Load the Node's data from a DataInput stream
      *

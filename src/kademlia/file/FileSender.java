@@ -24,6 +24,7 @@ public class FileSender {
     public static String FILE_TYPE = null;
     
     public static void send(Socket socket, List<File> files) throws IOException{
+        
         ListIterator li = files.listIterator();
         DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
         dos.writeInt(files.size());
