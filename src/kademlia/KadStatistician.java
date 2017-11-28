@@ -96,7 +96,11 @@ public interface KadStatistician
     
     public void setBootstrapTimestamp(long bootstrapTimestamp);
     
+    public long getBootstrapTimestamp();
+    
     public long getShutdownTimestamp();
+    
+    public void setShutdownTimestamp(long shutDownTimestamp);
     
     public long getOnlineTime();
     

@@ -34,6 +34,7 @@ public class Main extends Application {
     @Override
     public void stop(){
         System.out.println("System is shutting down");
+        RunningConfiguration.LOCAL_JKNODE.getStatistician().setShutdownTimestamp(System.currentTimeMillis());
         RunningConfiguration.LOCAL_JKNODE.getStatistician().createLog();
         File fileData = new File("filedata.csv");
         if(fileData.exists() && fileData.isFile()){
@@ -48,6 +49,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         //DeviceRating.deviceQuery();
         RunningConfiguration.run();
+        RunningConfiguration.LOCAL_JKNODE.getStatistician().setBootstrapTimestamp(System.currentTimeMillis());
         launch(args);
     }
     
