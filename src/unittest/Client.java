@@ -6,18 +6,10 @@
 package unittest;
 
 import java.io.BufferedInputStream;
-<<<<<<< HEAD
-=======
-import java.io.DataInputStream;
->>>>>>> f080ad1403529ae148b614410106f03fd269159b
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-<<<<<<< HEAD
-=======
-import java.io.FileOutputStream;
->>>>>>> f080ad1403529ae148b614410106f03fd269159b
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -30,15 +22,8 @@ import java.util.ListIterator;
  */
 public class Client {
 
-<<<<<<< HEAD
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-
-=======
     public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
-        
->>>>>>> f080ad1403529ae148b614410106f03fd269159b
         Socket socket = new Socket("192.168.1.20", 15123);
-
         List<File> files = new <File>ArrayList();
         File a = new File("city.jpg");
         File b = new File("night.jpg");

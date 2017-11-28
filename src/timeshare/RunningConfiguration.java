@@ -47,13 +47,11 @@ public class RunningConfiguration {
     public final static String BOOTSTRAP_NODE_NAME = "bootstrap"; // bootstrap name
     public static InetSocketAddress BOOTSTRAP_NODE_SOCKET; // bootstrap socket
     public static Node BOOTSTRAP_NODE; // bootstrap Node
-<<<<<<< HEAD
-    
-=======
+
     public static String NODE_STATUS;
     public static String CONNECTION_STATUS;
     public static StringBuilder sb = new StringBuilder();
->>>>>>> f080ad1403529ae148b614410106f03fd269159b
+
 
     /* Startup node configurations */
     
