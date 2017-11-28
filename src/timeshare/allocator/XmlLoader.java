@@ -52,7 +52,10 @@ public class XmlLoader {
             NodeList nList = doc.getElementsByTagName("arg");
             NodeList peers = doc.getElementsByTagName("max_peers");
             System.out.println("max peers :" + peers.item(0).getTextContent());
-            peer_count = RunningConfiguration.getPeersCount();
+            //if(Integer.parseInt){
+                 peer_count = Integer.parseInt(peers.item(0).getTextContent());
+            
+           
             sendfiles = new ArrayList[peer_count];
             for (int i = 0; i < peer_count; i++) {
                 sendfiles[i] = new ArrayList();
