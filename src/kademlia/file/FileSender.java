@@ -30,11 +30,12 @@ public class FileSender {
         dos.writeInt(files.size());
         while (li.hasNext()) {
             File file = (File) li.next();
-            if(file.exists() && file.isFile()){
+            System.out.println(file.getPath()+"---"+file.getName());
+         
                 FILE_TYPE = getFileType(file.getName());
                 byte[] typeInBytes = FILE_TYPE.getBytes("UTF-8");
                 byte[] nameInBytes = file.getName().getBytes("UTF-8");
-                File transferFile = new File(file.getName());
+                File transferFile = new File(file.getPath());
                 byte[] contents = new byte[(int) transferFile.length()];
                 FileInputStream fin = new FileInputStream(transferFile);
                 BufferedInputStream bin = new BufferedInputStream(fin);
@@ -46,9 +47,7 @@ public class FileSender {
                 dos.write(nameInBytes);
                 dos.writeInt(contents.length);
                 dos.write(contents);
-            }else{
-                throw new FileNotFoundException();
-            }
+            
         }
         dos.flush();
         System.out.println("File transfer complete... closing the stream");

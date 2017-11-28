@@ -149,6 +149,7 @@ public class Scheduler {
 
                 List<File> files = new ArrayList<File>();
                 for (int l = 0; l < tbu.getTask().files.size(); l++) {
+                    System.out.println(tbu.getTask().files.get(l).toString());
                     files.add(new File(tbu.getTask().files.get(l).toString()));
                 }
                 
