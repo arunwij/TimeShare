@@ -35,6 +35,7 @@ import java.nio.channels.SocketChannel;
     }
 
     public FileReceiver() {
+        System.out.println("FileReceiver constructor");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -75,9 +76,9 @@ import java.nio.channels.SocketChannel;
                 buffer.clear();
             }
            // Thread.sleep(1000);
-            fileChannel.close();
+          //  fileChannel.close();
             System.out.println("End of file reached..Closing channel");
-            socketChannel.close();
+          //  socketChannel.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

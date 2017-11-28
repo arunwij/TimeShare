@@ -152,8 +152,8 @@ public class Scheduler {
                     } else {
                         System.out.println("send assest : " + "data/executor/files/" + file.getName());
 
-                        FileSender.send(c.getNode(), file, "data/executor/files/" );
-                        //Thread.sleep(5000);
+                       // FileSender.send(c.getNode(), file, "data/executor/files/");
+                        Thread.sleep(500);
 
                     }
                 }
@@ -163,13 +163,16 @@ public class Scheduler {
                 } else {
                     System.out.println("send assest : " + "data/javaFile/" + sim.javaFile.getName());
                     System.out.println("send assest : " + "data/kernel/" + sim.kernel.getName());
-                    FileSender.send(c.getNode(), sim.javaFile, "data/javaFile/");
-                    FileSender.send(c.getNode(), sim.kernel, "data/kernel/" );
+                    //FileSender.send(c.getNode(), sim.javaFile, "data/javaFile/");
+                    Thread.sleep(500);
+                    //FileSender.send(c.getNode(), sim.kernel, "data/kernel/");
+                    Thread.sleep(500);
                 }
-
-                WorkloadMessage wmsg = new WorkloadMessage(xl.className, xl.methodName, Serializer.STR1D, Serializer.toJson(params));
-                WorkloadManager wmgr = new WorkloadManager();
+                System.out.println("workload start");
+                 WorkloadMessage wmsg = new WorkloadMessage(xl.className, xl.methodName, Serializer.STR1D, Serializer.toJson(params));
+                 WorkloadManager wmgr = new WorkloadManager();
                 RunningConfiguration.KAD_SERVER.sendMessage(c.getNode(), wmsg, wmgr);
+                System.out.println("workload end");
             }
         }
 
