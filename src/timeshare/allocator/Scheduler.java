@@ -163,6 +163,7 @@ public class Scheduler {
                 WorkloadMessage wmsg = new WorkloadMessage(xl.className, xl.methodName, Serializer.STR1D, Serializer.toJson(params), isRedundent);
                 WorkloadManager wmgr =  WorkloadManager.getInstance();
                 RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, wmsg, wmgr);
+
             }
         }
 
