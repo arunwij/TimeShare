@@ -132,7 +132,7 @@ public class Scheduler {
                 
                 TaskWrapper tbu = pCopy[i].elementAt(j);
                 Node destinationNode = RunningConfiguration.getNodeList().get(i);
-                Socket socket = new Socket(destinationNode.getSocketAddress().getAddress(), destinationNode.getSocketAddress().getPort());
+                Socket socket = new Socket(destinationNode.getSocketAddress().getAddress(), destinationNode.getFileSocketAddress().getPort());
                 sim.mapTask(tbu.getTask(), i);
                 System.out.println("Adding task " + tbu.getTask().tid + " to machine " + i + ". Completion time = " + tbu.getTask().cTime + " @time " + currentTime);
                 int datacount = 3;
