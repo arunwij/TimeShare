@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/file/FileType.java</file>
             <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/timeshare/RunningConfiguration.java</file>
             <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/timeshare/allocator/Scheduler.java</file>
@@ -12,6 +13,22 @@
             <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/message/WorkloadReceiver.java</file>
             <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/unittest/Client.java</file>
             <file>file:/C:/Users/Artista/Documents/NetBeansProjects/Timeshare/src/kademlia/node/Node.java</file>
+=======
+            <file>file:/F:/Cad0p%20project/Timeshare/src/kademlia/message/Message.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/kademlia/message/Streamable.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/kademlia/file/FileSender.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/kademlia/message/WorkloadManager.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/XmlReader.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/Workload.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/VariableBroadcast.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/SceneController.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/ConvertDataType.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/Scheduler.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/allocator/XmlLoader.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/kademlia/message/WorkloadMessage.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/RunningConfiguration.java</file>
+            <file>file:/F:/Cad0p%20project/Timeshare/src/timeshare/Main.java</file>
+>>>>>>> morning commit sanjula
         </group>
     </open-files>
 </project-private>

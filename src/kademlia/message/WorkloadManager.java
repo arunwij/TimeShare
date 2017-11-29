@@ -4,6 +4,7 @@ import timeshare.RunningConfiguration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -41,11 +42,13 @@ public class WorkloadManager implements Receiver{
         if(incoming instanceof ResultMessage){
             System.out.println("Num Workload :"+WORKLOAD_COUNT);
             System.out.println("Num Workload Recived :"+WOKLOAD_RECEIVED);
-            
+           
             System.out.println("Result message");
             ResultMessage msg = (ResultMessage) incoming;
            
             System.out.println("Result received: " + msg.toString());
+            if(RunningConfiguration.resultCount<2)
+             RunningConfiguration.results[RunningConfiguration.resultCount++]=msg.toString();
         } 
         
 

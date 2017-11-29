@@ -38,7 +38,7 @@ public class FileSender {
         dos.writeInt(files.size());
         while (li.hasNext()) {
             File file = (File) li.next();
-            System.out.println(file.getPath()+"---"+file.getName());
+           // System.out.println(file.getPath()+"---"+file.getName());
          
                 FILE_TYPE = getFileType(file.getName());
                 byte[] typeInBytes = FILE_TYPE.getBytes("UTF-8");

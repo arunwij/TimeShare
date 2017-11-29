@@ -51,6 +51,10 @@ public class XmlLoader {
             System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getElementsByTagName("arg");
             NodeList peers = doc.getElementsByTagName("max_peers");
+            NodeList methodname = doc.getElementsByTagName("method_name");
+            NodeList classname = doc.getElementsByTagName("class_name");
+            methodName=  methodname.item(0).getTextContent();
+            className = classname.item(0).getTextContent();
             System.out.println("max peers :" + peers.item(0).getTextContent());
             //if(Integer.parseInt){
                  peer_count = Integer.parseInt(peers.item(0).getTextContent());

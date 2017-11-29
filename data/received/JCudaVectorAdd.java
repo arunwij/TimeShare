@@ -52,20 +52,17 @@ public  class JCudaVectorAdd
 		
 		
 	}
-    public static String[][] test( String[][] a,String[][] b )
+    public static double[][] test( String[] a,int[][] b ,int[] d)
     { 
-        a[0][0]="dfgdfg";
-        b[0][0]="dfgdfg";
-        a[0][1]="dfgdfg";
-        b[0][1]="dfgdfg";
-        long startTime = System.nanoTime(); 
-
-        JCudaVectorAdd unZip = new JCudaVectorAdd();
-        
-        unZip.unZipIt(INPUT_ZIP_FILE,OUTPUT_FOLDER);
-        long estimatedTime = System.nanoTime() - startTime;
-         System.out.println(b+"time is "+estimatedTime/1000000 );
-        return a;
+       double c[][] = new double[b.length][b[0].length];
+		for(int i=0;i<b.length; i++)
+			for(int j=0;j<b[0].length; j++){
+				System.out.println(a[j]);	
+				c[i][j]=b[i][j] + d[j];
+			}
+				
+		
+        return c;
        // }
     }
 

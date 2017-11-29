@@ -57,7 +57,7 @@ public  class JCudaVectorAdd
        double c[][] = new double[b.length][b[0].length];
 		for(int i=0;i<b.length; i++)
 			for(int j=0;j<b[0].length; j++){
-				System.out.println(a[0]);	
+				System.out.println(a[0]+" " + b[i][j] + " " +d[j]);	
 				c[i][j]=b[i][j] + d[j];
 			}
 				

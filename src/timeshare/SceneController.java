@@ -5,6 +5,7 @@
  */
 package timeshare;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,6 +30,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javax.swing.JOptionPane;
 import kademlia.operation.ConnectOperation;
 import timeshare.allocator.XmlReader;
 
@@ -182,7 +184,7 @@ public class SceneController implements Initializable {
     private void uploadCSV() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select the CSV File");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv*"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.cu*"));
         selectedCsv = fileChooser.showOpenDialog(null);
         if (selectedCsv != null) {
             lblCsv.setText(selectedCsv.getName());
@@ -201,6 +203,13 @@ public class SceneController implements Initializable {
         try {
             XmlReader xml  = new XmlReader(selectedXml,selectedSource,selectedCsv);
             xml.run();
+            //Thread.sleep(5000);
+            
+            Component frame = null;
+            //Runtime.getRuntime().exec("explorer data\\executor\\files");
+            JOptionPane.showMessageDialog(frame, "Task Execution is done", "Task", JOptionPane.INFORMATION_MESSAGE);
+            Runtime.getRuntime().exec("explorer data\\executor\\files");
+            RunningConfiguration.printResults();
         } catch (Exception ex) {
             Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -266,4 +275,6 @@ public class SceneController implements Initializable {
             }
         }, 0, 2000);
     }
+    
+    
 }

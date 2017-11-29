@@ -56,9 +56,10 @@ public class WorkloadReceiver implements Receiver {
         }*/
         System.out.println(msg.data);
         String data[]=Serializer.getStr1d(msg.data);
-        Object senddata[]= new Object[data.length];
+        
         Class<?>[] parameterTypes =pip.getParameterTypes(msg.getMethodName(), msg.getClassName());
-        for (int i = 0; i < data.length; i++) {
+        Object senddata[]= new Object[parameterTypes.length];
+        for (int i = 0; i < parameterTypes.length; i++) {
             Gson json = new Gson();
             System.out.println("convert :"+parameterTypes[i].toString());
             senddata[i] = json.fromJson(data[i],parameterTypes[i] );

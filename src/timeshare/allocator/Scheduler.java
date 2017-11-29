@@ -130,7 +130,7 @@ public class Scheduler {
         /*Copy matCopy[] and pCopy[] back to original matrices*/
         for (int i = 0; i < sim.m; i++) {
             for (int j = 0; j < pCopy[i].size(); j++) {
-                
+                System.out.println(RunningConfiguration.LOCAL_JKNODE.getRoutingTable());
                 TaskWrapper tbu = pCopy[i].elementAt(j);
                 Node destinationNode = RunningConfiguration.getNodeList().get(i);
         
@@ -148,20 +148,21 @@ public class Scheduler {
 
                 List<File> files = new ArrayList<File>();
                 for (int l = 0; l < tbu.getTask().files.size(); l++) {
-                    System.out.println(tbu.getTask().files.get(l).toString());
-                    files.add(new File(tbu.getTask().files.get(l).toString()));
+                   // System.out.println(tbu.getTask().files.get(l).toString());
+                  //  files.add(new File(tbu.getTask().files.get(l).toString()));
                 }
                 
                 //files.add(sim.javaFile);
                 //files.add(sim.kernel);
-                FileMessage fm = new FileMessage("");
-                FileListner fl = new FileListner();
-                RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, fm, fl);
-                FileSender.send(destinationNode.getSocketAddress().getAddress(), files);
+                //FileMessage fm = new FileMessage("");
+                //FileListner fl = new FileListner();
+               // RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, fm, fl);
+               // FileSender.send(destinationNode.getSocketAddress().getAddress(), files);
              
              
                 // added workload status parameter to workload message. it is a boolean value. True if it is a redundent workload otherwise false;
                boolean isRedundent = false; // eg
+                Thread.sleep(10000);
                 WorkloadMessage wmsg = new WorkloadMessage(xl.className, xl.methodName, Serializer.STR1D, Serializer.toJson(params));
                 WorkloadManager wmgr =  new WorkloadManager();
                 RunningConfiguration.KAD_SERVER.sendMessage(destinationNode, wmsg, wmgr);
